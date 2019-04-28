@@ -11,7 +11,7 @@
   <entry>
     <title><![CDATA[Django小知识]]></title>
     <url>%2F2019%2F04%2F28%2FDjango%2FDjango%E5%B0%8F%E7%9F%A5%E8%AF%86%2F</url>
-    <content type="text"><![CDATA[查看model列名Billing_Cost.objects.get(id=1)._meta.fields 忽略模版渲染语法使用标签 Model只查询特定列的结果Billing_Cost.objects.values(‘resource_type’,’change_time’).get(id=1) Model查询排除特定列的结果Billing_Cost.objects.defer(‘resource_type’,’change_time’).values().get(id=1)]]></content>
+    <content type="text"><![CDATA[查看model列名Billing_Cost.objects.get(id=1)._meta.fields 忽略模版渲染语法使用标签verbatim endverbatim Model只查询特定列的结果Billing_Cost.objects.values(‘resource_type’,’change_time’).get(id=1) Model查询排除特定列的结果Billing_Cost.objects.defer(‘resource_type’,’change_time’).values().get(id=1)]]></content>
       <tags>
         <tag>Django</tag>
       </tags>
