@@ -10,7 +10,7 @@
   
   <title>
     
-       阿里云磁盘分区与扩容 | FreezeJ&#39; Blog
+       Django数据库防注入 | FreezeJ&#39; Blog
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -144,7 +144,7 @@
 </header>
 
     <div id="article-banner">
-  <h2> 阿里云磁盘分区与扩容</h2>
+  <h2> Django数据库防注入</h2>
   <p class="post-date">2019-04-28</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
@@ -153,27 +153,23 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h2 id="使用parted磁盘分区"><a href="#使用parted磁盘分区" class="headerlink" title="使用parted磁盘分区"></a>使用parted磁盘分区</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum -y install parted</span><br><span class="line"><span class="meta">#</span> 一行执行：</span><br><span class="line">parted  /dev/vdb mklabel  GPT "YES"  mkpart "vdb1" "ext4"   "0" "100%" "I"  # 建议使用命令parted /dev/vdb分步执行</span><br><span class="line">mkfs.ext4 /dev/vdb1 &gt; /dev/null  # ext4文件系统</span><br><span class="line">tune2fs -c -1 -i -1  /dev/vdb1  &gt; /dev/null  # 定义自检周期,-1表示关闭自检</span><br><span class="line">mkdir -p /data/</span><br><span class="line">mount /dev/vdb1 /data  # 挂载到目录</span><br><span class="line">blkid | awk /vdb1/'&#123;print $2" /data ext4 defaults 0 0"&#125;' &gt;&gt; /etc/fstab  # 添加开机启动挂载</span><br></pre></td></tr></table></figure>
-<h2 id="阿里云数据盘扩容"><a href="#阿里云数据盘扩容" class="headerlink" title="阿里云数据盘扩容"></a>阿里云数据盘扩容</h2><p>yum install -y lsof</p>
-<p>lsof /data  # 检查磁盘被什么程序占用</p>
-<p>umount /data/  # 卸载磁盘</p>
-<p>parted /dev/vdb “p” “F” “rm 1” “unit s” “mkpart vdb1 ext4 0 100%” “Yes” “I” # CentOS</p>
-<p>parted /dev/vdb “rm 1” “mkpart vdb1 ext4 0 100%” “Yes” “I”   # debian</p>
-<p>parted /dev/vdb</p>
-<p>p<br>Warning: Not all of the space available to /dev/vdb appears to be used, you can fix the GPT to use all of the space (an extra 104857600 blocks) or continue with the current setting?<br>Fix/Ignore? F  # 通常检测到磁盘大写变化才会有这个提示，如果没有可能需要重启！<br>rm 1<br>unit s<br>mkpart vdb1 ext4 0 100% # yes<br>I<br>quit</p>
-<p>e2fsck -f /dev/vdb1<br>resize2fs /dev/vdb1<br>mount  /dev/vdb1 /data/</p>
+    <section class="markdown-content"><h1 id="Django-SQL防注入"><a href="#Django-SQL防注入" class="headerlink" title="Django SQL防注入"></a>Django SQL防注入</h1><p>SQL注入是所有网站建设都应该注意防范的东西，使用Django当然也不例外。下面介绍几个Django中防范SQL注入的方案。</p>
+<p><strong>方案一</strong></p>
+<p>总是使用Django自带的数据库API。它会根据你所使用的数据库服务器（例如PostSQL或者MySQL）的转换规则，自动转义特殊的SQL参数。这被运用到了整个Django的数据库API中，只有一些例外：</p>
+<p>传给 extra() 方法的 where 参数。 (参考 附录 C。) 这个参数故意设计成可以接受原始的SQL。</p>
+<p>使用底层数据库API的查询。</p>
+<p><strong>方案二</strong></p>
+<p>看下面的Python代码：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> connection</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">user_contacts</span><span class="params">(request)</span>:</span></span><br><span class="line">  user = request.GET[*<span class="string">'username'</span>*]</span><br><span class="line">  sql = *<span class="string">"SELECT \* FROM user_contacts WHERE* *username* *= %s"</span>*</span><br><span class="line">  cursor = connection.cursor()</span><br><span class="line">  cursor.execute(sql, [user])  <span class="comment"># 通过传参的方式执行原生SQL</span></span><br><span class="line">  <span class="comment"># ... do something with the results</span></span><br></pre></td></tr></table></figure>
+<p>请注意在cursor.execute() 的SQL语句中使用“%s”，而不要在SQL内直接添加参数。 如果你使用这项技术，数据库基础库将会自动添加引号，同时在必要的情况下转意你的参数。</p>
 </section>
     <!-- Tags START -->
     
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#Linux">
-    <span class="tag-code">Linux</span>
-  </a>
-
-  <a href="/tags#阿里云">
-    <span class="tag-code">阿里云</span>
+  <a href="/tags#Django">
+    <span class="tag-code">Django</span>
   </a>
 
       </div>
@@ -184,20 +180,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2019/04/28/Python/python面向对象概述/">
+      <a class="nav-left" href="/2019/04/28/Django/Django小知识/">
         <span class="nav-arrow">← </span>
         
-           python面向对象概述
+           Django小知识
         
       </a>
     
-    
-      <a class="nav-right" href="/2019/04/28/Linux/centos7搭建Harbor企业级docker仓库/">
-        
-           centos7搭建Harbor企业级docker仓库
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -243,7 +232,7 @@
   <div class="toc-main">
     <strong class="toc-title">目录</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#使用parted磁盘分区"><span class="toc-nav-text">使用parted磁盘分区</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#阿里云数据盘扩容"><span class="toc-nav-text">阿里云数据盘扩容</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Django-SQL防注入"><span class="toc-nav-text">Django SQL防注入</span></a></li></ol>
     
   </div>
 </aside>
@@ -254,7 +243,7 @@
 
 <script>
   (function () {
-    var url = 'http://durongjie.com/2019/04/28/Linux/阿里云磁盘分区与扩容/';
+    var url = 'http://durongjie.com/2019/04/28/Django/Django数据库防注入/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -316,7 +305,7 @@
     var gitmentConfig = "FreezeJ";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: " 阿里云磁盘分区与扩容",
+        id: " Django数据库防注入",
         owner: "FreezeJ",
         repo: "FreezeJ.github.io",
         oauth: {

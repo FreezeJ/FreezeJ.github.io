@@ -10,7 +10,7 @@
   
   <title>
     
-       阿里云磁盘分区与扩容 | FreezeJ&#39; Blog
+       Django小知识 | FreezeJ&#39; Blog
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -144,7 +144,7 @@
 </header>
 
     <div id="article-banner">
-  <h2> 阿里云磁盘分区与扩容</h2>
+  <h2> Django小知识</h2>
   <p class="post-date">2019-04-28</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
@@ -153,27 +153,22 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h2 id="使用parted磁盘分区"><a href="#使用parted磁盘分区" class="headerlink" title="使用parted磁盘分区"></a>使用parted磁盘分区</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum -y install parted</span><br><span class="line"><span class="meta">#</span> 一行执行：</span><br><span class="line">parted  /dev/vdb mklabel  GPT "YES"  mkpart "vdb1" "ext4"   "0" "100%" "I"  # 建议使用命令parted /dev/vdb分步执行</span><br><span class="line">mkfs.ext4 /dev/vdb1 &gt; /dev/null  # ext4文件系统</span><br><span class="line">tune2fs -c -1 -i -1  /dev/vdb1  &gt; /dev/null  # 定义自检周期,-1表示关闭自检</span><br><span class="line">mkdir -p /data/</span><br><span class="line">mount /dev/vdb1 /data  # 挂载到目录</span><br><span class="line">blkid | awk /vdb1/'&#123;print $2" /data ext4 defaults 0 0"&#125;' &gt;&gt; /etc/fstab  # 添加开机启动挂载</span><br></pre></td></tr></table></figure>
-<h2 id="阿里云数据盘扩容"><a href="#阿里云数据盘扩容" class="headerlink" title="阿里云数据盘扩容"></a>阿里云数据盘扩容</h2><p>yum install -y lsof</p>
-<p>lsof /data  # 检查磁盘被什么程序占用</p>
-<p>umount /data/  # 卸载磁盘</p>
-<p>parted /dev/vdb “p” “F” “rm 1” “unit s” “mkpart vdb1 ext4 0 100%” “Yes” “I” # CentOS</p>
-<p>parted /dev/vdb “rm 1” “mkpart vdb1 ext4 0 100%” “Yes” “I”   # debian</p>
-<p>parted /dev/vdb</p>
-<p>p<br>Warning: Not all of the space available to /dev/vdb appears to be used, you can fix the GPT to use all of the space (an extra 104857600 blocks) or continue with the current setting?<br>Fix/Ignore? F  # 通常检测到磁盘大写变化才会有这个提示，如果没有可能需要重启！<br>rm 1<br>unit s<br>mkpart vdb1 ext4 0 100% # yes<br>I<br>quit</p>
-<p>e2fsck -f /dev/vdb1<br>resize2fs /dev/vdb1<br>mount  /dev/vdb1 /data/</p>
+    <section class="markdown-content"><hr>
+<h2 id="typora-root-url-static"><a href="#typora-root-url-static" class="headerlink" title="typora-root-url: ../../static"></a>typora-root-url: ../../static</h2><h3 id="查看model列名"><a href="#查看model列名" class="headerlink" title="查看model列名"></a>查看model列名</h3><p>Billing_Cost.objects.get(id=1)._meta.fields</p>
+<p><img src="\1548238762146.png" alt="1548238762146"></p>
+<h3 id="忽略模版渲染语法"><a href="#忽略模版渲染语法" class="headerlink" title="忽略模版渲染语法"></a>忽略模版渲染语法</h3><p>使用标签  </p>
+<h3 id="Model只查询特定列的结果"><a href="#Model只查询特定列的结果" class="headerlink" title="Model只查询特定列的结果"></a>Model只查询特定列的结果</h3><p>Billing_Cost.objects.values(‘resource_type’,’change_time’).get(id=1)</p>
+<p><img src="\1548238973794.png" alt="1548238973794"></p>
+<h3 id="Model查询排除特定列的结果"><a href="#Model查询排除特定列的结果" class="headerlink" title="Model查询排除特定列的结果"></a>Model查询排除特定列的结果</h3><p>Billing_Cost.objects.defer(‘resource_type’,’change_time’).values().get(id=1)</p>
+<p><img src="\1548239087634.png" alt="1548239087634"></p>
 </section>
     <!-- Tags START -->
     
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#Linux">
-    <span class="tag-code">Linux</span>
-  </a>
-
-  <a href="/tags#阿里云">
-    <span class="tag-code">阿里云</span>
+  <a href="/tags#Django">
+    <span class="tag-code">Django</span>
   </a>
 
       </div>
@@ -184,17 +179,17 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2019/04/28/Python/python面向对象概述/">
+      <a class="nav-left" href="/2019/04/28/JavaScript/CSS选择器/">
         <span class="nav-arrow">← </span>
         
-           python面向对象概述
+           CSS选择器
         
       </a>
     
     
-      <a class="nav-right" href="/2019/04/28/Linux/centos7搭建Harbor企业级docker仓库/">
+      <a class="nav-right" href="/2019/04/28/Django/Django数据库防注入/">
         
-           centos7搭建Harbor企业级docker仓库
+           Django数据库防注入
         
         <span class="nav-arrow"> →</span>
       </a>
@@ -243,7 +238,7 @@
   <div class="toc-main">
     <strong class="toc-title">目录</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#使用parted磁盘分区"><span class="toc-nav-text">使用parted磁盘分区</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#阿里云数据盘扩容"><span class="toc-nav-text">阿里云数据盘扩容</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#typora-root-url-static"><span class="toc-nav-text">typora-root-url: ../../static</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#查看model列名"><span class="toc-nav-text">查看model列名</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#忽略模版渲染语法"><span class="toc-nav-text">忽略模版渲染语法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Model只查询特定列的结果"><span class="toc-nav-text">Model只查询特定列的结果</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Model查询排除特定列的结果"><span class="toc-nav-text">Model查询排除特定列的结果</span></a></li></ol></li></ol>
     
   </div>
 </aside>
@@ -254,7 +249,7 @@
 
 <script>
   (function () {
-    var url = 'http://durongjie.com/2019/04/28/Linux/阿里云磁盘分区与扩容/';
+    var url = 'http://durongjie.com/2019/04/28/Django/Django小知识/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -316,7 +311,7 @@
     var gitmentConfig = "FreezeJ";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: " 阿里云磁盘分区与扩容",
+        id: " Django小知识",
         owner: "FreezeJ",
         repo: "FreezeJ.github.io",
         oauth: {
