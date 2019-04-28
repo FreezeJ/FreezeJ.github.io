@@ -183,8 +183,9 @@
         
           查看model列名Billing_Cost.objects.get(id=1)._meta.fields
 
-忽略模版渲染语法使用标签&#123;% verbatim %&#125; &#123;% endverbatim %&#125;
-Model只查询特定列的结果Billing_Cost. ...
+忽略模版渲染语法使用标签
+ 
+Model只查询特定列的结果Billing_Cost.objects.values(‘resource_type’,’change_time’).get( ...
         
       </div>
       <a class="more" href="/2019/04/28/Django/Django小知识/">Read more</a>

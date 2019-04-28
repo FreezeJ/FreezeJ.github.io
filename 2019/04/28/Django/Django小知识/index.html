@@ -155,7 +155,8 @@
   <article class="post-article">
     <section class="markdown-content"><h3 id="查看model列名"><a href="#查看model列名" class="headerlink" title="查看model列名"></a>查看model列名</h3><p>Billing_Cost.objects.get(id=1)._meta.fields</p>
 <p><img src="https://raw.githubusercontent.com/FreezeJ/FreezeJ.github.io.static/master/1548238762146.png" alt="1548238762146"></p>
-<h3 id="忽略模版渲染语法"><a href="#忽略模版渲染语法" class="headerlink" title="忽略模版渲染语法"></a>忽略模版渲染语法</h3><p>使用标签<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% verbatim %&#125; &#123;% endverbatim %&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="忽略模版渲染语法"><a href="#忽略模版渲染语法" class="headerlink" title="忽略模版渲染语法"></a>忽略模版渲染语法</h3><p>使用标签</p>
+<p> </p>
 <h3 id="Model只查询特定列的结果"><a href="#Model只查询特定列的结果" class="headerlink" title="Model只查询特定列的结果"></a>Model只查询特定列的结果</h3><p>Billing_Cost.objects.values(‘resource_type’,’change_time’).get(id=1)</p>
 <p><img src="https://raw.githubusercontent.com/FreezeJ/FreezeJ.github.io.static/master/1548238973794.png" alt="1548238973794"></p>
 <h3 id="Model查询排除特定列的结果"><a href="#Model查询排除特定列的结果" class="headerlink" title="Model查询排除特定列的结果"></a>Model查询排除特定列的结果</h3><p>Billing_Cost.objects.defer(‘resource_type’,’change_time’).values().get(id=1)</p>
