@@ -10,7 +10,7 @@
   
   <title>
     
-      Hello World | FreezeJ&#39; Blog
+      pthon反射 | FreezeJ&#39; Blog
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -144,8 +144,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>Hello World</h2>
-  <p class="post-date">2019-04-26</p>
+  <h2>pthon反射</h2>
+  <p class="post-date">2019-04-28</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -153,21 +153,52 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+    <section class="markdown-content"><h1 id="Python反射"><a href="#Python反射" class="headerlink" title="Python反射"></a>Python反射</h1><p>所谓“反射”，指的是以字符串的形式来操作（包括：增删改查）对象的属性和方法 。</p>
+<p>用于“反射”的内置函数有以下四个：</p>
+<ol>
+<li>hasattr</li>
+<li>getattr</li>
+<li>setattr</li>
+<li>delattr</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 反射的四个内置方法</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.name = <span class="string">'animal'</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">eat</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'%s eat'</span> % self.name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">dog = Animal()</span><br><span class="line">print(hasattr(dog, <span class="string">'name'</span>))  <span class="comment"># True</span></span><br><span class="line">print(getattr(dog, <span class="string">'name'</span>))  <span class="comment"># animal</span></span><br><span class="line">setattr(dog, <span class="string">'name'</span>,<span class="string">'dog'</span>)  <span class="comment"># 相当于dog.name = dog</span></span><br><span class="line">print(getattr(dog, <span class="string">'name'</span>))  <span class="comment"># dog</span></span><br><span class="line">delattr(dog, <span class="string">'name'</span>)  <span class="comment"># 相当于del dog.name</span></span><br><span class="line">print(hasattr(dog, <span class="string">'name'</span>))  <span class="comment"># False</span></span><br></pre></td></tr></table></figure>
+<p>只有在不知道对象信息的情况下，才会去获取对象信息。</p>
+<p>举个例子：别的程序传给你一个变量var，这个变量是一个字符串，并且这个字符串对应某个模块下的某个函数名，如果你通过变量var直接导入该模块下的该函数，肯定是不行的，因为var是个变量，这时就可以使用反射，例如：var=”xxx” f=getattr(module,var)，这样，就得到了var对应的模块中的函数f，接下来就可以调用f了。</p>
 </section>
     <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Python">
+    <span class="tag-code">Python</span>
+  </a>
+
+      </div>
     
     <!-- Tags END -->
     <!-- NAV START -->
     
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/04/28/Python/python模块/">
+        <span class="nav-arrow">← </span>
+        
+          pthon模块
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/04/28/Python/python小知识点/">
+        
+          pthon小知识点
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
     <!-- NAV END -->
     <!-- 打赏 START -->
     
@@ -208,19 +239,20 @@
   
     <aside class="catalog-container">
   <div class="toc-main">
-    <strong class="toc-title">Catalog</strong>
+    <strong class="toc-title">目录</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Quick-Start"><span class="toc-nav-text">Quick Start</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Create-a-new-post"><span class="toc-nav-text">Create a new post</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Run-server"><span class="toc-nav-text">Run server</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Generate-static-files"><span class="toc-nav-text">Generate static files</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Deploy-to-remote-sites"><span class="toc-nav-text">Deploy to remote sites</span></a></li></ol></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Python反射"><span class="toc-nav-text">Python反射</span></a></li></ol>
     
   </div>
 </aside>
+
   
   <!-- Catalog END -->
 </main>
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2019/04/26/hello-world/';
+    var url = 'http://yoursite.com/2019/04/28/Python/python反射/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -282,7 +314,7 @@
     var gitmentConfig = "FreezeJ";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "Hello World",
+        id: "pthon反射",
         owner: "FreezeJ",
         repo: "FreezeJ.github.io",
         oauth: {
