@@ -160,16 +160,16 @@
 <h3 id="容器集群管理"><a href="#容器集群管理" class="headerlink" title="容器集群管理"></a>容器集群管理</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd /usr/local/harbor/</span><br><span class="line">docker-compose ps  # 查看harbor集群容器，安装后已经启动</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> ---------- 控制 ----------</span><br><span class="line"><span class="meta">#</span> 必须要在/usr/local/harbor/目录下，或者-f指定docker-compose.yml</span><br><span class="line"><span class="meta">#</span> 启动Harbor</span><br><span class="line">docker-compose start</span><br><span class="line"><span class="meta">#</span> 停止Harbor</span><br><span class="line">docker-comose stop</span><br><span class="line"><span class="meta">#</span> 重启Harbor</span><br><span class="line">docker-compose restart</span><br><span class="line"><span class="meta">#</span> 移除Harbor</span><br><span class="line">docker-compose down -v  # -v 参数移除vloume</span><br><span class="line"><span class="meta">#</span> 重新创建并启动</span><br><span class="line">docker-compose up -d</span><br><span class="line"><span class="meta">#</span> ---------- 控制 ----------</span><br></pre></td></tr></table></figure>
 <h4 id="修改nginx端口（如有需要）"><a href="#修改nginx端口（如有需要）" class="headerlink" title="修改nginx端口（如有需要）"></a>修改nginx端口（如有需要）</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim /usr/local/harbor/docker-compose.yml</span><br><span class="line"><span class="meta">#</span> 把proxy下的80:80改为8080:80则为使用8080访问harbor</span><br><span class="line">docker-compose stop proxy  # proxy其实就是nginx</span><br><span class="line">docker-compose up -d proxy  # 重新开启nginx</span><br><span class="line">netstat -lntp # 查看本地打开端口，如果有docker-proxy为8080则修改成功</span><br><span class="line"><span class="meta">#</span> 如果有安全组防火墙，记得先放行对应端口</span><br></pre></td></tr></table></figure>
 <h3 id="访问网页"><a href="#访问网页" class="headerlink" title="访问网页"></a>访问网页</h3><p>使用账号admin，默认密码Harbor12345，如果修改了配置文件的密码，则使用上面修改的密码。</p>
-<p><img src="oss://freezej/blog_image/static1555394389198.png" alt="登录界面"></p>
+<p><img src="https://raw.githubusercontent.com/FreezeJ/FreezeJ.github.io.static/master/1555394389198.png" alt="登录界面"></p>
 <ul>
 <li>默认是所有人可以创建用户登录的，只是上面安装配置中禁止了用户注册。</li>
 </ul>
-<p><img src="oss://freezej/blog_image/static1555394437899.png" alt="功能面板"></p>
-<p><img src="oss://freezej/blog_image/static1555394503239.png" alt="系统配置"></p>
+<p><img src="https://raw.githubusercontent.com/FreezeJ/FreezeJ.github.io.static/master/1555394437899.png" alt="功能面板"></p>
+<p><img src="https://raw.githubusercontent.com/FreezeJ/FreezeJ.github.io.static/master/1555394503239.png" alt="系统配置"></p>
 <ul>
 <li>系统配置中可以设置邮箱配置，认证配置、垃圾清理等，但是不可以设置web打开的端口。</li>
 </ul>
-<p><img src="oss://freezej/blog_image/static1555394579735.png" alt="漏洞扫描功能"></p>
+<p><img src="https://raw.githubusercontent.com/FreezeJ/FreezeJ.github.io.static/master/1555394579735.png" alt="漏洞扫描功能"></p>
 <ul>
 <li>通过漏洞扫描，可以分析出镜像存在的一些漏洞缺陷编码，并且提供修复建议。</li>
 </ul>
