@@ -15,7 +15,7 @@
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/tomorrow.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   
     <link rel="stylesheet" href="/css/plugins/gitment.css">
@@ -150,10 +150,92 @@
 <main class="app-body">
   <div id="tag-cloud">
     
-      <a class="tag1" data-name="tag-Python">Python</a>
+      <a class="tag2" data-name="tag-Linux">Linux</a>
+    
+      <a class="tag3" data-name="tag-Mysql">Mysql</a>
+    
+      <a class="tag3" data-name="tag-Kubernetes">Kubernetes</a>
+    
+      <a class="tag1" data-name="tag-阿里云">阿里云</a>
+    
+      <a class="tag2" data-name="tag-Python">Python</a>
     
   </div>
   
+    <div class="tag-list">
+      <h3 class="tag-name" id="tag-Linux">Linux</h3>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2019/04/28/Linux/Mysql备份/"> Mysql备份</a>
+          </li>
+        </ul>
+        
+        <ul class="tag-preview">
+          <li>
+            <a href="/2019/04/28/Linux/Dashboard安装/">Dashboard安装</a>
+          </li>
+        </ul>
+        
+        <ul class="tag-preview">
+          <li>
+            <a href="/2019/04/28/Linux/阿里云磁盘分区与扩容/"> 阿里云磁盘分区与扩容</a>
+          </li>
+        </ul>
+        
+        <ul class="tag-preview">
+          <li>
+            <a href="/2019/04/28/Linux/centos7搭建Harbor企业级docker仓库/"> centos7搭建Harbor企业级docker仓库</a>
+          </li>
+        </ul>
+        
+        <ul class="tag-preview">
+          <li>
+            <a href="/2019/04/28/Linux/centos7部署k8s集群-kubeadm/"> centos7部署k8s集群-kubeadm</a>
+          </li>
+        </ul>
+        
+    </div>
+    
+    <div class="tag-list">
+      <h3 class="tag-name" id="tag-Mysql">Mysql</h3>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2019/04/28/Linux/Mysql备份/"> Mysql备份</a>
+          </li>
+        </ul>
+        
+    </div>
+    
+    <div class="tag-list">
+      <h3 class="tag-name" id="tag-Kubernetes">Kubernetes</h3>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2019/04/28/Linux/Dashboard安装/">Dashboard安装</a>
+          </li>
+        </ul>
+        
+        <ul class="tag-preview">
+          <li>
+            <a href="/2019/04/28/Linux/centos7部署k8s集群-kubeadm/"> centos7部署k8s集群-kubeadm</a>
+          </li>
+        </ul>
+        
+    </div>
+    
+    <div class="tag-list">
+      <h3 class="tag-name" id="tag-阿里云">阿里云</h3>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2019/04/28/Linux/阿里云磁盘分区与扩容/"> 阿里云磁盘分区与扩容</a>
+          </li>
+        </ul>
+        
+    </div>
+    
     <div class="tag-list">
       <h3 class="tag-name" id="tag-Python">Python</h3>
       
@@ -171,12 +253,6 @@
         
         <ul class="tag-preview">
           <li>
-            <a href="/2019/04/28/Python/python封装、继承和多态/"> python封装、继承和多态</a>
-          </li>
-        </ul>
-        
-        <ul class="tag-preview">
-          <li>
             <a href="/2019/04/28/Python/python小知识点/">pthon小知识点</a>
           </li>
         </ul>
@@ -184,6 +260,12 @@
         <ul class="tag-preview">
           <li>
             <a href="/2019/04/28/Python/python模块/">pthon模块</a>
+          </li>
+        </ul>
+        
+        <ul class="tag-preview">
+          <li>
+            <a href="/2019/04/28/Python/python封装、继承和多态/"> python封装、继承和多态</a>
           </li>
         </ul>
         
@@ -217,7 +299,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/tags/index.html'
+    var url = 'http://durongjie.com/tags/index.html'
     $('#article-banner').geopattern(url)
     $('.header').removeClass('fixed-header')
 
@@ -256,16 +338,16 @@
     FastClick.attach(document.body);
   })
 </script>
-
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>
-  var hasLine = 'true';
-  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    hljs.configure({ useBR: true })
+      var hasLine = 'false';
     $('figure pre').each(function(i, block) {
       var figure = $(this).parents('figure');
       if (hasLine === 'false') {
         figure.find('.gutter').hide();
       }
-      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var lang = $(figure).attr('class').split(' ')[1] || 'code';
       var codeHtml = $(this).html();
       var codeTag = document.createElement('code');
       codeTag.className = lang;
@@ -274,10 +356,10 @@
       figure.attr('data-lang', lang.toUpperCase());
       hljs.highlightBlock(block);
     });
-  })
 </script>
 <!-- Baidu Tongji -->
 
 <script src="/js/script.js"></script>
+
   </body>
 </html>

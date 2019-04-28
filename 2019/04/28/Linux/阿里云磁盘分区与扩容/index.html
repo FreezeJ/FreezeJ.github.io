@@ -10,7 +10,7 @@
   
   <title>
     
-       python面向对象概述 | FreezeJ&#39; Blog
+       阿里云磁盘分区与扩容 | FreezeJ&#39; Blog
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -144,7 +144,7 @@
 </header>
 
     <div id="article-banner">
-  <h2> python面向对象概述</h2>
+  <h2> 阿里云磁盘分区与扩容</h2>
   <p class="post-date">2019-04-28</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
@@ -153,40 +153,27 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h1 id="面向对象编程概述"><a href="#面向对象编程概述" class="headerlink" title="面向对象编程概述"></a>面向对象编程概述</h1><p>对象具有以下特征：</p>
-<ol>
-<li>万物皆对象</li>
-<li>每个对象唯一</li>
-<li>对象具有属性和行为</li>
-<li>对象具有状态（属性的取值）</li>
-<li>对象分为类对象和实例对象两大类</li>
-</ol>
-<p>面向对象编程的步骤：</p>
-<ol>
-<li>抽象出类对象</li>
-<li>抽象出类对象的属性</li>
-<li>抽象出类对象的方法</li>
-<li>根基类对象创建实例对象</li>
-<li>通过实例对象访问属性和方法</li>
-</ol>
-<p>Python是动态语言，所以可以对类动态地绑定类方法，在实例对象创建之后，也可以对其动态地绑定实例方法。<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 动态绑定方法</span></span><br><span class="line"><span class="keyword">from</span> types <span class="keyword">import</span> MethodType</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">say_name</span><span class="params">(self)</span>:</span></span><br><span class="line">    print(self.name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">dog = Animal(<span class="string">'dog'</span>)</span><br><span class="line">cat = Animal(<span class="string">'cat'</span>)</span><br><span class="line">dog.say_name = MethodType(say_name, dog)  <span class="comment"># 动态绑定实例方法</span></span><br><span class="line">Animal.say_name = say_name  <span class="comment"># 动态绑定类方法</span></span><br><span class="line">dog.say_name()</span><br><span class="line">cat.say_name()</span><br></pre></td></tr></table></figure></p>
-<p><strong>在类对象中定义方法的几种方式。</strong></p>
-<ol>
-<li><p>静态方法使用@staticmethod装饰，只是一个普通的函数，便于管理。</p>
-</li>
-<li><p>类方法使用@classmethod装饰，需要传入形参cls。</p>
-</li>
-<li>实例方法不需要使用装饰器，需要传入形参self。</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 静态方法、类方法、实例方法</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">say_hello</span><span class="params">()</span>:</span></span><br><span class="line">        print(<span class="string">'hello'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">say_hi</span><span class="params">(cls)</span>:</span></span><br><span class="line">        print(<span class="string">'hi'</span>)</span><br><span class="line">        cls.say_hello()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">say_name</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(self.name)</span><br><span class="line">        self.say_hello()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">dog = Animal(<span class="string">'dog'</span>)</span><br><span class="line">dog.say_hello()</span><br><span class="line">dog.say_hi()</span><br><span class="line">dog.say_name()</span><br></pre></td></tr></table></figure>
+    <section class="markdown-content"><h2 id="使用parted磁盘分区"><a href="#使用parted磁盘分区" class="headerlink" title="使用parted磁盘分区"></a>使用parted磁盘分区</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum -y install parted</span><br><span class="line"><span class="meta">#</span><span class="bash"> 一行执行：</span></span><br><span class="line">parted  /dev/vdb mklabel  GPT "YES"  mkpart "vdb1" "ext4"   "0" "100%" "I"  # 建议使用命令parted /dev/vdb分步执行</span><br><span class="line">mkfs.ext4 /dev/vdb1 &gt; /dev/null  # ext4文件系统</span><br><span class="line">tune2fs -c -1 -i -1  /dev/vdb1  &gt; /dev/null  # 定义自检周期,-1表示关闭自检</span><br><span class="line">mkdir -p /data/</span><br><span class="line">mount /dev/vdb1 /data  # 挂载到目录</span><br><span class="line">blkid | awk /vdb1/'&#123;print $2" /data ext4 defaults 0 0"&#125;' &gt;&gt; /etc/fstab  # 添加开机启动挂载</span><br></pre></td></tr></table></figure>
+<h2 id="阿里云数据盘扩容"><a href="#阿里云数据盘扩容" class="headerlink" title="阿里云数据盘扩容"></a>阿里云数据盘扩容</h2><p>yum install -y lsof</p>
+<p>lsof /data  # 检查磁盘被什么程序占用</p>
+<p>umount /data/  # 卸载磁盘</p>
+<p>parted /dev/vdb “p” “F” “rm 1” “unit s” “mkpart vdb1 ext4 0 100%” “Yes” “I” # CentOS</p>
+<p>parted /dev/vdb “rm 1” “mkpart vdb1 ext4 0 100%” “Yes” “I”   # debian</p>
+<p>parted /dev/vdb</p>
+<p>p<br>Warning: Not all of the space available to /dev/vdb appears to be used, you can fix the GPT to use all of the space (an extra 104857600 blocks) or continue with the current setting?<br>Fix/Ignore? F  # 通常检测到磁盘大写变化才会有这个提示，如果没有可能需要重启！<br>rm 1<br>unit s<br>mkpart vdb1 ext4 0 100% # yes<br>I<br>quit</p>
+<p>e2fsck -f /dev/vdb1<br>resize2fs /dev/vdb1<br>mount  /dev/vdb1 /data/</p>
 </section>
     <!-- Tags START -->
     
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#Python">
-    <span class="tag-code">Python</span>
+  <a href="/tags#Linux">
+    <span class="tag-code">Linux</span>
+  </a>
+
+  <a href="/tags#阿里云">
+    <span class="tag-code">阿里云</span>
   </a>
 
       </div>
@@ -197,17 +184,17 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2019/04/28/Python/python类属性和方法的访问控制/">
+      <a class="nav-left" href="/2019/04/28/Python/python面向对象概述/">
         <span class="nav-arrow">← </span>
         
-           python类属性和方法的访问控制
+           python面向对象概述
         
       </a>
     
     
-      <a class="nav-right" href="/2019/04/28/Linux/阿里云磁盘分区与扩容/">
+      <a class="nav-right" href="/2019/04/28/Linux/centos7搭建Harbor企业级docker仓库/">
         
-           阿里云磁盘分区与扩容
+           centos7搭建Harbor企业级docker仓库
         
         <span class="nav-arrow"> →</span>
       </a>
@@ -256,7 +243,7 @@
   <div class="toc-main">
     <strong class="toc-title">目录</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#面向对象编程概述"><span class="toc-nav-text">面向对象编程概述</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#使用parted磁盘分区"><span class="toc-nav-text">使用parted磁盘分区</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#阿里云数据盘扩容"><span class="toc-nav-text">阿里云数据盘扩容</span></a></li></ol>
     
   </div>
 </aside>
@@ -267,7 +254,7 @@
 
 <script>
   (function () {
-    var url = 'http://durongjie.com/2019/04/28/Python/python面向对象概述/';
+    var url = 'http://durongjie.com/2019/04/28/Linux/阿里云磁盘分区与扩容/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -329,7 +316,7 @@
     var gitmentConfig = "FreezeJ";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: " python面向对象概述",
+        id: " 阿里云磁盘分区与扩容",
         owner: "FreezeJ",
         repo: "FreezeJ.github.io",
         oauth: {

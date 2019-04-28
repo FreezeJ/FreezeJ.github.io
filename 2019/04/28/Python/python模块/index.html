@@ -15,7 +15,7 @@
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/tomorrow.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   
     <link rel="stylesheet" href="/css/plugins/gitment.css">
@@ -173,7 +173,7 @@
 </li>
 </ol>
 <p>解析器搜索模块的路径：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> pprint <span class="keyword">import</span> pprint</span><br><span class="line">pprint(sys.path)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> pprint <span class="keyword">import</span> pprint</span><br><span class="line">pprint(sys.path)</span><br></pre></td></tr></table></figure>
 <p>搜索路径主要由三部分组成：</p>
 <ol>
 <li>当前目录</li>
@@ -188,7 +188,7 @@
 <hr>
 <h2 id="重新加载模块"><a href="#重新加载模块" class="headerlink" title="重新加载模块"></a>重新加载模块</h2><p>当使用import导入模块之后，模块被修改，如果再次使用import导入模块，是不会生效的。</p>
 <p>需要使用importlib中的reload()方法，重新加载模块。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> my_module, time</span><br><span class="line"><span class="keyword">import</span> importlib</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">    importlib.reload(my_module)  <span class="comment"># 动态重新加载模块</span></span><br><span class="line">    print(my_module.a)</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> my_module, time</span><br><span class="line"><span class="keyword">import</span> importlib</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">    importlib.reload(my_module)  <span class="comment"># 动态重新加载模块</span></span><br><span class="line">    print(my_module.a)</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 <hr>
 <h2 id="模块访问控制"><a href="#模块访问控制" class="headerlink" title="模块访问控制"></a>模块访问控制</h2><p>当某个模块前加单下划线_时，不能通过import *导入，但是可以通过import _xxx导入。</p>
 </section>
@@ -272,7 +272,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2019/04/28/Python/python模块/';
+    var url = 'http://durongjie.com/2019/04/28/Python/python模块/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -387,16 +387,16 @@
     FastClick.attach(document.body);
   })
 </script>
-
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>
-  var hasLine = 'true';
-  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    hljs.configure({ useBR: true })
+      var hasLine = 'false';
     $('figure pre').each(function(i, block) {
       var figure = $(this).parents('figure');
       if (hasLine === 'false') {
         figure.find('.gutter').hide();
       }
-      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var lang = $(figure).attr('class').split(' ')[1] || 'code';
       var codeHtml = $(this).html();
       var codeTag = document.createElement('code');
       codeTag.className = lang;
@@ -405,10 +405,10 @@
       figure.attr('data-lang', lang.toUpperCase());
       hljs.highlightBlock(block);
     });
-  })
 </script>
 <!-- Baidu Tongji -->
 
 <script src="/js/script.js"></script>
+
   </body>
 </html>
