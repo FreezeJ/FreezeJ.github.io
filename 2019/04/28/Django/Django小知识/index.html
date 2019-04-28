@@ -153,14 +153,13 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><hr>
-<h2 id="typora-root-url-static"><a href="#typora-root-url-static" class="headerlink" title="typora-root-url: ../../static"></a>typora-root-url: ../../static</h2><h3 id="查看model列名"><a href="#查看model列名" class="headerlink" title="查看model列名"></a>查看model列名</h3><p>Billing_Cost.objects.get(id=1)._meta.fields</p>
-<p><img src="\1548238762146.png" alt="1548238762146"></p>
+    <section class="markdown-content"><h3 id="查看model列名"><a href="#查看model列名" class="headerlink" title="查看model列名"></a>查看model列名</h3><p>Billing_Cost.objects.get(id=1)._meta.fields</p>
+<p><img src="https://raw.githubusercontent.com/FreezeJ/FreezeJ.github.io.static/master/1548238762146.png" alt="1548238762146"></p>
 <h3 id="忽略模版渲染语法"><a href="#忽略模版渲染语法" class="headerlink" title="忽略模版渲染语法"></a>忽略模版渲染语法</h3><p>使用标签  </p>
 <h3 id="Model只查询特定列的结果"><a href="#Model只查询特定列的结果" class="headerlink" title="Model只查询特定列的结果"></a>Model只查询特定列的结果</h3><p>Billing_Cost.objects.values(‘resource_type’,’change_time’).get(id=1)</p>
-<p><img src="\1548238973794.png" alt="1548238973794"></p>
+<p><img src="https://raw.githubusercontent.com/FreezeJ/FreezeJ.github.io.static/master/1548238973794.png" alt="1548238973794"></p>
 <h3 id="Model查询排除特定列的结果"><a href="#Model查询排除特定列的结果" class="headerlink" title="Model查询排除特定列的结果"></a>Model查询排除特定列的结果</h3><p>Billing_Cost.objects.defer(‘resource_type’,’change_time’).values().get(id=1)</p>
-<p><img src="\1548239087634.png" alt="1548239087634"></p>
+<p><img src="https://raw.githubusercontent.com/FreezeJ/FreezeJ.github.io.static/master/1548239087634.png" alt="1548239087634"></p>
 </section>
     <!-- Tags START -->
     
@@ -238,7 +237,7 @@
   <div class="toc-main">
     <strong class="toc-title">目录</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#typora-root-url-static"><span class="toc-nav-text">typora-root-url: ../../static</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#查看model列名"><span class="toc-nav-text">查看model列名</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#忽略模版渲染语法"><span class="toc-nav-text">忽略模版渲染语法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Model只查询特定列的结果"><span class="toc-nav-text">Model只查询特定列的结果</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Model查询排除特定列的结果"><span class="toc-nav-text">Model查询排除特定列的结果</span></a></li></ol></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#查看model列名"><span class="toc-nav-text">查看model列名</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#忽略模版渲染语法"><span class="toc-nav-text">忽略模版渲染语法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Model只查询特定列的结果"><span class="toc-nav-text">Model只查询特定列的结果</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Model查询排除特定列的结果"><span class="toc-nav-text">Model查询排除特定列的结果</span></a></li></ol>
     
   </div>
 </aside>
