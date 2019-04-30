@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[如何维修墙上网络端口]]></title>
-    <url>%2F2019%2F04%2F29%2FLife%2F%E5%A6%82%E4%BD%95%E7%BB%B4%E4%BF%AE%E5%A2%99%E4%B8%8A%E7%BD%91%E7%BB%9C%E7%AB%AF%E5%8F%A3%2F</url>
-    <content type="text"><![CDATA[如何维修网络端口客户墙上端口由于老化、接触不良导致链路不通，可以直接使用转接头替换墙上的端口，这种方法方便快捷，但是不美观。那么墙上的端口又要怎么维修呢？ 先把这两个螺丝拧下来，把线盒拆开，剪掉连接线盒盖的网线，拿出线盒盖。 扣这里把这个金属扣子弄开 线盒盖的背面 用螺丝刀拧侧面的卡扣，可以把盖子打开 打开盖子后残留的网线就可以拿出来了 这时候就可以把墙上的新一段网线，按顺序插回去（不能按紧盖子，要留空隙网线才能穿过去） 注意顺序！！！橙色的格子就表示橙色，橙色的三角代表橙白，以此类推。按照数字下面的颜色是568B线序（常用），上面是568A 最后扣上这个扣子，把盖子装回墙上，测线通过就可以了。]]></content>
-  </entry>
-  <entry>
     <title><![CDATA[Django数据库防注入]]></title>
     <url>%2F2019%2F04%2F28%2FDjango%2FDjango%E6%95%B0%E6%8D%AE%E5%BA%93%E9%98%B2%E6%B3%A8%E5%85%A5%2F</url>
     <content type="text"><![CDATA[Django SQL防注入SQL注入是所有网站建设都应该注意防范的东西，使用Django当然也不例外。下面介绍几个Django中防范SQL注入的方案。 方案一 总是使用Django自带的数据库API。它会根据你所使用的数据库服务器（例如PostSQL或者MySQL）的转换规则，自动转义特殊的SQL参数。这被运用到了整个Django的数据库API中，只有一些例外： 传给 extra() 方法的 where 参数。 (参考 附录 C。) 这个参数故意设计成可以接受原始的SQL。 使用底层数据库API的查询。 方案二 看下面的Python代码： from django.db import connectiondef user_contacts(request): user = request.GET[*'username'*] sql = *"SELECT \* FROM user_contacts WHERE* *username* *= %s"* cursor = connection.cursor() cursor.execute(sql, [user]) # 通过传参的方式执行原生SQL # ... do something with the results 请注意在cursor.execute() 的SQL语句中使用“%s”，而不要在SQL内直接添加参数。 如果你使用这项技术，数据库基础库将会自动添加引号，同时在必要的情况下转意你的参数。]]></content>
