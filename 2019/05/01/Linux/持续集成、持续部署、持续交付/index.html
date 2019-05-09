@@ -10,7 +10,7 @@
   
   <title>
     
-       Django数据库防注入 | FreezeJ&#39; Blog
+      持续集成、持续部署、持续交付 | FreezeJ&#39; Blog
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -144,8 +144,8 @@
 </header>
 
     <div id="article-banner">
-  <h2> Django数据库防注入</h2>
-  <p class="post-date">2019-04-28</p>
+  <h2>持续集成、持续部署、持续交付</h2>
+  <p class="post-date">2019-05-01</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -153,23 +153,25 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h1 id="Django-SQL防注入"><a href="#Django-SQL防注入" class="headerlink" title="Django SQL防注入"></a>Django SQL防注入</h1><p>SQL注入是所有网站建设都应该注意防范的东西，使用Django当然也不例外。下面介绍几个Django中防范SQL注入的方案。</p>
-<p><strong>方案一</strong></p>
-<p>总是使用Django自带的数据库API。它会根据你所使用的数据库服务器（例如PostSQL或者MySQL）的转换规则，自动转义特殊的SQL参数。这被运用到了整个Django的数据库API中，只有一些例外：</p>
-<p>传给 extra() 方法的 where 参数。 (参考 附录 C。) 这个参数故意设计成可以接受原始的SQL。</p>
-<p>使用底层数据库API的查询。</p>
-<p><strong>方案二</strong></p>
-<p>看下面的Python代码：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> connection</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">user_contacts</span><span class="params">(request)</span>:</span></span><br><span class="line">  user = request.GET[*<span class="string">'username'</span>*]</span><br><span class="line">  sql = *<span class="string">"SELECT \* FROM user_contacts WHERE* *username* *= %s"</span>*</span><br><span class="line">  cursor = connection.cursor()</span><br><span class="line">  cursor.execute(sql, [user])  <span class="comment"># 通过传参的方式执行原生SQL</span></span><br><span class="line">  <span class="comment"># ... do something with the results</span></span><br></pre></td></tr></table></figure>
-<p>请注意在cursor.execute() 的SQL语句中使用“%s”，而不要在SQL内直接添加参数。 如果你使用这项技术，数据库基础库将会自动添加引号，同时在必要的情况下转意你的参数。</p>
+    <section class="markdown-content"><h1 id="持续集成、持续部署、持续交付"><a href="#持续集成、持续部署、持续交付" class="headerlink" title="持续集成、持续部署、持续交付"></a>持续集成、持续部署、持续交付</h1><p><strong>集成</strong>是指软件个人研发的部分向软件整体部分交付，以便尽早发现个人开发部分的问题；</p>
+<p><strong>部署</strong>是代码尽快向可运行的开发/测试节交付，以便尽早测试；</p>
+<p><strong>交付</strong>是指研发尽快向客户交付，以便尽早发现生产环境中存在的问题。</p>
+<h2 id="持续集成"><a href="#持续集成" class="headerlink" title="持续集成"></a>持续集成</h2><p>持续集成强调开发人员提交了新代码之后，立刻进行构建、（单元）测试。根据测试结果，我们可以确定新代码和原有代码能否正确地集成在一起。</p>
+<h2 id="持续交付"><a href="#持续交付" class="headerlink" title="持续交付"></a>持续交付</h2><p>持续交付在持续集成的基础上，将集成后的代码部署到更贴近真实运行环境的「类生产环境」（production-like environments）中。比如，我们完成单元测试后，可以把代码部署到连接数据库的 Staging 环境中更多的测试。如果代码没有问题，可以继续手动部署到生产环境中。</p>
+<h2 id="持续部署"><a href="#持续部署" class="headerlink" title="持续部署"></a>持续部署</h2><p>持续部署则是在持续交付的基础上，把部署到生产环境的过程自动化。</p>
+<p><strong>而所谓的持续，就是说每完成一个完整的部分，就向下个环节交付，发现问题可以马上调整。使得问题不会放大到其他部分和后面的环节。</strong></p>
+<p>举个例子，你家装修厨房，其中一项是铺地砖，边角地砖要切割大小。如果一次全切割完再铺上去，发现尺寸有误的话浪费和返工时间就大了，不如切一块铺一块。这就是持续集成。</p>
+<p>装修厨房有很多部分，每个部分都有检测手段，如地砖铺完了要测试漏水与否，线路铺完了要通电测试电路通顺，水管装好了也要测试冷水热水。如果全部装完了再测，出现问题可能会互相影响，比如电路不行可能要把地砖给挖开……。那么每完成一部分就测试，这是持续部署。</p>
+<p>全部装修完了，你去验收，发现地砖颜色不合意，水池太小，灶台位置不对，返工吗？所以不如没完成一部分，你就去用一下试用验收，这就是持续交付。</p>
+<p>参考连接：<a href="https://blog.csdn.net/peterxiaoq/article/details/73648732" target="_blank" rel="noopener">https://blog.csdn.net/peterxiaoq/article/details/73648732</a></p>
 </section>
     <!-- Tags START -->
     
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#Django">
-    <span class="tag-code">Django</span>
+  <a href="/tags#Devops">
+    <span class="tag-code">Devops</span>
   </a>
 
       </div>
@@ -180,17 +182,17 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2019/04/28/Django/Django小知识/">
+      <a class="nav-left" href="/2019/04/29/Life/如何维修墙上网络端口/">
         <span class="nav-arrow">← </span>
         
-           Django小知识
+           如何维修墙上网络端口
         
       </a>
     
     
-      <a class="nav-right" href="/2019/04/29/Life/如何维修墙上网络端口/">
+      <a class="nav-right" href="/2019/05/01/Linux/Linux常用命令/">
         
-           如何维修墙上网络端口
+          Linux常用命令
         
         <span class="nav-arrow"> →</span>
       </a>
@@ -239,7 +241,7 @@
   <div class="toc-main">
     <strong class="toc-title">目录</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Django-SQL防注入"><span class="toc-nav-text">Django SQL防注入</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#持续集成、持续部署、持续交付"><span class="toc-nav-text">持续集成、持续部署、持续交付</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#持续集成"><span class="toc-nav-text">持续集成</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#持续交付"><span class="toc-nav-text">持续交付</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#持续部署"><span class="toc-nav-text">持续部署</span></a></li></ol></li></ol>
     
   </div>
 </aside>
@@ -250,7 +252,7 @@
 
 <script>
   (function () {
-    var url = 'http://durongjie.com/2019/04/28/Django/Django数据库防注入/';
+    var url = 'http://durongjie.com/2019/05/01/Linux/持续集成、持续部署、持续交付/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -312,7 +314,7 @@
     var gitmentConfig = "FreezeJ";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: " Django数据库防注入",
+        id: "持续集成、持续部署、持续交付",
         owner: "FreezeJ",
         repo: "FreezeJ.github.io",
         oauth: {

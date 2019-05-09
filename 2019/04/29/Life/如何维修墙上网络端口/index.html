@@ -10,7 +10,7 @@
   
   <title>
     
-       Django数据库防注入 | FreezeJ&#39; Blog
+       如何维修墙上网络端口 | FreezeJ&#39; Blog
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -144,8 +144,8 @@
 </header>
 
     <div id="article-banner">
-  <h2> Django数据库防注入</h2>
-  <p class="post-date">2019-04-28</p>
+  <h2> 如何维修墙上网络端口</h2>
+  <p class="post-date">2019-04-29</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -153,26 +153,26 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h1 id="Django-SQL防注入"><a href="#Django-SQL防注入" class="headerlink" title="Django SQL防注入"></a>Django SQL防注入</h1><p>SQL注入是所有网站建设都应该注意防范的东西，使用Django当然也不例外。下面介绍几个Django中防范SQL注入的方案。</p>
-<p><strong>方案一</strong></p>
-<p>总是使用Django自带的数据库API。它会根据你所使用的数据库服务器（例如PostSQL或者MySQL）的转换规则，自动转义特殊的SQL参数。这被运用到了整个Django的数据库API中，只有一些例外：</p>
-<p>传给 extra() 方法的 where 参数。 (参考 附录 C。) 这个参数故意设计成可以接受原始的SQL。</p>
-<p>使用底层数据库API的查询。</p>
-<p><strong>方案二</strong></p>
-<p>看下面的Python代码：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> connection</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">user_contacts</span><span class="params">(request)</span>:</span></span><br><span class="line">  user = request.GET[*<span class="string">'username'</span>*]</span><br><span class="line">  sql = *<span class="string">"SELECT \* FROM user_contacts WHERE* *username* *= %s"</span>*</span><br><span class="line">  cursor = connection.cursor()</span><br><span class="line">  cursor.execute(sql, [user])  <span class="comment"># 通过传参的方式执行原生SQL</span></span><br><span class="line">  <span class="comment"># ... do something with the results</span></span><br></pre></td></tr></table></figure>
-<p>请注意在cursor.execute() 的SQL语句中使用“%s”，而不要在SQL内直接添加参数。 如果你使用这项技术，数据库基础库将会自动添加引号，同时在必要的情况下转意你的参数。</p>
+    <section class="markdown-content"><h1 id="如何维修网络端口"><a href="#如何维修网络端口" class="headerlink" title="如何维修网络端口"></a>如何维修网络端口</h1><p>客户墙上端口由于老化、接触不良导致链路不通，可以直接使用转接头替换墙上的端口，这种方法方便快捷，但是不美观。那么墙上的端口又要怎么维修呢？</p>
+<p><img src="https://raw.githubusercontent.com/FreezeJ/FreezeJ.github.io.static/master/1556693371436.png" alt="1556693371436"></p>
+<p>先把这两个螺丝拧下来，把线盒拆开，剪掉连接线盒盖的网线，拿出线盒盖。</p>
+<p><img src="https://raw.githubusercontent.com/FreezeJ/FreezeJ.github.io.static/master/1556693408834.png" alt="1556693408834"></p>
+<p>扣这里把这个金属扣子弄开</p>
+<p><img src="http://note.youdao.com/yws/res/34310/1DED818E57934F10A019EB1487EBCA01" alt="img"></p>
+<p>线盒盖的背面</p>
+<p><img src="http://note.youdao.com/yws/res/34309/1F0D4C1389C8464A8C7917708C9A9BD2" alt="img"></p>
+<p><img src="http://note.youdao.com/yws/res/34317/F9F5AB1975E94254BDB3DC636E7380C8" alt="img"></p>
+<p>用螺丝刀拧侧面的卡扣，可以把盖子打开</p>
+<p><img src="http://note.youdao.com/yws/res/34312/29AE0731CBA4484E83C6FB9E25177477" alt="img"></p>
+<p>打开盖子后残留的网线就可以拿出来了</p>
+<p><img src="http://note.youdao.com/yws/res/34315/ED7D46EA3DA849ED9902C1458032B627" alt="img"></p>
+<p>这时候就可以把墙上的新一段网线，按顺序插回去（不能按紧盖子，要留空隙网线才能穿过去）</p>
+<p><img src="http://note.youdao.com/yws/res/34316/39B0885CB8214F5D9B5D718338DD176F" alt="img"></p>
+<p>注意顺序！！！橙色的格子就表示橙色，橙色的三角代表橙白，以此类推。按照数字下面的颜色是568B线序（常用），上面是568A</p>
+<p><img src="http://note.youdao.com/yws/res/34311/2E9975B84AD342F199A2F9CC35284CC9" alt="img"></p>
+<p>最后扣上这个扣子，把盖子装回墙上，测线通过就可以了。</p>
 </section>
     <!-- Tags START -->
-    
-      <div class="tags">
-        <span>Tags:</span>
-        
-  <a href="/tags#Django">
-    <span class="tag-code">Django</span>
-  </a>
-
-      </div>
     
     <!-- Tags END -->
     <!-- NAV START -->
@@ -180,17 +180,17 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2019/04/28/Django/Django小知识/">
+      <a class="nav-left" href="/2019/04/28/Django/Django数据库防注入/">
         <span class="nav-arrow">← </span>
         
-           Django小知识
+           Django数据库防注入
         
       </a>
     
     
-      <a class="nav-right" href="/2019/04/29/Life/如何维修墙上网络端口/">
+      <a class="nav-right" href="/2019/05/01/Linux/持续集成、持续部署、持续交付/">
         
-           如何维修墙上网络端口
+          持续集成、持续部署、持续交付
         
         <span class="nav-arrow"> →</span>
       </a>
@@ -239,7 +239,7 @@
   <div class="toc-main">
     <strong class="toc-title">目录</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Django-SQL防注入"><span class="toc-nav-text">Django SQL防注入</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#如何维修网络端口"><span class="toc-nav-text">如何维修网络端口</span></a></li></ol>
     
   </div>
 </aside>
@@ -250,7 +250,7 @@
 
 <script>
   (function () {
-    var url = 'http://durongjie.com/2019/04/28/Django/Django数据库防注入/';
+    var url = 'http://durongjie.com/2019/04/29/Life/如何维修墙上网络端口/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -312,7 +312,7 @@
     var gitmentConfig = "FreezeJ";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: " Django数据库防注入",
+        id: " 如何维修墙上网络端口",
         owner: "FreezeJ",
         repo: "FreezeJ.github.io",
         oauth: {
