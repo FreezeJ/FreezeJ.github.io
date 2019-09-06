@@ -10,7 +10,7 @@
   
   <title>
     
-      PEP8整理以及注意点 | FreezeJ&#39; Blog
+      Shell启动脚本 | FreezeJ&#39; Blog
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -144,8 +144,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>PEP8整理以及注意点</h2>
-  <p class="post-date">2019-05-09</p>
+  <h2>Shell启动脚本</h2>
+  <p class="post-date">2019-08-02</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -153,118 +153,19 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h1 id="PEP8整理以及注意点"><a href="#PEP8整理以及注意点" class="headerlink" title="PEP8整理以及注意点"></a>PEP8整理以及注意点</h1><blockquote>
-<p>使用PEP8要求代码风格，使代码更加统一整洁。</p>
-</blockquote>
-<h2 id="基本要求"><a href="#基本要求" class="headerlink" title="基本要求"></a>基本要求</h2><h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><h4 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h4><p>大写加下划线：</p>
-<ul>
-<li><p>USER_CONSTANT</p>
-</li>
-<li><p>PI</p>
-</li>
-<li><p>START_TIME</p>
-</li>
-</ul>
-<h4 id="私有变量"><a href="#私有变量" class="headerlink" title="私有变量"></a>私有变量</h4><p>小写和一个前导下划线：</p>
-<ul>
-<li><p>_private_value</p>
-</li>
-<li><p>_money</p>
-</li>
-<li><p>_rate</p>
-</li>
-</ul>
-<h4 id="内置变量"><a href="#内置变量" class="headerlink" title="内置变量"></a>内置变量</h4><p>小写，两个前导下划线和两个后置下划线：</p>
-<ul>
-<li><p>__class__</p>
-</li>
-<li><p>__name__</p>
-</li>
-<li><p>__doc__</p>
-</li>
-</ul>
-<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><h4 id="私有方法"><a href="#私有方法" class="headerlink" title="私有方法"></a>私有方法</h4><p>小写和一个前导下划线：</p>
-<ul>
-<li><p>def _secrete(self):</p>
-</li>
-<li><p>def _print_name(self):</p>
-</li>
-<li><p>def _save_time(self):</p>
-</li>
-</ul>
-<h4 id="特殊方法"><a href="#特殊方法" class="headerlink" title="特殊方法"></a>特殊方法</h4><p>小写和两个前置下划线，两个后置下划线：</p>
-<ul>
-<li><p>def __add__(self):</p>
-</li>
-<li><p>def __init__(self):</p>
-</li>
-<li><p>def __del__(self):</p>
-</li>
-</ul>
-<h4 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h4><p>小写和下划线，缺省值等号两边没有空格:</p>
-<ul>
-<li><p>def connect(self, user=None):</p>
-</li>
-<li><p>def save_time(self, time_now=0) ——&gt;（注意，尽量不要把可变值设置为默认参数，即time_now=time.time()或者start_list=[]）</p>
-</li>
-</ul>
-<h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><p>类总是使用大驼峰命名格式，常见的一个方法是使用表示其类型或者特性的后缀</p>
-<h4 id="基类"><a href="#基类" class="headerlink" title="基类"></a>基类</h4><p>可以使用一个Base或Abstract前缀：</p>
-<ul>
-<li>BaseCookie(object)</li>
-<li>AbstractCookie(object)</li>
-</ul>
-<h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><p>不带下划线的小写字母，若是实现协议的模块，通常使用lib后缀</p>
-<ul>
-<li><p>import os</p>
-</li>
-<li><p>import sys</p>
-</li>
-<li><p>import time</p>
-</li>
-</ul>
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ol>
-<li><p>不要使用断言来实现静态类型检测</p>
-</li>
-<li><p>不要滥用*args和**kwargs</p>
-</li>
-</ol>
-<p><strong>使用has或is前缀命名布尔元素</strong></p>
-<ul>
-<li><p>is_connect = True</p>
-</li>
-<li><p>has_member = False</p>
-</li>
-</ul>
-<p><strong>使用复数形式命名序列</strong></p>
-<ul>
-<li>members = [‘user_1’,’user_2’]</li>
-</ul>
-<p><strong>避免通用名称和现有名称</strong></p>
-<p>如：list、dict、sequence、element</p>
-<p>还有os、sys、time等</p>
-<h3 id="代码长度"><a href="#代码长度" class="headerlink" title="代码长度"></a>代码长度</h3><p>一个函数不要超过30行代码</p>
-<p>一个类不要超过200行代码，不要超过10个方法</p>
-<p>一个模块不要超过500行代码</p>
-<h2 id="辅助工具"><a href="#辅助工具" class="headerlink" title="辅助工具"></a>辅助工具</h2><p><strong>验证脚本是否符合pep8：</strong></p>
-<p>可以安装一个 pep8 脚本用于验证你的代码风格是否符合 PEP8。</p>
-<p>>&gt;easy_install pep8</p>
-<p>>&gt;pep8 -r –ignoire E501 Test.py</p>
-<p>这个命令行的意思是，重复打出错误，并且忽略 501 错误(代码超过 79 行)。</p>
-<p><strong>yapf自动规范Python代码的脚本</strong></p>
-<p><strong>pylint Python代码规范化分析工具</strong></p>
+    <section class="markdown-content"><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line"><span class="meta">#</span> 启动脚本</span><br><span class="line"></span><br><span class="line">echo "当前用户：" $&#123;USER&#125;</span><br><span class="line">echo "当前目录：" $&#123;HOME&#125;</span><br><span class="line">echo "----------------------------"</span><br><span class="line"></span><br><span class="line">function start() &#123;</span><br><span class="line">    # 服务启动需要做的步骤</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function stop() &#123;</span><br><span class="line">    # 服务停止需要做的步骤</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function restart() &#123;</span><br><span class="line">    # 重启服务需要做的步骤</span><br><span class="line">	stop</span><br><span class="line">	sleep 3</span><br><span class="line">	start</span><br><span class="line">	status</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function status() &#123;</span><br><span class="line">    # 查看状态需要做的步骤</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 判断用户输入命令</span><br><span class="line">case $1 in </span><br><span class="line">   start)  # 服务启动需要做的步骤</span><br><span class="line">        start</span><br><span class="line">        ;;</span><br><span class="line">   stop)  # 服务停止需要做的步骤</span><br><span class="line">        stop</span><br><span class="line">        ;;</span><br><span class="line">   restart) # 重启服务需要做的步骤</span><br><span class="line">        restart</span><br><span class="line">        ;；</span><br><span class="line">   status) # 查看状态需要做的步骤</span><br><span class="line">        status</span><br><span class="line">        ;;</span><br><span class="line">   *) echo "Usage: $0 &#123;start|stop|restart|status&#125;"</span><br><span class="line">        exit 4</span><br><span class="line">        ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
 </section>
     <!-- Tags START -->
     
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#Python">
-    <span class="tag-code">Python</span>
+  <a href="/tags#Linux">
+    <span class="tag-code">Linux</span>
   </a>
 
-  <a href="/tags#Other">
-    <span class="tag-code">Other</span>
+  <a href="/tags#Shell">
+    <span class="tag-code">Shell</span>
   </a>
 
       </div>
@@ -275,17 +176,17 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2019/05/09/Other/YAML语法/">
+      <a class="nav-left" href="/2019/06/14/Python/Socket编程/">
         <span class="nav-arrow">← </span>
         
-          YAML语法
+          Socket编程
         
       </a>
     
     
-      <a class="nav-right" href="/2019/05/09/Mysql/Mysql基础练习/">
+      <a class="nav-right" href="/2019/09/06/Python/Python_attr模块/">
         
-          Mysql基础练习
+          Python_attr模块
         
         <span class="nav-arrow"> →</span>
       </a>
@@ -334,7 +235,7 @@
   <div class="toc-main">
     <strong class="toc-title">目录</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#PEP8整理以及注意点"><span class="toc-nav-text">PEP8整理以及注意点</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#基本要求"><span class="toc-nav-text">基本要求</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#变量"><span class="toc-nav-text">变量</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#常量"><span class="toc-nav-text">常量</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#私有变量"><span class="toc-nav-text">私有变量</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#内置变量"><span class="toc-nav-text">内置变量</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#方法"><span class="toc-nav-text">方法</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#私有方法"><span class="toc-nav-text">私有方法</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#特殊方法"><span class="toc-nav-text">特殊方法</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#函数参数"><span class="toc-nav-text">函数参数</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#类"><span class="toc-nav-text">类</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#基类"><span class="toc-nav-text">基类</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#模块"><span class="toc-nav-text">模块</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#参数"><span class="toc-nav-text">参数</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#代码长度"><span class="toc-nav-text">代码长度</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#辅助工具"><span class="toc-nav-text">辅助工具</span></a></li></ol></li></ol>
+      <ol class="nav">none</ol>
     
   </div>
 </aside>
@@ -345,7 +246,7 @@
 
 <script>
   (function () {
-    var url = 'http://durongjie.com/2019/05/09/Other/PEP8整理以及注意点/';
+    var url = 'http://durongjie.com/2019/08/02/Linux/Shell启动脚本/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -407,7 +308,7 @@
     var gitmentConfig = "FreezeJ";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "PEP8整理以及注意点",
+        id: "Shell启动脚本",
         owner: "FreezeJ",
         repo: "FreezeJ.github.io",
         oauth: {

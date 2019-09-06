@@ -157,11 +157,11 @@
 <h4 id="备份基本命令"><a href="#备份基本命令" class="headerlink" title="备份基本命令"></a>备份基本命令</h4><p>mysqldump -u user -p DATABASES TABLE1 TABLE2… &gt; backup.sql</p>
 <h5 id="选项说明"><a href="#选项说明" class="headerlink" title="选项说明"></a>选项说明</h5><ul>
 <li>mysqldump 默认是锁表的，如果不需要锁表，请使用 <strong>–skip-lock-tables</strong></li>
-<li>备份所有数据库使用 <strong>-all-databases</strong></li>
+<li>备份所有数据库使用 <strong>–all-databases</strong></li>
 <li>排除数据表 <strong>–ignore-table=dbname.tablename</strong></li>
 <li>备份前刷新binlog日志 <strong>–flush-logs</strong></li>
 <li>只导出数据结构 <strong>–no-data, -d</strong></li>
-<li>导出时，包括创建数据库语句 <strong>-B</strong></li>
+<li>导出时，包括创建数据库语句 <strong>-B</strong> 或 <strong>–databases</strong></li>
 </ul>
 <h4 id="恢复命令"><a href="#恢复命令" class="headerlink" title="恢复命令"></a>恢复命令</h4><p>mysql -u user -p -e “source backup.sql” DATABASES</p>
 <h5 id="选项说明-1"><a href="#选项说明-1" class="headerlink" title="选项说明"></a>选项说明</h5><ul>
