@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[WSGI、uwsgi和uWSGI]]></title>
+    <url>%2F2019%2F10%2F29%2FPython%2FWSGI%E3%80%81uwsgi%E5%92%8CuWSGI%2F</url>
+    <content type="text"><![CDATA[WSGI：全称是Web Server Gateway Interface，WSGI不是服务器，python模块，框架，API或者任何软件，只是一种规范，描述web server如何与web application通信的规范。server和application的规范在PEP 3333中有具体描述。要实现WSGI协议，必须同时实现web server和web application，当前运行在WSGI协议之上的web框架有Bottle, Flask, Django。 WSGI协议主要包括server和application两部分： WSGI server负责从客户端接收请求，将request转发给application，将application返回的response返回给客户端； WSGI application接收由server转发的request，处理请求，并将处理结果返回给server。 WSGI协议其实是定义了一种server与application解耦的规范，即可以有多个实现WSGI server的服务器，也可以有多个实现WSGI application的框架，那么就可以选择任意的server和application组合实现自己的web应用。 例如uWSGI和Gunicorn都是实现了WSGI server协议的服务器，Django，Flask是实现了WSGI application协议的web框架，可以根据项目实际情况搭配使用。 uWSGI：是一个web服务器，实现了WSGI协议、uwsgi协议、http协议等。 uwsgi：与WSGI一样是一种通信协议，是uWSGI服务器的独占协议，用于定义传输信息的类型(type of information)，每一个uwsgi packet前4byte为传输信息类型的描述，与WSGI协议是两种东西，据说该协议是fcgi协议的10倍快。 参考链接：https://www.jianshu.com/p/679dee0a4193]]></content>
+      <tags>
+        <tag>Django</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Centos7搭建Turn服务器(coturn)]]></title>
+    <url>%2F2019%2F09%2F16%2FLinux%2F%E6%90%AD%E5%BB%BATurn%E6%9C%8D%E5%8A%A1%E5%99%A8%2F</url>
+    <content type="text"><![CDATA[Centos7搭建Turn服务器(coturn)官方安装文档]]></content>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Webrtc</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Python_attr模块]]></title>
     <url>%2F2019%2F09%2F06%2FPython%2FPython_attr%E6%A8%A1%E5%9D%97%2F</url>
     <content type="text"><![CDATA[Python attr 模块demo代码import attrfrom attr.validators import instance_ofdef check_str_len(instance, attribute, value): if not 10 &gt; len(value) &gt; 1: print(value) raise ValueError("wrong str len!")@attr.s(auto_attribs=True, slots=True)class Book(object): name: str # 设置了auto_attribs会自动生成参数 page: int book_type: list author: str = attr.ib(validator=[instance_of(str), check_str_len]) # 检查合法性，可以是多个条件 price: float = attr.ib(converter=float) # 类型转换为float secret: str = attr.ib(repr=False) # 排除不输出 comment: str = attr.ib(default='123')a = Book('python test', 100, ['计算机', '编程'], '匿名', 30, 'yqgadfgwsrtqaavssdfa', '一本好书')print(a) # 不输出repr=False的项print(a.__slots__) # 开启slots=Trueprint(attr.asdict(a)) # 转换属性为dict输出'''console输出内容：Book(name='python test', page=100, book_type=['计算机', '编程'], author='匿名', price=30.0, comment='一本好书')('name', 'page', 'book_type', 'author', 'price', 'secret', 'comment', '__weakref__')&#123;'name': 'python test', 'page': 100, 'book_type': ['计算机', '编程'], 'author': '匿名', 'price': 30.0, 'secret': 'yqgadfgwsrtqaavssdfa', 'comment': '一本好书'&#125;''' 参考文章： https://www.jianshu.com/p/2140b519028d https://www.attrs.org/en/stable/examples.html https://glyph.twistedmatrix.com/2016/08/attrs.html]]></content>
@@ -65,8 +82,8 @@
     <url>%2F2019%2F05%2F09%2FOther%2FPEP8%E6%95%B4%E7%90%86%E4%BB%A5%E5%8F%8A%E6%B3%A8%E6%84%8F%E7%82%B9%2F</url>
     <content type="text"><![CDATA[PEP8整理以及注意点 使用PEP8要求代码风格，使代码更加统一整洁。 基本要求变量常量大写加下划线： USER_CONSTANT PI START_TIME 私有变量小写和一个前导下划线： _private_value _money _rate 内置变量小写，两个前导下划线和两个后置下划线： __class__ __name__ __doc__ 方法私有方法小写和一个前导下划线： def _secrete(self): def _print_name(self): def _save_time(self): 特殊方法小写和两个前置下划线，两个后置下划线： def __add__(self): def __init__(self): def __del__(self): 函数参数小写和下划线，缺省值等号两边没有空格: def connect(self, user=None): def save_time(self, time_now=0) ——&gt;（注意，尽量不要把可变值设置为默认参数，即time_now=time.time()或者start_list=[]） 类类总是使用大驼峰命名格式，常见的一个方法是使用表示其类型或者特性的后缀 基类可以使用一个Base或Abstract前缀： BaseCookie(object) AbstractCookie(object) 模块不带下划线的小写字母，若是实现协议的模块，通常使用lib后缀 import os import sys import time 参数 不要使用断言来实现静态类型检测 不要滥用*args和**kwargs 使用has或is前缀命名布尔元素 is_connect = True has_member = False 使用复数形式命名序列 members = [‘user_1’,’user_2’] 避免通用名称和现有名称 如：list、dict、sequence、element 还有os、sys、time等 代码长度一个函数不要超过30行代码 一个类不要超过200行代码，不要超过10个方法 一个模块不要超过500行代码 辅助工具验证脚本是否符合pep8： 可以安装一个 pep8 脚本用于验证你的代码风格是否符合 PEP8。 >&gt;easy_install pep8 >&gt;pep8 -r –ignoire E501 Test.py 这个命令行的意思是，重复打出错误，并且忽略 501 错误(代码超过 79 行)。 yapf自动规范Python代码的脚本 pylint Python代码规范化分析工具]]></content>
       <tags>
-        <tag>Python</tag>
         <tag>Other</tag>
+        <tag>Python</tag>
       </tags>
   </entry>
   <entry>
