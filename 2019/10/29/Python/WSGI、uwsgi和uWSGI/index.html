@@ -160,7 +160,7 @@
 <li><strong>WSGI application</strong>接收由server转发的request，处理请求，并将处理结果返回给server。</li>
 </ul>
 <p>WSGI协议其实是定义了一种server与application解耦的规范，即可以有多个实现WSGI server的服务器，也可以有多个实现WSGI application的框架，那么就可以选择任意的server和application组合实现自己的web应用。</p>
-<p><img src="/home/freeze/Document/hexo_blog/source/_posts/Python/wsgi.png" alt="img"></p>
+<p><img src="../static/wsgi.png" alt="img"></p>
 <p>例如uWSGI和Gunicorn都是实现了WSGI server协议的服务器，Django，Flask是实现了WSGI application协议的web框架，可以根据项目实际情况搭配使用。 </p>
 <p><strong>uWSGI</strong>：是一个<strong>web服务器</strong>，实现了WSGI协议、uwsgi协议、http协议等。</p>
 <p><strong>uwsgi</strong>：与WSGI一样是一种<strong>通信协议</strong>，是uWSGI服务器的独占协议，<strong>用于定义传输信息的类型(type of information)</strong>，每一个uwsgi packet前4byte为传输信息类型的描述，与WSGI协议是两种东西，据说该协议是fcgi协议的10倍快。 </p>
