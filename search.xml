@@ -107,8 +107,8 @@
     <url>%2F2019%2F05%2F09%2FOther%2FPEP8%E6%95%B4%E7%90%86%E4%BB%A5%E5%8F%8A%E6%B3%A8%E6%84%8F%E7%82%B9%2F</url>
     <content type="text"><![CDATA[PEP8整理以及注意点 使用PEP8要求代码风格，使代码更加统一整洁。 基本要求变量常量大写加下划线： USER_CONSTANT PI START_TIME 私有变量小写和一个前导下划线： _private_value _money _rate 内置变量小写，两个前导下划线和两个后置下划线： __class__ __name__ __doc__ 方法私有方法小写和一个前导下划线： def _secrete(self): def _print_name(self): def _save_time(self): 特殊方法小写和两个前置下划线，两个后置下划线： def __add__(self): def __init__(self): def __del__(self): 函数参数小写和下划线，缺省值等号两边没有空格: def connect(self, user=None): def save_time(self, time_now=0) ——&gt;（注意，尽量不要把可变值设置为默认参数，即time_now=time.time()或者start_list=[]） 类类总是使用大驼峰命名格式，常见的一个方法是使用表示其类型或者特性的后缀 基类可以使用一个Base或Abstract前缀： BaseCookie(object) AbstractCookie(object) 模块不带下划线的小写字母，若是实现协议的模块，通常使用lib后缀 import os import sys import time 参数 不要使用断言来实现静态类型检测 不要滥用*args和**kwargs 使用has或is前缀命名布尔元素 is_connect = True has_member = False 使用复数形式命名序列 members = [‘user_1’,’user_2’] 避免通用名称和现有名称 如：list、dict、sequence、element 还有os、sys、time等 代码长度一个函数不要超过30行代码 一个类不要超过200行代码，不要超过10个方法 一个模块不要超过500行代码 辅助工具验证脚本是否符合pep8： 可以安装一个 pep8 脚本用于验证你的代码风格是否符合 PEP8。 >&gt;easy_install pep8 >&gt;pep8 -r –ignoire E501 Test.py 这个命令行的意思是，重复打出错误，并且忽略 501 错误(代码超过 79 行)。 yapf自动规范Python代码的脚本 pylint Python代码规范化分析工具]]></content>
       <tags>
-        <tag>Other</tag>
         <tag>Python</tag>
+        <tag>Other</tag>
       </tags>
   </entry>
   <entry>

@@ -364,7 +364,7 @@ $@：参数列表
 
     // error image
     $(".markdown-content img").on('error', function() {
-      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).attr('src', 'https://markdown-resource.oss-cn-shenzhen.aliyuncs.com/img20200414170549.png')
       $(this).css({
         'cursor': 'default'
       })
@@ -373,7 +373,7 @@ $@：参数列表
     // zoom image
     $(".markdown-content img").on('click', function() {
       var src = $(this).attr('src')
-      if (src !== 'http://file.muyutech.com/error-img.png') {
+      if (src !== 'https://markdown-resource.oss-cn-shenzhen.aliyuncs.com/img20200414170549.png') {
         var imageW = $(this).width()
         var imageH = $(this).height()
 
