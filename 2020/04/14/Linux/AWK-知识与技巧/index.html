@@ -10,7 +10,7 @@
   
   <title>
     
-      WSGI、uwsgi和uWSGI | FreezeJ&#39; Blog
+      AWK 知识与技巧 | FreezeJ&#39; Blog
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -144,8 +144,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>WSGI、uwsgi和uWSGI</h2>
-  <p class="post-date">2019-10-29</p>
+  <h2>AWK 知识与技巧</h2>
+  <p class="post-date">2020-04-14</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -153,26 +153,26 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p><strong>WSGI</strong>：全称是Web Server Gateway Interface，WSGI不是服务器，python模块，框架，API或者任何软件，只是一种规范，<strong>描述web server如何与web application通信的规范</strong>。server和application的规范在PEP 3333中有具体描述。要实现WSGI协议，必须同时实现web server和web application，当前运行在WSGI协议之上的web框架有Bottle, Flask, Django。 </p>
-<p>WSGI协议主要包括server和application两部分：</p>
-<ul>
-<li><strong>WSGI server</strong>负责从客户端接收请求，将request转发给application，将application返回的response返回给客户端；</li>
-<li><strong>WSGI application</strong>接收由server转发的request，处理请求，并将处理结果返回给server。</li>
-</ul>
-<p>WSGI协议其实是定义了一种server与application解耦的规范，即可以有多个实现WSGI server的服务器，也可以有多个实现WSGI application的框架，那么就可以选择任意的server和application组合实现自己的web应用。</p>
-<p><img src="https://raw.githubusercontent.com/FreezeJ/FreezeJ.github.io.static/master/wsgi.png" alt="img"></p>
-<p>例如uWSGI和Gunicorn都是实现了WSGI server协议的服务器，Django，Flask是实现了WSGI application协议的web框架，可以根据项目实际情况搭配使用。 </p>
-<p><strong>uWSGI</strong>：是一个<strong>web服务器</strong>，实现了WSGI协议、uwsgi协议、http协议等。</p>
-<p><strong>uwsgi</strong>：与WSGI一样是一种<strong>通信协议</strong>，是uWSGI服务器的独占协议，<strong>用于定义传输信息的类型(type of information)</strong>，每一个uwsgi packet前4byte为传输信息类型的描述，与WSGI协议是两种东西，据说该协议是fcgi协议的10倍快。 </p>
-<p>参考链接：<a href="https://www.jianshu.com/p/679dee0a4193" target="_blank" rel="noopener">https://www.jianshu.com/p/679dee0a4193</a></p>
+    <section class="markdown-content"><h1 id="AWK-知识与技巧"><a href="#AWK-知识与技巧" class="headerlink" title="AWK 知识与技巧"></a>AWK 知识与技巧</h1><h3 id="使用match匹配关键字并且输出匹配内容"><a href="#使用match匹配关键字并且输出匹配内容" class="headerlink" title="使用match匹配关键字并且输出匹配内容"></a>使用match匹配关键字并且输出匹配内容</h3><blockquote>
+<p>命令 </p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat wget-list-USTC.row | grep -v <span class="string">'^$'</span> |  awk <span class="string">'&#123;match($0,/&lt;a href="(.+)"&gt;/,a); print "http://mirrors.ustc.edu.cn/lfs/lfs-packages/9.1/"a[1]&#125;'</span> &gt; wget-list</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>实际例子</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cat wget-list-USTC.row | head</span><br><span class="line">&lt;a href=&quot;Python-3.8.1.tar.xz&quot;&gt;Python-3.8.1.tar.xz&lt;/a&gt;                                18-Dec-2019 21:30            17828408</span><br><span class="line">&lt;a href=&quot;XML-Parser-2.46.tar.gz&quot;&gt;XML-Parser-2.46.tar.gz&lt;/a&gt;                             24-Sep-2019 05:29              254763</span><br><span class="line">&lt;a href=&quot;acl-2.2.53.tar.gz&quot;&gt;acl-2.2.53.tar.gz&lt;/a&gt;                                  16-Aug-2018 16:36              524300</span><br><span class="line">&lt;a href=&quot;attr-2.4.48.tar.gz&quot;&gt;attr-2.4.48.tar.gz&lt;/a&gt;                                 16-Aug-2018 16:36              467840</span><br><span class="line">&lt;a href=&quot;autoconf-2.69.tar.xz&quot;&gt;autoconf-2.69.tar.xz&lt;/a&gt;                               16-Aug-2018 16:36             1214744</span><br><span class="line">&lt;a href=&quot;automake-1.16.1.tar.xz&quot;&gt;automake-1.16.1.tar.xz&lt;/a&gt;                             16-Aug-2018 16:36             1534936</span><br><span class="line">&lt;a href=&quot;bash-5.0-upstream_fixes-1.patch&quot;&gt;bash-5.0-upstream_fixes-1.patch&lt;/a&gt;                    01-Dec-2019 16:25               21672</span><br><span class="line">&lt;a href=&quot;bash-5.0.tar.gz&quot;&gt;bash-5.0.tar.gz&lt;/a&gt;                                    07-Jan-2019 14:13            10135110</span><br><span class="line">&lt;a href=&quot;bc-2.5.3.tar.gz&quot;&gt;bc-2.5.3.tar.gz&lt;/a&gt;                                    01-Feb-2020 16:02              252149</span><br><span class="line">&lt;a href=&quot;binutils-2.34.tar.xz&quot;&gt;binutils-2.34.tar.xz&lt;/a&gt;                               01-Feb-2020 12:24            21637796</span><br><span class="line"></span><br><span class="line">cat wget-list-USTC.row | grep -v &apos;^$&apos; |  awk &apos;&#123;match($0,/&lt;a href=&quot;(.+)&quot;&gt;/,a); print &quot;http://mirrors.ustc.edu.cn/lfs/lfs-packages/9.1/&quot;a[1]&#125;&apos; &gt; wget-list</span><br><span class="line"></span><br><span class="line">cat wget-list | head</span><br><span class="line">http://mirrors.ustc.edu.cn/lfs/lfs-packages/9.1/Python-3.8.1.tar.xz</span><br><span class="line">http://mirrors.ustc.edu.cn/lfs/lfs-packages/9.1/XML-Parser-2.46.tar.gz</span><br><span class="line">http://mirrors.ustc.edu.cn/lfs/lfs-packages/9.1/acl-2.2.53.tar.gz</span><br><span class="line">http://mirrors.ustc.edu.cn/lfs/lfs-packages/9.1/attr-2.4.48.tar.gz</span><br><span class="line">http://mirrors.ustc.edu.cn/lfs/lfs-packages/9.1/autoconf-2.69.tar.xz</span><br><span class="line">http://mirrors.ustc.edu.cn/lfs/lfs-packages/9.1/automake-1.16.1.tar.xz</span><br><span class="line">http://mirrors.ustc.edu.cn/lfs/lfs-packages/9.1/bash-5.0-upstream_fixes-1.patch</span><br><span class="line">http://mirrors.ustc.edu.cn/lfs/lfs-packages/9.1/bash-5.0.tar.gz</span><br><span class="line">http://mirrors.ustc.edu.cn/lfs/lfs-packages/9.1/bc-2.5.3.tar.gz</span><br><span class="line">http://mirrors.ustc.edu.cn/lfs/lfs-packages/9.1/binutils-2.34.tar.xz</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>解析  </p>
+</blockquote>
+<p><code>match($0,/&lt;a href=&quot;(.+)&quot;&gt;/,a)</code>  match函数接收3个参数，第一个为输入，$0表示整行数据。第二个参数为正则匹配，参数内括号匹配到的内容按顺序保存到第三个参数命名的列表中，该例子为a，使用a[1]调用第一个括号匹配的内容，a[2]第二个括号内容，以此类推。</p>
 </section>
     <!-- Tags START -->
     
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#Django">
-    <span class="tag-code">Django</span>
+  <a href="/tags#Linux">
+    <span class="tag-code">Linux</span>
   </a>
 
       </div>
@@ -183,17 +183,17 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2019/09/16/Linux/搭建Turn服务器/">
+      <a class="nav-left" href="/2020/04/14/Linux/LFS-搭建笔记/">
         <span class="nav-arrow">← </span>
         
-          Centos7搭建Turn服务器(coturn)
+          LFS 搭建笔记
         
       </a>
     
     
-      <a class="nav-right" href="/2020/04/14/Linux/LFS-搭建笔记/">
+      <a class="nav-right" href="/2020/04/14/Linux/vbox下linux添加和启动网卡/">
         
-          LFS 搭建笔记
+          vbox下linux添加和启动网卡
         
         <span class="nav-arrow"> →</span>
       </a>
@@ -242,7 +242,7 @@
   <div class="toc-main">
     <strong class="toc-title">目录</strong>
     
-      <ol class="nav">none</ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#AWK-知识与技巧"><span class="toc-nav-text">AWK 知识与技巧</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#使用match匹配关键字并且输出匹配内容"><span class="toc-nav-text">使用match匹配关键字并且输出匹配内容</span></a></li></ol></li></ol>
     
   </div>
 </aside>
@@ -253,7 +253,7 @@
 
 <script>
   (function () {
-    var url = 'http://durongjie.com/2019/10/29/Python/WSGI、uwsgi和uWSGI/';
+    var url = 'http://durongjie.com/2020/04/14/Linux/AWK-知识与技巧/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -315,7 +315,7 @@
     var gitmentConfig = "FreezeJ";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "WSGI、uwsgi和uWSGI",
+        id: "AWK 知识与技巧",
         owner: "FreezeJ",
         repo: "FreezeJ.github.io",
         oauth: {

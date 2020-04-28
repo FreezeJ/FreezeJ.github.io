@@ -10,7 +10,7 @@
   
   <title>
     
-      WSGI、uwsgi和uWSGI | FreezeJ&#39; Blog
+      vbox下linux添加和启动网卡 | FreezeJ&#39; Blog
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -144,8 +144,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>WSGI、uwsgi和uWSGI</h2>
-  <p class="post-date">2019-10-29</p>
+  <h2>vbox下linux添加和启动网卡</h2>
+  <p class="post-date">2020-04-14</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -153,26 +153,28 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p><strong>WSGI</strong>：全称是Web Server Gateway Interface，WSGI不是服务器，python模块，框架，API或者任何软件，只是一种规范，<strong>描述web server如何与web application通信的规范</strong>。server和application的规范在PEP 3333中有具体描述。要实现WSGI协议，必须同时实现web server和web application，当前运行在WSGI协议之上的web框架有Bottle, Flask, Django。 </p>
-<p>WSGI协议主要包括server和application两部分：</p>
-<ul>
-<li><strong>WSGI server</strong>负责从客户端接收请求，将request转发给application，将application返回的response返回给客户端；</li>
-<li><strong>WSGI application</strong>接收由server转发的request，处理请求，并将处理结果返回给server。</li>
-</ul>
-<p>WSGI协议其实是定义了一种server与application解耦的规范，即可以有多个实现WSGI server的服务器，也可以有多个实现WSGI application的框架，那么就可以选择任意的server和application组合实现自己的web应用。</p>
-<p><img src="https://raw.githubusercontent.com/FreezeJ/FreezeJ.github.io.static/master/wsgi.png" alt="img"></p>
-<p>例如uWSGI和Gunicorn都是实现了WSGI server协议的服务器，Django，Flask是实现了WSGI application协议的web框架，可以根据项目实际情况搭配使用。 </p>
-<p><strong>uWSGI</strong>：是一个<strong>web服务器</strong>，实现了WSGI协议、uwsgi协议、http协议等。</p>
-<p><strong>uwsgi</strong>：与WSGI一样是一种<strong>通信协议</strong>，是uWSGI服务器的独占协议，<strong>用于定义传输信息的类型(type of information)</strong>，每一个uwsgi packet前4byte为传输信息类型的描述，与WSGI协议是两种东西，据说该协议是fcgi协议的10倍快。 </p>
-<p>参考链接：<a href="https://www.jianshu.com/p/679dee0a4193" target="_blank" rel="noopener">https://www.jianshu.com/p/679dee0a4193</a></p>
+    <section class="markdown-content"><h1 id="vbox下linux添加和启动网卡"><a href="#vbox下linux添加和启动网卡" class="headerlink" title="vbox下linux添加和启动网卡"></a>vbox下linux添加和启动网卡</h1><h2 id="vbox添加新网卡"><a href="#vbox添加新网卡" class="headerlink" title="vbox添加新网卡"></a>vbox添加新网卡</h2><p><img src="https://markdown-resource.oss-cn-shenzhen.aliyuncs.com/img20200408162332.png" alt></p>
+<h2 id="查看网卡名字"><a href="#查看网卡名字" class="headerlink" title="查看网卡名字"></a>查看网卡名字</h2><p>ubuntu16：<br><code>ls /sys/class/net</code></p>
+<p>centos7：<br><code>ls /etc/sysconfig/network-scripts/  (ifcfg-*就是接口名称)</code></p>
+<h2 id="手动开启接口："><a href="#手动开启接口：" class="headerlink" title="手动开启接口："></a>手动开启接口：</h2><p>ubuntu：<br><code>ifconfig 接口名 up</code></p>
+<p>centos7：<br><code>/etc/sysconfig/network-scripts/if-up  接口名</code><br>或 <code>ifconfig 接口名 up</code></p>
+<h2 id="编辑接口文件（开机启动接口，静态设置等）"><a href="#编辑接口文件（开机启动接口，静态设置等）" class="headerlink" title="编辑接口文件（开机启动接口，静态设置等）"></a>编辑接口文件（开机启动接口，静态设置等）</h2><p>ubuntu：<br><code>vim /etc/networks/interfaces</code><br><img src="https://markdown-resource.oss-cn-shenzhen.aliyuncs.com/img20200408162414.png" alt></p>
+<p>centos7：<br><code>vim /etc/sysconfig/network-script/接口名</code><br><img src="https://markdown-resource.oss-cn-shenzhen.aliyuncs.com/img20200408162438.png" alt></p>
+<h2 id="重启网络"><a href="#重启网络" class="headerlink" title="重启网络"></a>重启网络</h2><p>ubuntu：<br><code>service networking restart</code></p>
+<p>centos7：<br><code>systemctl start network.service</code><br>或 <code>service network restart</code></p>
+<h2 id="查看接口ip"><a href="#查看接口ip" class="headerlink" title="查看接口ip"></a>查看接口ip</h2><p><code>ipconfig</code>  或 <code>ip add</code></p>
 </section>
     <!-- Tags START -->
     
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#Django">
-    <span class="tag-code">Django</span>
+  <a href="/tags#Linux">
+    <span class="tag-code">Linux</span>
+  </a>
+
+  <a href="/tags#vbox">
+    <span class="tag-code">vbox</span>
   </a>
 
       </div>
@@ -183,17 +185,17 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2019/09/16/Linux/搭建Turn服务器/">
+      <a class="nav-left" href="/2020/04/14/Linux/AWK-知识与技巧/">
         <span class="nav-arrow">← </span>
         
-          Centos7搭建Turn服务器(coturn)
+          AWK 知识与技巧
         
       </a>
     
     
-      <a class="nav-right" href="/2020/04/14/Linux/LFS-搭建笔记/">
+      <a class="nav-right" href="/2020/04/20/Linux/centos7安装redmine3-4/">
         
-          LFS 搭建笔记
+          centos7安装redmine3.4
         
         <span class="nav-arrow"> →</span>
       </a>
@@ -242,7 +244,7 @@
   <div class="toc-main">
     <strong class="toc-title">目录</strong>
     
-      <ol class="nav">none</ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#vbox下linux添加和启动网卡"><span class="toc-nav-text">vbox下linux添加和启动网卡</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#vbox添加新网卡"><span class="toc-nav-text">vbox添加新网卡</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#查看网卡名字"><span class="toc-nav-text">查看网卡名字</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#手动开启接口："><span class="toc-nav-text">手动开启接口：</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#编辑接口文件（开机启动接口，静态设置等）"><span class="toc-nav-text">编辑接口文件（开机启动接口，静态设置等）</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#重启网络"><span class="toc-nav-text">重启网络</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#查看接口ip"><span class="toc-nav-text">查看接口ip</span></a></li></ol></li></ol>
     
   </div>
 </aside>
@@ -253,7 +255,7 @@
 
 <script>
   (function () {
-    var url = 'http://durongjie.com/2019/10/29/Python/WSGI、uwsgi和uWSGI/';
+    var url = 'http://durongjie.com/2020/04/14/Linux/vbox下linux添加和启动网卡/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -315,7 +317,7 @@
     var gitmentConfig = "FreezeJ";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "WSGI、uwsgi和uWSGI",
+        id: "vbox下linux添加和启动网卡",
         owner: "FreezeJ",
         repo: "FreezeJ.github.io",
         oauth: {

@@ -10,7 +10,7 @@
   
   <title>
     
-      WSGI、uwsgi和uWSGI | FreezeJ&#39; Blog
+      centos7安装redmine3.4 | FreezeJ&#39; Blog
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -144,8 +144,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>WSGI、uwsgi和uWSGI</h2>
-  <p class="post-date">2019-10-29</p>
+  <h2>centos7安装redmine3.4</h2>
+  <p class="post-date">2020-04-20</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -153,26 +153,17 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p><strong>WSGI</strong>：全称是Web Server Gateway Interface，WSGI不是服务器，python模块，框架，API或者任何软件，只是一种规范，<strong>描述web server如何与web application通信的规范</strong>。server和application的规范在PEP 3333中有具体描述。要实现WSGI协议，必须同时实现web server和web application，当前运行在WSGI协议之上的web框架有Bottle, Flask, Django。 </p>
-<p>WSGI协议主要包括server和application两部分：</p>
-<ul>
-<li><strong>WSGI server</strong>负责从客户端接收请求，将request转发给application，将application返回的response返回给客户端；</li>
-<li><strong>WSGI application</strong>接收由server转发的request，处理请求，并将处理结果返回给server。</li>
-</ul>
-<p>WSGI协议其实是定义了一种server与application解耦的规范，即可以有多个实现WSGI server的服务器，也可以有多个实现WSGI application的框架，那么就可以选择任意的server和application组合实现自己的web应用。</p>
-<p><img src="https://raw.githubusercontent.com/FreezeJ/FreezeJ.github.io.static/master/wsgi.png" alt="img"></p>
-<p>例如uWSGI和Gunicorn都是实现了WSGI server协议的服务器，Django，Flask是实现了WSGI application协议的web框架，可以根据项目实际情况搭配使用。 </p>
-<p><strong>uWSGI</strong>：是一个<strong>web服务器</strong>，实现了WSGI协议、uwsgi协议、http协议等。</p>
-<p><strong>uwsgi</strong>：与WSGI一样是一种<strong>通信协议</strong>，是uWSGI服务器的独占协议，<strong>用于定义传输信息的类型(type of information)</strong>，每一个uwsgi packet前4byte为传输信息类型的描述，与WSGI协议是两种东西，据说该协议是fcgi协议的10倍快。 </p>
-<p>参考链接：<a href="https://www.jianshu.com/p/679dee0a4193" target="_blank" rel="noopener">https://www.jianshu.com/p/679dee0a4193</a></p>
-</section>
+    <section class="markdown-content"><h1 id="centos7安装redmine3-4"><a href="#centos7安装redmine3-4" class="headerlink" title="centos7安装redmine3.4"></a>centos7安装redmine3.4</h1><h2 id="系统版本"><a href="#系统版本" class="headerlink" title="系统版本"></a>系统版本</h2><p><code>Linux centos7 3.10.0-1062.18.1.el7.x86_64 #1 SMP Tue Mar 17 23:49:17 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux</code></p>
+<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">systemctl stop firewalld  <span class="comment"># 关闭防火墙</span></span><br><span class="line">yum install mariadb-libs mariadb mariadb-devel mariadb-server ImageMagick-devel  ImageMagick ruby rubygems ruby-devel -y  <span class="comment"># 安装所需包</span></span><br><span class="line">wget https://www.redmine.org/releases/redmine-3.4.7.tar.gz  <span class="comment"># 获取安装包</span></span><br><span class="line">tar xf redmine-3.4.7.tar.gz -C  /usr/<span class="built_in">local</span>/</span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/redmine-3.4.7/config</span><br><span class="line">cp configuration.yml.example  configuration.yml</span><br><span class="line">cp database.yml.example database.yml</span><br><span class="line">vim database.yml  <span class="comment"># 配置数据库用户名密码</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">systemctl start mariadb  <span class="comment"># 开启数据库</span></span><br></pre></td></tr></table></figure>
+<p>mysq插入数据<br><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> redmine <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8mb4;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">'redmine'</span>@<span class="string">'localhost'</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'123456'</span>;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> redmine.* <span class="keyword">TO</span> <span class="string">'redmine'</span>@<span class="string">'localhost'</span>;</span><br></pre></td></tr></table></figure></p>
+<h3 id="RUBY"><a href="#RUBY" class="headerlink" title="RUBY"></a>RUBY</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">gem <span class="built_in">source</span> -l  <span class="comment"># 查看源</span></span><br><span class="line">gem sources -a http://mirrors.aliyun.com/rubygems/  <span class="comment"># 添加国内源</span></span><br><span class="line">gem sources --remove  https://rubygems.org/  <span class="comment"># 删除国外源</span></span><br><span class="line">gem <span class="built_in">source</span> -u  <span class="comment"># 更新源</span></span><br><span class="line">gem <span class="built_in">source</span> -l  <span class="comment"># 查看源</span></span><br><span class="line"></span><br><span class="line">升级RUBY</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Install mpapis public key (might need `gpg2` and or `sudo`)</span></span><br><span class="line">gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3</span><br><span class="line"></span><br><span class="line"><span class="comment"># Download the installer</span></span><br><span class="line">curl -O https://raw.githubusercontent.com/rvm/rvm/master/binscripts/rvm-installer</span><br><span class="line">curl -O https://raw.githubusercontent.com/rvm/rvm/master/binscripts/rvm-installer.asc</span><br><span class="line"></span><br><span class="line"><span class="comment"># Verify the installer signature (might need `gpg2`), and if it validates...</span></span><br><span class="line">gpg --verify rvm-installer.asc &amp;&amp;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Run the installer</span></span><br><span class="line">bash rvm-installer stable</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">rvm -v  <span class="comment"># 查看rvm版本</span></span><br><span class="line"></span><br><span class="line">rvm list known  <span class="comment"># 查看Ruby版本</span></span><br><span class="line">rvm install 2.5</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">gem install bundler  <span class="comment">#Redmine使用Bundler来管理gems依赖项，需要先安装Bundler</span></span><br><span class="line">bundle install --without development <span class="built_in">test</span>  production  <span class="comment">#安装Redmine所需的所有gem</span></span><br><span class="line">bundle <span class="built_in">exec</span> rake generate_secret_token  <span class="comment"># 生成Rails使用的随机密钥，用于编码存储会话数据的cookie，从而防止其被篡改。</span></span><br><span class="line">生成新的机密令牌会在重新启动后使所有现有会话无效。将此秘密存储在config/secrets.yml中</span><br></pre></td></tr></table></figure></section>
     <!-- Tags START -->
     
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#Django">
-    <span class="tag-code">Django</span>
+  <a href="/tags#Linux">
+    <span class="tag-code">Linux</span>
   </a>
 
       </div>
@@ -183,17 +174,17 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2019/09/16/Linux/搭建Turn服务器/">
+      <a class="nav-left" href="/2020/04/14/Linux/vbox下linux添加和启动网卡/">
         <span class="nav-arrow">← </span>
         
-          Centos7搭建Turn服务器(coturn)
+          vbox下linux添加和启动网卡
         
       </a>
     
     
-      <a class="nav-right" href="/2020/04/14/Linux/LFS-搭建笔记/">
+      <a class="nav-right" href="/2020/04/27/Linux/Ansible使用文档/">
         
-          LFS 搭建笔记
+          Ansible入门使用
         
         <span class="nav-arrow"> →</span>
       </a>
@@ -242,7 +233,7 @@
   <div class="toc-main">
     <strong class="toc-title">目录</strong>
     
-      <ol class="nav">none</ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#centos7安装redmine3-4"><span class="toc-nav-text">centos7安装redmine3.4</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#系统版本"><span class="toc-nav-text">系统版本</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#安装步骤"><span class="toc-nav-text">安装步骤</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#RUBY"><span class="toc-nav-text">RUBY</span></a></li></ol></li></ol></li></ol>
     
   </div>
 </aside>
@@ -253,7 +244,7 @@
 
 <script>
   (function () {
-    var url = 'http://durongjie.com/2019/10/29/Python/WSGI、uwsgi和uWSGI/';
+    var url = 'http://durongjie.com/2020/04/20/Linux/centos7安装redmine3-4/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -315,7 +306,7 @@
     var gitmentConfig = "FreezeJ";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "WSGI、uwsgi和uWSGI",
+        id: "centos7安装redmine3.4",
         owner: "FreezeJ",
         repo: "FreezeJ.github.io",
         oauth: {
