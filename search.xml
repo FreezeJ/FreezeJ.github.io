@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Centos更换yum源]]></title>
+    <url>%2F2020%2F05%2F19%2FCentos%E6%9B%B4%E6%8D%A2yum%E6%BA%90%2F</url>
+    <content type="text"><![CDATA[Centos7cd /etc/yum.repos.dmkdir -p tmpmv CentOS* tmp/curl -O http://mirrors.aliyun.com/repo/Centos-7.repo# 安装EPELyum -y install epel-releasecurl -O http://mirrors.aliyun.com/repo/epel-7.repoyum clean all &amp;&amp; yum makecache Centos6cd /etc/yum.repos.dmkdir -p tmpmv CentOS* tmp/curl -O http://mirrors.aliyun.com/repo/Centos-6.repo# 安装EPELyum -y install epel-releasecurl -O http://mirrors.aliyun.com/repo/epel-6.repoyum clean all &amp;&amp; yum makecache]]></content>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[nmap小用例]]></title>
     <url>%2F2020%2F05%2F06%2Fnmap%E5%B0%8F%E7%94%A8%E4%BE%8B%2F</url>
     <content type="text"><![CDATA[nmap小用例 简介：Nmap (“Network Mapper(网络映射器)”) 是一款开放源代码的网络探测和安全审核的工具。它的设计目标是快速地扫描大型网络，当然用它扫描单个主机也没有问题。Nmap以新颖的方式使用原始IP报文来发现网络上有哪些主机，那些主机提供什么服务(应用程序名和版本)，那些服务运行在什么操作系统(包括版本信息)，它们使用什么类型的报文过滤器/防火墙，以及一堆其它功能。虽然Nmap通常用于安全审核，许多系统管理员和网络管理员也用它来做一些日常的工作，比如查看整个网络的信息，管理服务升级计划，以及监视主机和服务的运行。 Nmap命令行接受多个主机说明，它们不必是相同类型。nmap scanme.nmap.org 192.168.0.0/8 10.0.0，1，3-7.0-255 局域网查找10.1.1.1~10.1.1.50的空闲ip（使用ARP Ping避免禁ping）nmap -v -PR 10.1.1.1-50 | grep 'host down' | awk '&#123;print $5&#125;' 查看操作系统nmap -O 10.1.1.2 只扫描特定的端口nmap -p 20 10.1.1.1-10 快速扫描nmap -F 20 10.1.1.1-10]]></content>

@@ -10,7 +10,7 @@
   
   <title>
     
-      nmap小用例 | FreezeJ&#39; Blog
+      Centos更换yum源 | FreezeJ&#39; Blog
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -144,8 +144,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>nmap小用例</h2>
-  <p class="post-date">2020-05-06</p>
+  <h2>Centos更换yum源</h2>
+  <p class="post-date">2020-05-19</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -153,15 +153,8 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h1 id="nmap小用例"><a href="#nmap小用例" class="headerlink" title="nmap小用例"></a>nmap小用例</h1><blockquote>
-<p>简介：<br>Nmap (“Network Mapper(网络映射器)”) 是一款开放源代码的网络探测和安全审核的工具。它的设计目标是快速地扫描大型网络，当然用它扫描单个主机也没有问题。Nmap以新颖的方式使用原始IP报文来发现网络上有哪些主机，那些主机提供什么服务(应用程序名和版本)，那些服务运行在什么操作系统(包括版本信息)，它们使用什么类型的报文过滤器/防火墙，以及一堆其它功能。虽然Nmap通常用于安全审核，许多系统管理员和网络管理员也用它来做一些日常的工作，比如查看整个网络的信息，管理服务升级计划，以及监视主机和服务的运行。</p>
-</blockquote>
-<p>Nmap命令行接受多个主机说明，它们不必是相同类型。<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap scanme.nmap.org 192.168.0.0/8 10.0.0，1，3-7.0-255</span><br></pre></td></tr></table></figure></p>
-<p><strong>局域网查找10.1.1.1~10.1.1.50的空闲ip（使用ARP Ping避免禁ping）</strong><br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap -v -PR 10.1.1.1-50 | grep 'host down' | awk '&#123;print $5&#125;'</span><br></pre></td></tr></table></figure></p>
-<p><strong>查看操作系统</strong><br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap -O 10.1.1.2</span><br></pre></td></tr></table></figure></p>
-<p><strong>只扫描特定的端口</strong><br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap -p 20 10.1.1.1-10</span><br></pre></td></tr></table></figure></p>
-<p><strong>快速扫描</strong><br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap -F 20 10.1.1.1-10</span><br></pre></td></tr></table></figure></p>
-</section>
+    <section class="markdown-content"><h2 id="Centos7"><a href="#Centos7" class="headerlink" title="Centos7"></a>Centos7</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/yum.repos.d</span><br><span class="line">mkdir -p tmp</span><br><span class="line">mv CentOS* tmp/</span><br><span class="line">curl -O http://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装EPEL</span></span><br><span class="line">yum -y install epel-release</span><br><span class="line">curl -O http://mirrors.aliyun.com/repo/epel-7.repo</span><br><span class="line">yum clean all &amp;&amp; yum makecache</span><br></pre></td></tr></table></figure>
+<h2 id="Centos6"><a href="#Centos6" class="headerlink" title="Centos6"></a>Centos6</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/yum.repos.d</span><br><span class="line">mkdir -p tmp</span><br><span class="line">mv CentOS* tmp/</span><br><span class="line">curl -O http://mirrors.aliyun.com/repo/Centos-6.repo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装EPEL</span></span><br><span class="line">yum -y install epel-release</span><br><span class="line">curl -O http://mirrors.aliyun.com/repo/epel-6.repo</span><br><span class="line">yum clean all &amp;&amp; yum makecache</span><br></pre></td></tr></table></figure></section>
     <!-- Tags START -->
     
       <div class="tags">
@@ -169,14 +162,6 @@
         
   <a href="/tags#Linux">
     <span class="tag-code">Linux</span>
-  </a>
-
-  <a href="/tags#nmap">
-    <span class="tag-code">nmap</span>
-  </a>
-
-  <a href="/tags#Network">
-    <span class="tag-code">Network</span>
   </a>
 
       </div>
@@ -187,20 +172,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2020/04/27/Linux/Ansible使用文档/">
+      <a class="nav-left" href="/2020/05/06/nmap小用例/">
         <span class="nav-arrow">← </span>
         
-          Ansible入门使用
+          nmap小用例
         
       </a>
     
-    
-      <a class="nav-right" href="/2020/05/19/Centos更换yum源/">
-        
-          Centos更换yum源
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -246,7 +224,7 @@
   <div class="toc-main">
     <strong class="toc-title">目录</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#nmap小用例"><span class="toc-nav-text">nmap小用例</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Centos7"><span class="toc-nav-text">Centos7</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Centos6"><span class="toc-nav-text">Centos6</span></a></li></ol>
     
   </div>
 </aside>
@@ -257,7 +235,7 @@
 
 <script>
   (function () {
-    var url = 'http://durongjie.com/2020/05/06/nmap小用例/';
+    var url = 'http://durongjie.com/2020/05/19/Centos更换yum源/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -319,7 +297,7 @@
     var gitmentConfig = "FreezeJ";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "nmap小用例",
+        id: "Centos更换yum源",
         owner: "FreezeJ",
         repo: "FreezeJ.github.io",
         oauth: {
