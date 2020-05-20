@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[模态框html与js代码]]></title>
+    <url>%2F2020%2F05%2F20%2F%E6%A8%A1%E6%80%81%E6%A1%86html%E4%B8%8Ejs%E4%BB%A3%E7%A0%81%2F</url>
+    <content type="text"><![CDATA[模态框html与js代码HTML&lt;!--方法结果模态框--&gt;&lt;div class="modal fade" id="fun_result" tabindex="-1" role="dialog" aria-labelledby="fun_result_ModalLabel"&gt; &lt;div class="modal-dialog modal-lg" role="document"&gt; &lt;div class="modal-content"&gt; &lt;div class="modal-header"&gt; &lt;button type="button" class="close" data-dismiss="modal" aria-label="Close"&gt;&lt;span aria-hidden="true"&gt;&amp;times;&lt;/span&gt;&lt;/button&gt; &lt;h4 class="modal-title" id="fun_result_ModalLabel" align="center"&gt;查看结果&lt;/h4&gt; &lt;/div&gt; &lt;div class="modal-body"&gt; &lt;div class="modal-body"&gt; &lt;div&gt;&lt;span style="font-weight: bold"&gt;sls检查项名：&amp;nbsp&lt;/span&gt; &lt;pre id="fun_result_name"&gt;&lt;/pre&gt; &lt;/div&gt; &lt;div&gt;&lt;span style="font-weight: bold"&gt;执行命令：&lt;/span&gt; &lt;pre id="fun_result_cmd"&gt;&lt;/pre&gt; &lt;/div&gt; &lt;div&gt;&lt;span style="font-weight: bold"&gt;执行描述：&lt;/span&gt; &lt;pre id="fun_comment"&gt;&lt;/pre&gt; &lt;/div&gt; &lt;div&gt;&lt;span style="font-weight: bold"&gt;错误信息：&lt;/span&gt; &lt;pre id="fun_result_err_message" style="color: #ff463f"&gt;&lt;/pre&gt; &lt;/div&gt; &lt;div&gt;&lt;span style="font-weight: bold"&gt;返回信息：&lt;/span&gt; &lt;pre id="fun_result_message" style="color: #ff463f"&gt;&lt;/pre&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;div class="modal-footer"&gt; &lt;button type="button" class="btn btn-success" data-dismiss="modal"&gt;关闭&lt;/button&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt;&lt;/div&gt; JS$('#fun_result').modal(&#123; show: true,&#125;) 模态框的详细http://www.runoob.com/bootstrap/bootstrap-modal-plugin.html]]></content>
+      <tags>
+        <tag>HTML</tag>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Centos更换yum源]]></title>
     <url>%2F2020%2F05%2F19%2FCentos%E6%9B%B4%E6%8D%A2yum%E6%BA%90%2F</url>
     <content type="text"><![CDATA[Centos7cd /etc/yum.repos.dmkdir -p tmpmv CentOS* tmp/curl -O http://mirrors.aliyun.com/repo/Centos-7.repo# 安装EPELyum -y install epel-releasecurl -O http://mirrors.aliyun.com/repo/epel-7.repoyum clean all &amp;&amp; yum makecache Centos6cd /etc/yum.repos.dmkdir -p tmpmv CentOS* tmp/curl -O http://mirrors.aliyun.com/repo/Centos-6.repo# 安装EPELyum -y install epel-releasecurl -O http://mirrors.aliyun.com/repo/epel-6.repoyum clean all &amp;&amp; yum makecache]]></content>
