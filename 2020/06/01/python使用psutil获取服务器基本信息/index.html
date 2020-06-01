@@ -10,7 +10,7 @@
   
   <title>
     
-      paramiko实现ssh跳板机 | FreezeJ&#39; Blog
+      python使用psutil获取服务器基本信息 | FreezeJ&#39; Blog
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -144,8 +144,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>paramiko实现ssh跳板机</h2>
-  <p class="post-date">2020-05-26</p>
+  <h2>python使用psutil获取服务器基本信息</h2>
+  <p class="post-date">2020-06-01</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -153,19 +153,9 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="keyword">import</span> paramiko</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">jump2server</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        jump_server_ip,</span></span></span><br><span class="line"><span class="function"><span class="params">        jump_server_username,</span></span></span><br><span class="line"><span class="function"><span class="params">        jump_server_password,</span></span></span><br><span class="line"><span class="function"><span class="params">        remote_host_ip,</span></span></span><br><span class="line"><span class="function"><span class="params">        remote_host_username,</span></span></span><br><span class="line"><span class="function"><span class="params">        remote_host_password,</span></span></span><br><span class="line"><span class="function"><span class="params">        remote_ssh_port=<span class="number">22</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        jump_ssh_port=<span class="number">22</span>)</span>:</span></span><br><span class="line">    jump_server = paramiko.SSHClient()</span><br><span class="line">    jump_server.set_missing_host_key_policy(paramiko.AutoAddPolicy())  <span class="comment"># 自动接受key</span></span><br><span class="line">    jump_server.connect(jump_server_ip, username=jump_server_username, password=jump_server_password)  <span class="comment"># 跳板机连接</span></span><br><span class="line">    jump_transport = jump_server.get_transport()  <span class="comment"># 创建Transport对象</span></span><br><span class="line">    <span class="comment"># 建立隧道</span></span><br><span class="line">    jump_channel = jump_transport.open_channel(kind=<span class="string">"direct-tcpip"</span>,</span><br><span class="line">                                               dest_addr=(remote_host_ip, remote_ssh_port),</span><br><span class="line">                                               src_addr=(jump_server_ip, jump_ssh_port))</span><br><span class="line">    remote_host = paramiko.SSHClient()</span><br><span class="line">    remote_host.set_missing_host_key_policy(paramiko.AutoAddPolicy())  <span class="comment"># 自动接受key</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 使用密码连接（通过隧道）</span></span><br><span class="line">    remote_host.connect(remote_host_ip, username=remote_host_username, password=remote_host_password, sock=jump_channel)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 使用密钥连接（通过隧道）</span></span><br><span class="line">    <span class="comment"># private_key = paramiko.RSAKey.from_private_key_file('/root/.ssh/id_rsa')</span></span><br><span class="line">    <span class="comment"># remote_host.connect(remote_host_ip,</span></span><br><span class="line">    <span class="comment"># username=remote_host_username,</span></span><br><span class="line">    <span class="comment"># pkey=private_key,</span></span><br><span class="line">    <span class="comment"># sock=jump_channel)</span></span><br><span class="line">    <span class="keyword">return</span> remote_host</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    server = jump2server(</span><br><span class="line">        jump_server_ip=<span class="string">'192.168.56.1'</span>,</span><br><span class="line">        jump_server_username=<span class="string">'root'</span>,</span><br><span class="line">        jump_server_password=<span class="string">'xxxxxxxx'</span>,</span><br><span class="line">        remote_host_ip=<span class="string">'192.168.56.1'</span>,</span><br><span class="line">        remote_host_username=<span class="string">'root'</span>,</span><br><span class="line">        remote_host_password=<span class="string">'xxxxxxxx'</span>,</span><br><span class="line">    )</span><br><span class="line">    stdin, stdout, stderr = server.exec_command(<span class="string">"netstat -ntp | grep ssh"</span>)</span><br><span class="line">    print(stdout.read().decode())</span><br><span class="line">    server.close()</span><br></pre></td></tr></table></figure>
-<p><strong>输出结果</strong><br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">tcp        0    112 192.168.56.2:22       192.168.56.1:59393    ESTABLISHED 21676/sshd: root@no</span><br></pre></td></tr></table></figure></p>
+    <section class="markdown-content"><p><a href="https://psutil.readthedocs.io/en/latest/" target="_blank" rel="noopener">官方文档</a><br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2020-6-1 11:28</span></span><br><span class="line"><span class="comment"># @Author  : FreezeJ</span></span><br><span class="line"><span class="comment"># @File    : get_machine_info.py</span></span><br><span class="line"><span class="comment"># @Software: PyCharm</span></span><br><span class="line"><span class="comment"># @Comment : Null</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> psutil</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">machine_info</span><span class="params">(max_percent=<span class="number">90</span>, cpu_interval=<span class="number">0.5</span>, none_value=<span class="string">'none'</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    :param max_percent: 最大的内存和磁盘百分比，默认为90</span></span><br><span class="line"><span class="string">    :param cpu_interval: 检测cpu使用率时间，默认为0.5秒,可以设置为0瞬间返回，但是结果可能不准确</span></span><br><span class="line"><span class="string">    :param none_value: 定义空值</span></span><br><span class="line"><span class="string">    :return: None</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">tr_gb</span><span class="params">(num)</span>:</span>  <span class="comment"># 转换为GB单位,ceil为向上取整</span></span><br><span class="line">        <span class="keyword">if</span> isinstance(num, int) <span class="keyword">or</span> isinstance(num, float):</span><br><span class="line">            <span class="keyword">return</span> math.ceil(num / <span class="number">1024.0</span> / <span class="number">1024.0</span> / <span class="number">1024.0</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> none_value</span><br><span class="line"></span><br><span class="line">    log_info_list = []  <span class="comment"># 用于记录日志</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># CPU</span></span><br><span class="line">    cpu_num = psutil.cpu_count()</span><br><span class="line">    cpu_percent = psutil.cpu_percent(interval=cpu_interval)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 内存</span></span><br><span class="line">    mem = psutil.virtual_memory()</span><br><span class="line">    mem_total = mem.total</span><br><span class="line">    mem_used = mem.used</span><br><span class="line">    mem_buffers = mem.buffers</span><br><span class="line">    mem_cached = mem.cached</span><br><span class="line">    mem_free = mem.free + mem_buffers + mem_cached</span><br><span class="line">    mem_percent = mem.percent</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 磁盘</span></span><br><span class="line">    disk = psutil.disk_partitions()</span><br><span class="line">    mount_point_list = [d.mountpoint <span class="keyword">for</span> d <span class="keyword">in</span> disk]</span><br><span class="line">    <span class="keyword">if</span> <span class="string">'/data'</span> <span class="keyword">not</span> <span class="keyword">in</span> mount_point_list:</span><br><span class="line">        log_info_list.append(<span class="string">"找不到data盘！"</span>)</span><br><span class="line">        data_disk_total = data_disk_used = data_disk_free = data_disk_percent = none_value</span><br><span class="line">        can_install_game = <span class="string">'false'</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        data_disk = psutil.disk_usage(<span class="string">'/data'</span>)</span><br><span class="line">        data_disk_total = data_disk.total</span><br><span class="line">        data_disk_used = data_disk.used</span><br><span class="line">        data_disk_free = data_disk.free</span><br><span class="line">        data_disk_percent = math.ceil(data_disk.percent)</span><br><span class="line">        <span class="keyword">if</span> data_disk_percent &gt; max_percent <span class="keyword">or</span> tr_gb(data_disk_free) &lt; <span class="number">10</span>:</span><br><span class="line">            log_info_list.append(<span class="string">"磁盘空间不足，剩余空间为&#123;0&#125;GB，无法再安装新服！"</span>.format(tr_gb(data_disk_free)))</span><br><span class="line">            can_install_game = <span class="string">'false'</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            can_install_game = <span class="string">'true'</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 结果</span></span><br><span class="line">    <span class="keyword">if</span> mem_percent &gt; max_percent <span class="keyword">or</span> tr_gb(mem_free) &lt; <span class="number">5</span>:</span><br><span class="line">        log_info_list.append(<span class="string">"内存不足，剩余内存为&#123;mem_free_gb&#125;GB，无法再安装新服！"</span>.format(mem_free_gb=tr_gb(mem_free)))</span><br><span class="line">        can_install_game = <span class="string">'false'</span></span><br><span class="line">    result = &#123;</span><br><span class="line">        <span class="string">"mem_total_gb"</span>: tr_gb(mem_total),</span><br><span class="line">        <span class="string">"mem_used_gb"</span>: tr_gb(mem_used),</span><br><span class="line">        <span class="string">"mem_free_gb"</span>: tr_gb(mem_free),</span><br><span class="line">        <span class="string">"mem_percent"</span>: math.ceil(mem_percent),</span><br><span class="line">        <span class="string">"data_total_gb"</span>: tr_gb(data_disk_total),</span><br><span class="line">        <span class="string">"data_disk_used_gb"</span>: tr_gb(data_disk_used),</span><br><span class="line">        <span class="string">"data_disk_free_gb"</span>: tr_gb(data_disk_free),</span><br><span class="line">        <span class="string">"data_disk_percent"</span>: data_disk_percent,</span><br><span class="line">        <span class="string">"cpu_percent"</span>: cpu_percent,</span><br><span class="line">        <span class="string">"cpu_num"</span>: cpu_num,</span><br><span class="line">        <span class="string">"can_install_game"</span>: can_install_game,  <span class="comment"># 磁盘和内存有空间，可以装服</span></span><br><span class="line">        <span class="string">"log_info_list"</span>: log_info_list,  <span class="comment"># 用于记录错误，有内容就代表存在报错</span></span><br><span class="line">    &#125;</span><br><span class="line">    print(json.dumps(result))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    machine_info(max_percent=<span class="number">90</span>, cpu_interval=<span class="number">0.5</span>)</span><br></pre></td></tr></table></figure></p>
 </section>
     <!-- Tags START -->
-    
-      <div class="tags">
-        <span>Tags:</span>
-        
-  <a href="/tags#Python">
-    <span class="tag-code">Python</span>
-  </a>
-
-      </div>
     
     <!-- Tags END -->
     <!-- NAV START -->
@@ -173,20 +163,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2020/05/20/模态框html与js代码/">
+      <a class="nav-left" href="/2020/05/26/paramiko实现ssh跳板机/">
         <span class="nav-arrow">← </span>
         
-          模态框html与js代码
+          paramiko实现ssh跳板机
         
       </a>
     
-    
-      <a class="nav-right" href="/2020/06/01/python使用psutil获取服务器基本信息/">
-        
-          python使用psutil获取服务器基本信息
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -243,8 +226,8 @@
 
 <script>
   (function () {
-    var url = 'http://durongjie.com/2020/05/26/paramiko实现ssh跳板机/';
-    var banner = 'null'
+    var url = 'http://durongjie.com/2020/06/01/python使用psutil获取服务器基本信息/';
+    var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
         'background-image': 'url(' + banner + ')'
@@ -305,7 +288,7 @@
     var gitmentConfig = "FreezeJ";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "paramiko实现ssh跳板机",
+        id: "python使用psutil获取服务器基本信息",
         owner: "FreezeJ",
         repo: "FreezeJ.github.io",
         oauth: {
