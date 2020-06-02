@@ -10,7 +10,7 @@
   
   <title>
     
-      nmap小用例 | FreezeJ&#39; Blog
+      paramiko实现ssh跳板机 | FreezeJ&#39; Blog
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -144,8 +144,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>nmap小用例</h2>
-  <p class="post-date">2020-05-06</p>
+  <h2>paramiko实现ssh跳板机</h2>
+  <p class="post-date">2020-05-26</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -153,30 +153,16 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h1 id="nmap小用例"><a href="#nmap小用例" class="headerlink" title="nmap小用例"></a>nmap小用例</h1><blockquote>
-<p>简介：<br>Nmap (“Network Mapper(网络映射器)”) 是一款开放源代码的网络探测和安全审核的工具。它的设计目标是快速地扫描大型网络，当然用它扫描单个主机也没有问题。Nmap以新颖的方式使用原始IP报文来发现网络上有哪些主机，那些主机提供什么服务(应用程序名和版本)，那些服务运行在什么操作系统(包括版本信息)，它们使用什么类型的报文过滤器/防火墙，以及一堆其它功能。虽然Nmap通常用于安全审核，许多系统管理员和网络管理员也用它来做一些日常的工作，比如查看整个网络的信息，管理服务升级计划，以及监视主机和服务的运行。</p>
-</blockquote>
-<p>Nmap命令行接受多个主机说明，它们不必是相同类型。<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap scanme.nmap.org 192.168.0.0/8 10.0.0，1，3-7.0-255</span><br></pre></td></tr></table></figure></p>
-<p><strong>局域网查找10.1.1.1~10.1.1.50的空闲ip（使用ARP Ping避免禁ping）</strong><br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap -v -PR 10.1.1.1-50 | grep 'host down' | awk '&#123;print $5&#125;'</span><br></pre></td></tr></table></figure></p>
-<p><strong>查看操作系统</strong><br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap -O 10.1.1.2</span><br></pre></td></tr></table></figure></p>
-<p><strong>只扫描特定的端口</strong><br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap -p 20 10.1.1.1-10</span><br></pre></td></tr></table></figure></p>
-<p><strong>快速扫描</strong><br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap -F 20 10.1.1.1-10</span><br></pre></td></tr></table></figure></p>
+    <section class="markdown-content"><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="keyword">import</span> paramiko</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">jump2server</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        jump_server_ip,</span></span></span><br><span class="line"><span class="function"><span class="params">        jump_server_username,</span></span></span><br><span class="line"><span class="function"><span class="params">        jump_server_password,</span></span></span><br><span class="line"><span class="function"><span class="params">        remote_host_ip,</span></span></span><br><span class="line"><span class="function"><span class="params">        remote_host_username,</span></span></span><br><span class="line"><span class="function"><span class="params">        remote_host_password,</span></span></span><br><span class="line"><span class="function"><span class="params">        remote_ssh_port=<span class="number">22</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        jump_ssh_port=<span class="number">22</span>)</span>:</span></span><br><span class="line">    jump_server = paramiko.SSHClient()</span><br><span class="line">    jump_server.set_missing_host_key_policy(paramiko.AutoAddPolicy())  <span class="comment"># 自动接受key</span></span><br><span class="line">    jump_server.connect(jump_server_ip, username=jump_server_username, password=jump_server_password)  <span class="comment"># 跳板机连接</span></span><br><span class="line">    jump_transport = jump_server.get_transport()  <span class="comment"># 创建Transport对象</span></span><br><span class="line">    <span class="comment"># 建立隧道</span></span><br><span class="line">    jump_channel = jump_transport.open_channel(kind=<span class="string">"direct-tcpip"</span>,</span><br><span class="line">                                               dest_addr=(remote_host_ip, remote_ssh_port),</span><br><span class="line">                                               src_addr=(jump_server_ip, jump_ssh_port))</span><br><span class="line">    remote_host = paramiko.SSHClient()</span><br><span class="line">    remote_host.set_missing_host_key_policy(paramiko.AutoAddPolicy())  <span class="comment"># 自动接受key</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 使用密码连接（通过隧道）</span></span><br><span class="line">    remote_host.connect(remote_host_ip, username=remote_host_username, password=remote_host_password, sock=jump_channel)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 使用密钥连接（通过隧道）</span></span><br><span class="line">    <span class="comment"># private_key = paramiko.RSAKey.from_private_key_file('/root/.ssh/id_rsa')</span></span><br><span class="line">    <span class="comment"># remote_host.connect(remote_host_ip,</span></span><br><span class="line">    <span class="comment"># username=remote_host_username,</span></span><br><span class="line">    <span class="comment"># pkey=private_key,</span></span><br><span class="line">    <span class="comment"># sock=jump_channel)</span></span><br><span class="line">    <span class="keyword">return</span> remote_host</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    server = jump2server(</span><br><span class="line">        jump_server_ip=<span class="string">'192.168.56.1'</span>,</span><br><span class="line">        jump_server_username=<span class="string">'root'</span>,</span><br><span class="line">        jump_server_password=<span class="string">'xxxxxxxx'</span>,</span><br><span class="line">        remote_host_ip=<span class="string">'192.168.56.1'</span>,</span><br><span class="line">        remote_host_username=<span class="string">'root'</span>,</span><br><span class="line">        remote_host_password=<span class="string">'xxxxxxxx'</span>,</span><br><span class="line">    )</span><br><span class="line">    stdin, stdout, stderr = server.exec_command(<span class="string">"netstat -ntp | grep ssh"</span>)</span><br><span class="line">    print(stdout.read().decode())</span><br><span class="line">    server.close()</span><br></pre></td></tr></table></figure>
+<p><strong>输出结果</strong><br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">tcp        0    112 192.168.56.2:22       192.168.56.1:59393    ESTABLISHED 21676/sshd: root@no</span><br></pre></td></tr></table></figure></p>
 </section>
     <!-- Tags START -->
     
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#Linux">
-    <span class="tag-code">Linux</span>
-  </a>
-
-  <a href="/tags#nmap">
-    <span class="tag-code">nmap</span>
-  </a>
-
-  <a href="/tags#Network">
-    <span class="tag-code">Network</span>
+  <a href="/tags#Python">
+    <span class="tag-code">Python</span>
   </a>
 
       </div>
@@ -187,17 +173,17 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2020/04/27/Linux/Ansible使用文档/">
+      <a class="nav-left" href="/2020/05/20/JavaScript/模态框html与js代码/">
         <span class="nav-arrow">← </span>
         
-          Ansible入门使用
+          模态框html与js代码
         
       </a>
     
     
-      <a class="nav-right" href="/2020/05/19/Centos更换yum源/">
+      <a class="nav-right" href="/2020/06/01/Python/python使用psutil获取服务器基本信息/">
         
-          Centos更换yum源
+          python使用psutil获取服务器基本信息
         
         <span class="nav-arrow"> →</span>
       </a>
@@ -246,7 +232,7 @@
   <div class="toc-main">
     <strong class="toc-title">目录</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#nmap小用例"><span class="toc-nav-text">nmap小用例</span></a></li></ol>
+      <ol class="nav">none</ol>
     
   </div>
 </aside>
@@ -257,8 +243,8 @@
 
 <script>
   (function () {
-    var url = 'http://durongjie.com/2020/05/06/nmap小用例/';
-    var banner = ''
+    var url = 'http://durongjie.com/2020/05/26/Python/paramiko实现ssh跳板机/';
+    var banner = 'null'
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
         'background-image': 'url(' + banner + ')'
@@ -319,7 +305,7 @@
     var gitmentConfig = "FreezeJ";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "nmap小用例",
+        id: "paramiko实现ssh跳板机",
         owner: "FreezeJ",
         repo: "FreezeJ.github.io",
         oauth: {
