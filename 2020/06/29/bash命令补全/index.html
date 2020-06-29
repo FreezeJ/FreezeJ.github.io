@@ -10,7 +10,7 @@
   
   <title>
     
-      Linux磁盘性能分析iostat | FreezeJ&#39; Blog
+      bash命令补全 | FreezeJ&#39; Blog
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -144,8 +144,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>Linux磁盘性能分析iostat</h2>
-  <p class="post-date">2020-06-22</p>
+  <h2>bash命令补全</h2>
+  <p class="post-date">2020-06-29</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -153,25 +153,9 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><blockquote>
-<p>iostat是I/O statistics（输入/输出统计）的缩写，iostat工具将对系统的磁盘操作活动进行监视。它的特点是汇报磁盘活动统计情况，同时也会汇报出CPU使用情况。iostat也有一个弱点，就是它不能对某个进程进行深入分析，仅对系统的整体情况进行分析<br>本文参考<a href="https://www.cnblogs.com/ultranms/p/9327784.html" target="_blank" rel="noopener">https://www.cnblogs.com/ultranms/p/9327784.html</a></p>
-</blockquote>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><code>yum install sysstat</code></p>
-<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p><code>iostat [ 选项 ] [ &lt;时间间隔&gt; [ &lt;次数&gt; ]]</code></p>
-<p><strong>常用选项说明：</strong><br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-c：只显示系统CPU统计信息，即单独输出avg-cpu结果，不包括device结果</span><br><span class="line">-d：单独输出Device结果，不包括cpu结果</span><br><span class="line">-k/-m：输出结果以kB/mB为单位，而不是以扇区数为单位</span><br><span class="line">-x:输出更详细的io设备统计信息</span><br><span class="line">interval/count：每次输出间隔时间，count表示输出次数，不带count表示循环输出</span><br><span class="line">说明：更多选项使用使用man iostat查看</span><br></pre></td></tr></table></figure></p>
-<h3 id="普通输出"><a href="#普通输出" class="headerlink" title="普通输出"></a>普通输出</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">iostat</span><br></pre></td></tr></table></figure>
-<p><img src="http://hexo-client.oss-cn-hongkong.aliyuncs.com/hexo-client/2020/06/22/ef67fff7-fa82-407b-94b2-c2b19c7a2ad6.png" alt="image.png"><br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输出含义：</span><br><span class="line">    avg-cpu: 总体cpu使用情况统计信息，对于多核cpu，这里为所有cpu的平均值。重点关注iowait值，表示CPU用于等待io请求的完成时间。</span><br><span class="line">    Device: 各磁盘设备的IO统计信息。各列含义如下：</span><br><span class="line"></span><br><span class="line">Device: 以sdX形式显示的设备名称</span><br><span class="line">tps: 每秒进程下发的IO读、写请求数量</span><br><span class="line">KB_read/s: 每秒从驱动器读入的数据量，单位为K。</span><br><span class="line">KB_wrtn/s: 每秒从驱动器写入的数据量，单位为K。</span><br><span class="line">KB_read: 读入数据总量，单位为K。</span><br><span class="line">KB_wrtn: 写入数据总量，单位为K。</span><br></pre></td></tr></table></figure></p>
-<h3 id="每隔2秒刷新显示，且显示3次"><a href="#每隔2秒刷新显示，且显示3次" class="headerlink" title="每隔2秒刷新显示，且显示3次"></a>每隔2秒刷新显示，且显示3次</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">iostat 2 3</span><br></pre></td></tr></table></figure>
-<h3 id="显示详细信息"><a href="#显示详细信息" class="headerlink" title="显示详细信息"></a>显示详细信息</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">iostat -x</span><br></pre></td></tr></table></figure>
-<p><img src="http://hexo-client.oss-cn-hongkong.aliyuncs.com/hexo-client/2020/06/22/3323d3f5-4835-46d9-b275-c9976efbd1e8.png" alt="image.png"><br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">以上各列的含义如下：</span><br><span class="line">rrqm/s: 每秒对该设备的读请求被合并次数，文件系统会对读取同块(block)的请求进行合并</span><br><span class="line">wrqm/s: 每秒对该设备的写请求被合并次数</span><br><span class="line">r/s: 每秒完成的读次数</span><br><span class="line">w/s: 每秒完成的写次数</span><br><span class="line">rkB/s: 每秒读数据量(kB为单位)</span><br><span class="line">wkB/s: 每秒写数据量(kB为单位)</span><br><span class="line">avgrq-sz:平均每次IO操作的数据量(扇区数为单位)</span><br><span class="line">avgqu-sz: 平均等待处理的IO请求队列长度</span><br><span class="line">await: 平均每次IO请求等待时间(包括等待时间和处理时间，毫秒为单位)</span><br><span class="line">svctm: 平均每次IO请求的处理时间(毫秒为单位)</span><br><span class="line">%util: 采用周期内用于IO操作的时间比率，即IO队列非空的时间比率</span><br></pre></td></tr></table></figure></p>
-<p><strong>重点关注参数</strong></p>
-<ol>
-<li>iowait% 表示CPU等待IO时间占整个CPU周期的百分比，如果iowait值超过50%，或者明显大于%system、%user以及%idle，表示IO可能存在问题。</li>
-<li>avgqu-sz 表示磁盘IO队列长度，即IO等待个数。</li>
-<li>await 表示每次IO请求等待时间，包括等待时间和处理时间</li>
-<li>svctm 表示每次IO请求处理的时间</li>
-<li>%util 表示磁盘忙碌情况，一般该值超过80%表示该磁盘可能处于繁忙状态。</li>
-</ol>
+    <section class="markdown-content"><p>bash自动补全脚本目录：<code>/etc/bash_completion.d</code><br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> bash completion <span class="keyword">for</span> menu.py</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 命令补全</span></span><br><span class="line">script_type_list='""'</span><br><span class="line">_test_options()</span><br><span class="line">&#123;</span><br><span class="line">  local curr_arg;</span><br><span class="line">  curr_arg=$&#123;COMP_WORDS[COMP_CWORD]&#125;</span><br><span class="line">  if echo $&#123;COMP_WORDS[1]&#125; | grep -Eq "menu\.py$" &amp;&amp; [ $COMP_CWORD -eq 2 ]; then</span><br><span class="line">    COMPREPLY=( $(compgen -W "CheckGameStatus PushCode CodeUpdate ServiceHotCmd StopGame StartGame RestartGame" $curr_arg ) );</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line">complete -F _test_options -o default python python3</span><br></pre></td></tr></table></figure></p>
+<p>说明：<br>COMP_WORDS：命令行全部参数<br>COMP_CWORD：当前光标所在参数索引<br>${COMP_WORDS[COMP_CWORD]}：当前参数<br>COMPREPLY：按下tab键执行的命令</p>
+<p>命令解释：<code>complete -F _test_options -o default python python3</code><br>当首个参数为python或者python3时，先匹配_test_options函数，如果没有匹配，则使用默认tab匹配结果（-o default）<br>在_test_options函数中使用正则判断，当第一个参数为menu.py，并且光标在第二个参数时，触发特殊的命令补全，提示参数。<br>compgen -W {完整的字符串} {需要补全的字符串}<br>complete 用于绑定命令与补全函数</p>
 </section>
     <!-- Tags START -->
     
@@ -190,17 +174,17 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2020/06/11/centos7快速安装docker/">
+      <a class="nav-left" href="/2020/06/22/Linux磁盘性能分析iostat/">
         <span class="nav-arrow">← </span>
         
-          centos7快速安装docker
+          Linux磁盘性能分析iostat
         
       </a>
     
     
-      <a class="nav-right" href="/2020/06/29/bash命令补全/">
+      <a class="nav-right" href="/2020/06/29/centos修改系统语言/">
         
-          bash命令补全
+          centos修改系统语言
         
         <span class="nav-arrow"> →</span>
       </a>
@@ -249,7 +233,7 @@
   <div class="toc-main">
     <strong class="toc-title">目录</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#安装"><span class="toc-nav-text">安装</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#用法"><span class="toc-nav-text">用法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#普通输出"><span class="toc-nav-text">普通输出</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#每隔2秒刷新显示，且显示3次"><span class="toc-nav-text">每隔2秒刷新显示，且显示3次</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#显示详细信息"><span class="toc-nav-text">显示详细信息</span></a></li></ol></li></ol>
+      <ol class="nav">none</ol>
     
   </div>
 </aside>
@@ -260,7 +244,7 @@
 
 <script>
   (function () {
-    var url = 'http://durongjie.com/2020/06/22/Linux磁盘性能分析iostat/';
+    var url = 'http://durongjie.com/2020/06/29/bash命令补全/';
     var banner = 'null'
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -322,7 +306,7 @@
     var gitmentConfig = "FreezeJ";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "Linux磁盘性能分析iostat",
+        id: "bash命令补全",
         owner: "FreezeJ",
         repo: "FreezeJ.github.io",
         oauth: {
