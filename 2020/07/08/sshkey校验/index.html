@@ -10,7 +10,7 @@
   
   <title>
     
-      bash命令补全 | FreezeJ&#39; Blog
+      sshkey校验 | FreezeJ&#39; Blog
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -144,8 +144,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>bash命令补全</h2>
-  <p class="post-date">2020-06-29</p>
+  <h2>sshkey校验</h2>
+  <p class="post-date">2020-07-08</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -153,20 +153,10 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p>bash自动补全脚本目录：<code>/etc/bash_completion.d</code><br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span> bash completion for menu.py</span><br><span class="line"><span class="meta">#</span> 命令补全</span><br><span class="line"></span><br><span class="line">_test_options()</span><br><span class="line">&#123;</span><br><span class="line">  local curr_arg;</span><br><span class="line">  curr_arg=$&#123;COMP_WORDS[COMP_CWORD]&#125;</span><br><span class="line">  if echo $&#123;COMP_WORDS[1]&#125; | grep -Eq "menu\.py$" &amp;&amp; [ $COMP_CWORD -eq 2 ]; then</span><br><span class="line">    COMPREPLY=( $(compgen -W "CheckGameStatus PushCode CodeUpdate ServiceHotCmd StopGame StartGame RestartGame" $curr_arg ) );</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line">complete -F _test_options -o default python python3</span><br></pre></td></tr></table></figure></p>
-<p>说明：<br>COMP_WORDS：命令行全部参数<br>COMP_CWORD：当前光标所在参数索引<br>${COMP_WORDS[COMP_CWORD]}：当前参数<br>COMPREPLY：按下tab键执行的命令</p>
-<p>命令解释：<code>complete -F _test_options -o default python python3</code><br>当首个参数为python或者python3时，先匹配_test_options函数，如果没有匹配，则使用默认tab匹配结果（-o default）<br>在_test_options函数中使用正则判断，当第一个参数为menu.py，并且光标在第二个参数时，触发特殊的命令补全，提示参数。<br>compgen -W {完整的字符串} {需要补全的字符串}<br>complete 用于绑定命令与补全函数</p>
+    <section class="markdown-content"><p><code>ssh-keygen -y -f id_rsa &gt; id_rsa.pub.tobecompared</code></p>
+<p>然后对比一下id_rsa.pub.tobecompared和id_rsa.pub</p>
 </section>
     <!-- Tags START -->
-    
-      <div class="tags">
-        <span>Tags:</span>
-        
-  <a href="/tags#Linux">
-    <span class="tag-code">Linux</span>
-  </a>
-
-      </div>
     
     <!-- Tags END -->
     <!-- NAV START -->
@@ -174,17 +164,17 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2020/06/22/Linux磁盘性能分析iostat/">
+      <a class="nav-left" href="/2020/06/29/centos修改系统语言/">
         <span class="nav-arrow">← </span>
         
-          Linux磁盘性能分析iostat
+          centos修改系统语言
         
       </a>
     
     
-      <a class="nav-right" href="/2020/06/29/centos修改系统语言/">
+      <a class="nav-right" href="/2020/07/15/SecretCRT密码解密/">
         
-          centos修改系统语言
+          SecretCRT密码解密
         
         <span class="nav-arrow"> →</span>
       </a>
@@ -244,8 +234,8 @@
 
 <script>
   (function () {
-    var url = 'http://durongjie.com/2020/06/29/bash命令补全/';
-    var banner = 'null'
+    var url = 'http://durongjie.com/2020/07/08/sshkey校验/';
+    var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
         'background-image': 'url(' + banner + ')'
@@ -306,7 +296,7 @@
     var gitmentConfig = "FreezeJ";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "bash命令补全",
+        id: "sshkey校验",
         owner: "FreezeJ",
         repo: "FreezeJ.github.io",
         oauth: {

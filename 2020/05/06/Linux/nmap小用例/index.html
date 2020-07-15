@@ -161,6 +161,7 @@
 <p><strong>查看操作系统</strong><br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap -O 10.1.1.2</span><br></pre></td></tr></table></figure></p>
 <p><strong>只扫描特定的端口</strong><br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap -p 20 10.1.1.1-10</span><br></pre></td></tr></table></figure></p>
 <p><strong>快速扫描</strong><br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap -F 20 10.1.1.1-10</span><br></pre></td></tr></table></figure></p>
+<p><strong>单行显示</strong><br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span> -sS TCP同步扫描(TCP SYN)</span><br><span class="line"><span class="meta">#</span> -p80 扫描80端口</span><br><span class="line"><span class="meta">#</span> -oG - 单独的行来记录所有信息，记住-oG 后要空格再加一个"-"</span><br><span class="line">nmap -sS -p80  -oG -  10.1.1.1-200 | grep open</span><br></pre></td></tr></table></figure></p>
 </section>
     <!-- Tags START -->
     
@@ -258,7 +259,7 @@
 <script>
   (function () {
     var url = 'http://durongjie.com/2020/05/06/Linux/nmap小用例/';
-    var banner = ''
+    var banner = 'null'
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
         'background-image': 'url(' + banner + ')'
