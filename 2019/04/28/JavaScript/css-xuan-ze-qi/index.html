@@ -24,8 +24,6 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
   
-    <script src="/js/qrious.js"></script>
-  
   
     <script src="/js/gitment.js"></script>
   
@@ -71,6 +69,12 @@
       
         <li class="list-item">
           
+            <a href="http://photo.durongjie.com:8001/" class="item-link">Photo</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
             <a href="/about/" class="item-link">About</a>
           
         </li>
@@ -105,6 +109,12 @@
           <li class="menu-item">
             
               <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="http://photo.durongjie.com:8001/" class="menu-link">Photo</a>
             
           </li>
         
@@ -480,11 +490,6 @@
     <!-- 打赏 END -->
     <!-- 二维码 START -->
     
-      <div class="qrcode">
-        <canvas id="share-qrcode"></canvas>
-        <p class="notice">扫描二维码，分享此文章</p>
-      </div>
-    
     <!-- 二维码 END -->
     
       <!-- Gitment START -->
@@ -558,13 +563,6 @@
   })();
 </script>
 
-
-  <script>
-    var qr = new QRious({
-      element: document.getElementById('share-qrcode'),
-      value: document.location.href
-    });
-  </script>
 
 
 
