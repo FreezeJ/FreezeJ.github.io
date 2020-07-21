@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="一个运维开发工程师的技术博客，分享关于自动化运维、Python编程、Linux操作系统、前端知识、网络技术、系统与网络安全技术的博客，以及记录一些较新技术的采坑日志，方便自己回顾，希望也能帮助到别人。">
+  <meta name="keyword" content="Linux,Python,Network,DevOps">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      python特殊方法 | FreezeJ&#39; Blog
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/css/plugins/gitment.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    <script src="/js/qrious.js"></script>
+  
+  
+    <script src="/js/gitment.js"></script>
+  
+  
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>FreezeJ' Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>python特殊方法</h2>
+  <p class="post-date">2019-04-28</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h1 id="Python-特殊方法"><a href="#Python-特殊方法" class="headerlink" title="Python 特殊方法"></a>Python 特殊方法</h1><p>以双下划线开头和结尾的方法称为特殊方法，__xxxx__。</p>
+<p>在定义类对象时，经常会重写一个或多个特殊方法，例如__init__。通常特殊方法都是自动调用的。</p>
+<hr>
+<h2 id="dict-获取对象信息"><a href="#dict-获取对象信息" class="headerlink" title="__dict__ 获取对象信息"></a>__dict__ 获取对象信息</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># __dict__  查看对象信息</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.name = <span class="string">'Animal'</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">eat</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'eat'</span>)</span><br><span class="line">animal = Animal()</span><br><span class="line">print(Animal.__dict__)</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">结果：</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">    '__module__': '__main__',</span></span><br><span class="line"><span class="string">    '__init__': &lt;function Animal.__init__ at 0x000001CE58A28D90&gt;, </span></span><br><span class="line"><span class="string">    'eat': &lt;function Animal.eat at 0x000001CE58A28E18&gt;, </span></span><br><span class="line"><span class="string">    '__dict__': &lt;attribute '__dict__' of 'Animal' objects&gt;, </span></span><br><span class="line"><span class="string">    '__weakref__': &lt;attribute '__weakref__' of 'Animal' objects&gt;,</span></span><br><span class="line"><span class="string">    '__doc__': None</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">print(animal.__dict__)</span><br><span class="line"><span class="comment"># &#123;'name': 'Animal'&#125;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="len-获取实例对象长度"><a href="#len-获取实例对象长度" class="headerlink" title="__len__ 获取实例对象长度"></a>__len__ 获取实例对象长度</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># __len__ 返回对象长度</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> len(self.name)</span><br><span class="line"></span><br><span class="line">dog = Animal(<span class="string">'dog'</span>)</span><br><span class="line">elephant = Animal(<span class="string">'elephant'</span>)</span><br><span class="line">print(len(dog))  <span class="comment"># 3</span></span><br><span class="line">print(len(elephant))  <span class="comment"># 8</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="iter-和-next-使实例对象可迭代"><a href="#iter-和-next-使实例对象可迭代" class="headerlink" title="__iter__ 和 __next__ 使实例对象可迭代"></a>__iter__ 和 __next__ 使实例对象可迭代</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># __iter__ 和 __next__ 使实例对象可迭代</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.book = [<span class="string">'Math'</span>,<span class="string">'English'</span>,<span class="string">'Chinese'</span>,<span class="string">'Physical'</span>]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.count = <span class="number">0</span></span><br><span class="line">        self.book_list_len = len(self.book)</span><br><span class="line">        <span class="keyword">return</span> self  <span class="comment"># 通常返回的是self</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__next__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.count &lt; self.book_list_len:</span><br><span class="line">            book_name = self.book[self.count]</span><br><span class="line">            self.count += <span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> book_name</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> StopIteration  <span class="comment"># 停止迭代</span></span><br><span class="line">xiaoming = Student()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> xiaoming:</span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="add-运算符重载"><a href="#add-运算符重载" class="headerlink" title="__add__ 运算符重载"></a>__add__ 运算符重载</h2><p>算术运算符可以用于自定义类对象的实例对象，必须在自定义类对象中实现标准算术运算符对应的以下特殊方法：</p>
+<ol>
+<li>+对应的特殊方法是__add__()和__radd__();</li>
+<li>-对应的特殊方法是__sub__()和__rsub__();</li>
+<li>*对应的特殊方法是__mul__()和__rmul__();</li>
+<li>/对应的特殊方法是__truediv__()和__rtruediv__();</li>
+<li>//对应的特殊方法是__floordiv__()和__rfloordiv__()</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 实例对象实现加法</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Myclass</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, data)</span>:</span></span><br><span class="line">        self.data = data</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__add__</span><span class="params">(self, other)</span>:</span>  <span class="comment"># other指的是加号右边的对象</span></span><br><span class="line">        <span class="keyword">return</span> self.data + other.data</span><br><span class="line">a = Myclass(<span class="number">10</span>)</span><br><span class="line">b = Myclass(<span class="number">20</span>)</span><br><span class="line">print(a + b)</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="str-和-repr-输出字符"><a href="#str-和-repr-输出字符" class="headerlink" title="__str__和__repr__ 输出字符"></a>__str__和__repr__ 输出字符</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># __str__ 和 __repr__</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Myclass</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, data)</span>:</span></span><br><span class="line">        self.data = data</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.data</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.data</span><br><span class="line"></span><br><span class="line">a = Myclass(<span class="string">'123'</span>)</span><br><span class="line">print(a)  <span class="comment"># 123</span></span><br><span class="line">print(str(a))  <span class="comment"># 123</span></span><br><span class="line">print(repr(a))  <span class="comment"># 123</span></span><br></pre></td></tr></table></figure>
+<p>str()和repr()都返回对象字符串，其区别在于：</p>
+<ol>
+<li>str()是给用户看的，显示更加友好。</li>
+<li>repr()是给程序开发者看的，为调试服务的。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>str(<span class="string">'Hello!\nWorld'</span>)</span><br><span class="line"><span class="string">'Hello!\nWorld'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(str(<span class="string">'Hello!\nWorld'</span>))</span><br><span class="line">Hello!</span><br><span class="line">World</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>repr(<span class="string">'Hello!\nWorld'</span>)</span><br><span class="line"><span class="string">"'Hello!\\nWorld'"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(repr(<span class="string">'Hello!\nWorld'</span>))</span><br><span class="line"><span class="string">'Hello!\nWorld'</span></span><br></pre></td></tr></table></figure>
+<h2 id="new-创建实例方法"><a href="#new-创建实例方法" class="headerlink" title="__new__ 创建实例方法"></a>__new__ 创建实例方法</h2><p>当使用“类名（实参）”创建实例对象时，python解析器的主要处理过程包括：</p>
+<ol>
+<li>调用特殊方法__new__()创建实例对象。</li>
+<li>调用特殊方法__init__()对创建的实例对象进行初始化。</li>
+</ol>
+<p>__init__中接收的self其实就是__new__中返回的对象。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># __new__ 创建实例调用方法</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__new__</span><span class="params">(cls, *args, **kwargs)</span>:</span></span><br><span class="line">        new_object = object.__new__(cls)</span><br><span class="line">        print(<span class="string">'New object id is %s'</span> % id(new_object))</span><br><span class="line">        <span class="keyword">return</span> new_object</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        print(<span class="string">'Init object id is %s'</span> % id(self))</span><br><span class="line"></span><br><span class="line">dog = Animal(<span class="string">'123'</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">结果：</span></span><br><span class="line"><span class="string">New object id is 2650305182240</span></span><br><span class="line"><span class="string">Init object id is 2650305182240</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="del-对象删除方法"><a href="#del-对象删除方法" class="headerlink" title="__del__ 对象删除方法"></a>__del__ 对象删除方法</h2><p>可以定义__del__来执行当对象被删除时所需的操作。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># __del__ 删除方法</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__del__</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'%s对象被删除！'</span> % self.name)</span><br><span class="line"></span><br><span class="line">dog = Animal(<span class="string">'dog'</span>)</span><br><span class="line">print(dog.name)</span><br><span class="line">print(<span class="string">'dog对象会在3秒后被删除'</span>)</span><br><span class="line">time.sleep(<span class="number">3</span>)  <span class="comment"># 程序结束，必定会删除对象</span></span><br></pre></td></tr></table></figure>
+<p>==当引用计数器为0时，对象不会立即被销毁（垃圾回收），所以__del__执行的时间也是不确定的。==</p>
+<hr>
+<h2 id="getattr-获取对象属性或方法"><a href="#getattr-获取对象属性或方法" class="headerlink" title="__getattr__ 获取对象属性或方法"></a>__getattr__ 获取对象属性或方法</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># __getattr__</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, item)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> item == <span class="string">'name'</span>:</span><br><span class="line">            <span class="keyword">return</span> self.name</span><br><span class="line">        <span class="keyword">elif</span> item == <span class="string">'say_name'</span>:</span><br><span class="line">            <span class="keyword">return</span> self.say_hi</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> AttributeError(<span class="string">'No attribute "%s"'</span> % item)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">say_hi</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        print(<span class="string">'Hi %s!'</span> % value)</span><br><span class="line"></span><br><span class="line">dog = Animal(<span class="string">'dog'</span>)</span><br><span class="line">print(dog.name)  <span class="comment"># dog</span></span><br><span class="line">dog.say_hi(<span class="string">'cat'</span>)  <span class="comment"># Hi cat!</span></span><br><span class="line">print(dog.age)  <span class="comment"># AttributeError: No attribute "age"</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="getitem-、-setitem-、-deltitem-索引设置"><a href="#getitem-、-setitem-、-deltitem-索引设置" class="headerlink" title="__getitem__、__setitem__、__deltitem__ 索引设置"></a>__getitem__、__setitem__、__deltitem__ 索引设置</h2><p>使实例对象实现像列表或者字典索引操作的三个方法。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># __getitem__、__setitem__、__delitem__</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.data = &#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, item)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.data.get(item)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__setitem__</span><span class="params">(self, key, value)</span>:</span></span><br><span class="line">        self.data[key] = value</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__delitem__</span><span class="params">(self, key)</span>:</span></span><br><span class="line">        <span class="keyword">del</span> self.data[key]</span><br><span class="line">dog = Animal()</span><br><span class="line">dog[<span class="string">'name'</span>] = <span class="string">'dog'</span></span><br><span class="line">print(dog[<span class="string">'name'</span>])</span><br><span class="line"><span class="keyword">del</span> dog[<span class="string">'name'</span>]</span><br><span class="line">print(dog[<span class="string">'name'</span>])</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="call-函数调用"><a href="#call-函数调用" class="headerlink" title="__call__ 函数调用"></a>__call__ 函数调用</h2><p>使实例对象可以像函数一样被调用。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># __call__</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self, *args, **kwargs)</span>:</span></span><br><span class="line">        print(args)</span><br><span class="line">        print(kwargs)</span><br><span class="line">dog = Animal()</span><br><span class="line">dog(<span class="number">18</span>, <span class="string">'yellow'</span>, name=<span class="string">'dog'</span>)</span><br><span class="line">print(callable(dog))</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">结果：</span></span><br><span class="line"><span class="string">(18, 'yellow')</span></span><br><span class="line"><span class="string">&#123;'name': 'dog'&#125;</span></span><br><span class="line"><span class="string">True</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+<p>==可以通过函数callable()来判断对象是否可以被调用。==</p>
+<hr>
+<h2 id="doc-文档字符串"><a href="#doc-文档字符串" class="headerlink" title="__doc__ 文档字符串"></a>__doc__ 文档字符串</h2><p>与函数的文档字符串类似，类对象的第一行字符串表示文档字符串。它是对类对象的功能的简要描述。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># __call__</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="string">'''这是一个动物类'''</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">dog = Animal()</span><br><span class="line">print(Animal.__doc__)</span><br><span class="line">print(dog.__doc__)</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">结果：</span></span><br><span class="line"><span class="string">这是一个动物类</span></span><br><span class="line"><span class="string">这是一个动物类</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="slots-限制实例对象属性或方法"><a href="#slots-限制实例对象属性或方法" class="headerlink" title="__slots__ 限制实例对象属性或方法"></a>__slots__ 限制实例对象属性或方法</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># __slots__</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.name = <span class="string">'animal'</span></span><br><span class="line">    __slots__ = (<span class="string">'age'</span>, <span class="string">'eat'</span>, <span class="string">'name'</span>)</span><br><span class="line"></span><br><span class="line">dog = Animal()</span><br><span class="line">print(dog.name)  <span class="comment"># animal</span></span><br><span class="line">dog.age = <span class="number">3</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">eat</span><span class="params">(self)</span>:</span></span><br><span class="line">    print(<span class="string">'%s eat!'</span> % self.name)</span><br><span class="line">Animal.eat = eat</span><br><span class="line">dog.eat()  <span class="comment"># animal eat!</span></span><br><span class="line">Animal.color = <span class="string">'withe'</span>  <span class="comment"># 对于类对象没有影响</span></span><br><span class="line">dog.color = <span class="string">'withe'</span>  <span class="comment"># AttributeError: 'Animal' object has no attribute 'color'</span></span><br></pre></td></tr></table></figure>
+<p>__slots__对于子类的实例对象是不生效的，如果子类也有__slots__，那么子类的对象可用实例属性或方法则为父类__slots__加子类__slots__。</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Python">
+    <span class="tag-code">Python</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/04/28/python/python-xiao-zhi-shi-dian/">
+        <span class="nav-arrow">← </span>
+        
+          pthon小知识点
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/04/28/python/mro-fang-fa-jie-xi-shun-xu/">
+        
+          MRO方法解析顺序
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">目录</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Python-特殊方法"><span class="toc-nav-text">Python 特殊方法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#dict-获取对象信息"><span class="toc-nav-text">__dict__ 获取对象信息</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#len-获取实例对象长度"><span class="toc-nav-text">__len__ 获取实例对象长度</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#iter-和-next-使实例对象可迭代"><span class="toc-nav-text">__iter__ 和 __next__ 使实例对象可迭代</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#add-运算符重载"><span class="toc-nav-text">__add__ 运算符重载</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#str-和-repr-输出字符"><span class="toc-nav-text">__str__和__repr__ 输出字符</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#new-创建实例方法"><span class="toc-nav-text">__new__ 创建实例方法</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#del-对象删除方法"><span class="toc-nav-text">__del__ 对象删除方法</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#getattr-获取对象属性或方法"><span class="toc-nav-text">__getattr__ 获取对象属性或方法</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#getitem-、-setitem-、-deltitem-索引设置"><span class="toc-nav-text">__getitem__、__setitem__、__deltitem__ 索引设置</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#call-函数调用"><span class="toc-nav-text">__call__ 函数调用</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#doc-文档字符串"><span class="toc-nav-text">__doc__ 文档字符串</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#slots-限制实例对象属性或方法"><span class="toc-nav-text">__slots__ 限制实例对象属性或方法</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://durongjie.com/2019/04/28/python/python-te-shu-fang-fa/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'https://markdown-resource.oss-cn-shenzhen.aliyuncs.com/img20200414170549.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'https://markdown-resource.oss-cn-shenzhen.aliyuncs.com/img20200414170549.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+  <script>
+    var gitmentConfig = "FreezeJ";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "python特殊方法",
+        owner: "FreezeJ",
+        repo: "FreezeJ.github.io",
+        oauth: {
+          client_id: "e454d874578e161854c4",
+          client_secret: "d52121a2ee21be59da10cbb323649596989eb512"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  </script>
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.configure({ useBR: true })
+      var hasLine = 'false';
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = $(figure).attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+
+  </body>
+</html>

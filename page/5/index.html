@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="一个运维开发工程师的技术博客，分享关于自动化运维、Python编程、Linux操作系统、前端知识、网络技术、系统与网络安全技术的博客，以及记录一些较新技术的采坑日志，方便自己回顾，希望也能帮助到别人。">
+  <meta name="keyword" content="Linux,Python,Network,DevOps">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      FreezeJ&#39; Blog
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/css/plugins/gitment.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    <script src="/js/qrious.js"></script>
+  
+  
+    <script src="/js/gitment.js"></script>
+  
+  
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>FreezeJ' Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/04/28/python/python-mian-xiang-dui-xiang-gai-shu/"> python面向对象概述</a>
+      </h2>
+      <p class="article-date">April 28, 2019</p>
+      
+        
+  <a href="/tags#Python">
+    <span class="tag-code">Python</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          面向对象编程概述对象具有以下特征：
+
+万物皆对象
+每个对象唯一
+对象具有属性和行为
+对象具有状态（属性的取值）
+对象分为类对象和实例对象两大类
+
+面向对象编程的步骤：
+
+抽象出类对象
+抽象出类对象的属性
+抽象出类对象的方法
+根基类对象创建实例对象
+通过实例对象访问属性和方法
+
+Python是 ...
+        
+      </div>
+      <a class="more" href="/2019/04/28/python/python-mian-xiang-dui-xiang-gai-shu/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/04/28/python/python-lei-shu-xing-he-fang-fa-de-fang-wen-kong-zhi/"> python类属性和方法的访问控制</a>
+      </h2>
+      <p class="article-date">April 28, 2019</p>
+      
+        
+  <a href="/tags#Python">
+    <span class="tag-code">Python</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          类属性和方法的访问控制控制类对象的属性和方法在类对象外部是否可以直接访问。在属性或方法前加两个下划线__，那么这个属性就不能从外部访问。
+# 私有变量和私有方法class Animal(object):    def __init__(self, name):        self.nam ...
+        
+      </div>
+      <a class="more" href="/2019/04/28/python/python-lei-shu-xing-he-fang-fa-de-fang-wen-kong-zhi/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/04/28/python/python-feng-zhuang-ji-cheng-he-duo-tai/"> python封装、继承和多态</a>
+      </h2>
+      <p class="article-date">April 28, 2019</p>
+      
+        
+  <a href="/tags#Python">
+    <span class="tag-code">Python</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          封装、继承和多态封装封装的两方面含义：
+
+将数据（属性）和行为（方法）包装到类对象中。在方法内部对属性进行操作，在类对象的外部调用方法。这样，无需关心方法内部的具体实现细节，从而隔离了复杂程度。
+在类对象的内部通过访问控制把某些属性和方法隐藏起来，不允许类对象的外部直接访问，而是在类对象的内 ...
+        
+      </div>
+      <a class="more" href="/2019/04/28/python/python-feng-zhuang-ji-cheng-he-duo-tai/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/04/28/python/python-diao-yong-c-dong-tai-lian-jie-ku/"> python调用C动态链接库</a>
+      </h2>
+      <p class="article-date">April 28, 2019</p>
+      
+        
+  <a href="/tags#Python">
+    <span class="tag-code">Python</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          python调用C动态链接库c_dll.c#include&lt;stdio.h&gt;void my_add(int num)&#123;    long int result = 0;    long int i = 1;    for(i; i&lt;=num; i++)&#123;  ...
+        
+      </div>
+      <a class="more" href="/2019/04/28/python/python-diao-yong-c-dong-tai-lian-jie-ku/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/04/28/python/mro-fang-fa-jie-xi-shun-xu/">MRO方法解析顺序</a>
+      </h2>
+      <p class="article-date">April 28, 2019</p>
+      
+        
+  <a href="/tags#Python">
+    <span class="tag-code">Python</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          MRO 方法解析顺序MRO的全称是Method Resolution Order（方法解析顺序），它指的是一颗类继承树，==当调用最底层类对象所对应实例对象的方法时，Python解析器在类继承树上搜索方法的顺序。==
+# MRO 方法解析顺序class A(object):    def s ...
+        
+      </div>
+      <a class="more" href="/2019/04/28/python/mro-fang-fa-jie-xi-shun-xu/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/04/28/python/python-te-shu-fang-fa/">python特殊方法</a>
+      </h2>
+      <p class="article-date">April 28, 2019</p>
+      
+        
+  <a href="/tags#Python">
+    <span class="tag-code">Python</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          Python 特殊方法以双下划线开头和结尾的方法称为特殊方法，__xxxx__。
+在定义类对象时，经常会重写一个或多个特殊方法，例如__init__。通常特殊方法都是自动调用的。
+
+__dict__ 获取对象信息# __dict__  查看对象信息class Animal(object):  ...
+        
+      </div>
+      <a class="more" href="/2019/04/28/python/python-te-shu-fang-fa/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/04/28/python/python-xiao-zhi-shi-dian/">pthon小知识点</a>
+      </h2>
+      <p class="article-date">April 28, 2019</p>
+      
+        
+  <a href="/tags#Python">
+    <span class="tag-code">Python</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          小知识点issubclass() 用于判断两个类对象之间的关系（是否有继承关系）
+# issubclass()class A(object):    passclass B(A):    passclass C(object):    passprint(issubclass(B, A))  ...
+        
+      </div>
+      <a class="more" href="/2019/04/28/python/python-xiao-zhi-shi-dian/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/04/28/python/python-fan-she/">pthon反射</a>
+      </h2>
+      <p class="article-date">April 28, 2019</p>
+      
+        
+  <a href="/tags#Python">
+    <span class="tag-code">Python</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          Python反射所谓“反射”，指的是以字符串的形式来操作（包括：增删改查）对象的属性和方法 。
+用于“反射”的内置函数有以下四个：
+
+hasattr
+getattr
+setattr
+delattr
+
+# 反射的四个内置方法class Animal(object):    def __init ...
+        
+      </div>
+      <a class="more" href="/2019/04/28/python/python-fan-she/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/04/28/python/python-mo-kuai/">pthon模块</a>
+      </h2>
+      <p class="article-date">April 28, 2019</p>
+      
+        
+  <a href="/tags#Python">
+    <span class="tag-code">Python</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          pthon模块为什么使用模块？
+
+代码重用
+避免属性冲突
+
+为了更好地组织和管理模块，python引入了包，在某个目录下添加模块__init__.py后，该目录就变成了包。目录支持嵌套，所以包也支持嵌套，包中还可以有子包。
+
+相对导入使用相对路径导入模块时，其中，一个.表示当前目录，两个.. ...
+        
+      </div>
+      <a class="more" href="/2019/04/28/python/python-mo-kuai/">Read more</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a href="/page/4/"><span class="page-arrow">← </span>Prev</a>
+  
+  
+    <a class="unvisible" href="/">Next <span class="page-arrow">→</span></a>
+  
+</div>
+  
+</main>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.configure({ useBR: true })
+      var hasLine = 'false';
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = $(figure).attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+
+  </body>
+</html>

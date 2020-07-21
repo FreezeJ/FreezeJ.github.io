@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="一个运维开发工程师的技术博客，分享关于自动化运维、Python编程、Linux操作系统、前端知识、网络技术、系统与网络安全技术的博客，以及记录一些较新技术的采坑日志，方便自己回顾，希望也能帮助到别人。">
+  <meta name="keyword" content="Linux,Python,Network,DevOps">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      LFS 搭建笔记 | FreezeJ&#39; Blog
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/css/plugins/gitment.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    <script src="/js/qrious.js"></script>
+  
+  
+    <script src="/js/gitment.js"></script>
+  
+  
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>FreezeJ' Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>LFS 搭建笔记</h2>
+  <p class="post-date">2020-04-14</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h1 id="LFS-搭建笔记"><a href="#LFS-搭建笔记" class="headerlink" title="LFS 搭建笔记"></a>LFS 搭建笔记</h1><blockquote>
+<p>版本：SVN-20200401<br>文档链接：<a href="http://www.linuxfromscratch.org/lfs/view/development/index.html" target="_blank" rel="noopener">http://www.linuxfromscratch.org/lfs/view/development/index.html</a><br> 软件镜像源：<a href="http://mirrors.ustc.edu.cn/lfs/lfs-packages/9.1/" target="_blank" rel="noopener">http://mirrors.ustc.edu.cn/lfs/lfs-packages/9.1/</a></p>
+</blockquote>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>本书共4部分，分为9章节，以下为每一章节的介绍。</p>
+<p><strong>第1章</strong>为本书的介绍和说明部分。</p>
+<p><strong>第2章</strong>介绍了如何创建新的Linux本机分区和文件系统。在这里将编译和安装新的LFS系统。  </p>
+<p><strong>第3章</strong>介绍了构建LFS系统需要下载哪些软件包和修补程序以及如何将它们存储在新文件系统中。</p>
+<p><strong>第4章</strong>讨论了合适的工作环境的设置，以及如何搭建工作环境。</p>
+<p><strong>第5章</strong>说明了许多软件包的安装，这些软件包将构成第6章中用于构建实际系统的基本开发套件（或工具链）。</p>
+<p><strong>第6章</strong>构建了完整的LFS系统。在chroot环境（改变root）程序用来进入一个虚拟环境，并开始一个新的shell，其根目录被设置为LFS分区。</p>
+<p><strong>第7章</strong>为设置基本的系统配置。  </p>
+<p><strong>第8章</strong>为设置内核和引导加载程序。  </p>
+<p><strong>第9章</strong>包含有关在本书之外继续LFS经验的信息。实施本书中的步骤之后，计算机将准备好重新启动进入新的LFS系统。</p>
+<h2 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h2><p>第二部分的总体目标 是创建一个临时区域，其中包含可以与主机系统隔离的一组已知良好的工具。通过使用 chroot，其余各章中的命令将包含在该环境中，从而确保目标LFS系统的构建干净无误。<br>包括的工具链有：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Binutils-2.34 <span class="comment"># Binutils程序包包含一个链接器，一个汇编器和其他用于处理目标文件的工具。</span></span><br><span class="line">GCC-9.3.0 <span class="comment"># GCC软件包包含GNU编译器集合，其中包括C和C ++编译器。</span></span><br><span class="line">Linux-5.5.9 API Headers  <span class="comment"># 内核的API，供Glibc使用。</span></span><br><span class="line">Glibc-2.31  <span class="comment"># Glibc软件包包含主要的C库。该库提供了用于分配内存，搜索目录，打开和关闭文件，读取和写入文件，字符串处理，模式匹配，算术等等的基本例程。</span></span><br><span class="line">Libstdc++  <span class="comment"># 标准的C++库</span></span><br><span class="line">Tcl-8.6.10  <span class="comment"># 工具命令语言，强大的通用脚本语言。</span></span><br><span class="line">Expect-5.45.4  <span class="comment"># 自动化工具，通过脚本对话框，交互式应用，如远程登录， FTP，passwd，fsck的，远程登录并提示。DejaGnu依赖Expect</span></span><br><span class="line">DejaGNU-1.6.2  <span class="comment"># GNU工具的运行测试套件的框架</span></span><br><span class="line">M4-1.4.18  <span class="comment"># 宏处理器</span></span><br><span class="line">Ncurses-6.2  <span class="comment"># 终端独立处理字符屏幕的库</span></span><br><span class="line">Bash-5.0  <span class="comment"># Bourne-Again SHell</span></span><br><span class="line">Bison-3.5.3  <span class="comment"># 解析器生成器</span></span><br><span class="line">Bzip2-1.0.8  <span class="comment"># 压缩和解压缩文件的程序</span></span><br><span class="line">Coreutils-8.32  <span class="comment"># 显示和设置基本系统特征的实用程序</span></span><br><span class="line">Diffutils-3.7  <span class="comment"># 显示文件或目录之间差异的程序</span></span><br><span class="line">File-5.38  <span class="comment"># 查看文件或多个文件类型的实用程序</span></span><br><span class="line">Findutils-4.7.0  <span class="comment"># 查找文件的程序</span></span><br><span class="line">Gawk-5.0.1  <span class="comment"># 处理文本文件的程序</span></span><br><span class="line">Gettext-0.20.1  <span class="comment"># 国际化和本地化的实用程序</span></span><br><span class="line">Grep-3.4  <span class="comment"># 搜索、过滤文件的程序</span></span><br><span class="line">Gzip-1.10  <span class="comment"># 压缩和解压缩文件</span></span><br><span class="line">Make-4.3  <span class="comment"># 编译软件包的程序</span></span><br><span class="line">Patch-2.7.6  <span class="comment"># 通常由diff程序创建的“补丁程序”文件 来修改或创建文件</span></span><br><span class="line">Perl-5.30.2  <span class="comment"># 实用的提取和报告语言</span></span><br><span class="line">Python-3.8.2  <span class="comment"># Python开发环境</span></span><br><span class="line">Sed-4.8  <span class="comment"># 流编辑器</span></span><br><span class="line">Tar-1.32  <span class="comment"># 归档程序</span></span><br><span class="line">Texinfo-6.7  <span class="comment"># 用于读取，写入和转换信息页面的程序</span></span><br><span class="line">Xz-5.2.5  <span class="comment"># 压缩和解压缩文件的程序</span></span><br></pre></td></tr></table></figure></p>
+<p>第三部分为使用第二部分建立的与主机系统隔离的工具来建立LFS系统，安装基本系统软件与系统配置文件介绍。<br>包括的工具链有：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Linux-5.5.9 API Headers</span><br><span class="line">Man-pages-5.05  <span class="comment"># 帮助手册</span></span><br><span class="line">Glibc-2.31  <span class="comment"># Glibc软件包包含主要的C库。该库提供了用于分配内存，搜索目录，打开和关闭文件，读取和写入文件，字符串处理，模式匹配，算术等等的基本例程。</span></span><br><span class="line">Zlib-1.2.11  <span class="comment"># 程序使用的压缩和解压缩库</span></span><br><span class="line">Bzip2-1.0.8  <span class="comment"># # 程序使用的压缩和解压缩库</span></span><br><span class="line">Xz-5.2.5  <span class="comment"># # 程序使用的压缩和解压缩库</span></span><br><span class="line">File-5.38  <span class="comment"># 查看文件或多个文件类型的实用程序</span></span><br><span class="line">Readline-8.0  <span class="comment"># 提供命令行编辑和历史记录功能的库。</span></span><br><span class="line">M4-1.4.18  <span class="comment"># 宏处理器</span></span><br><span class="line">Bc-2.6.0  <span class="comment"># 算数运算</span></span><br><span class="line">Binutils-2.34 <span class="comment"># Binutils程序包包含一个链接器，一个汇编器和其他用于处理目标文件的工具。</span></span><br><span class="line">GMP-6.2.0  <span class="comment"># 精密数学函数</span></span><br><span class="line">MPFR-4.0.2  <span class="comment"># 多精度数学的函数</span></span><br><span class="line">MPC-1.1.0  <span class="comment"># 复数算术运算</span></span><br><span class="line">Attr-2.4.48  <span class="comment"># 管理文件系统对象上的扩展属性</span></span><br><span class="line">Acl-2.2.53  <span class="comment"># 为文件和目录定义更细粒度的自由访问权限</span></span><br><span class="line">Shadow-4.8.1  <span class="comment"># 以安全方式处理密码的程序</span></span><br><span class="line">GCC-9.3.0 <span class="comment"># GCC软件包包含GNU编译器集合，其中包括C和C ++编译器</span></span><br><span class="line">Pkg-config-0.29.2  <span class="comment"># 用于在配置和执行文件期间传递包含路径和/或库路径以构建工具</span></span><br><span class="line">Ncurses-6.2  <span class="comment"># 用于终端独立处理字符屏幕的库</span></span><br><span class="line">Libcap-2.33  <span class="comment"># 将所有强大的root特权划分为一组不同的特权</span></span><br><span class="line">Sed-4.8  <span class="comment"># 流编辑器</span></span><br><span class="line">Psmisc-23.3  <span class="comment"># 显示有关正在运行的进程的信息的程序</span></span><br><span class="line">Iana-Etc-2.30  <span class="comment"># 为网络服务和协议提供数据</span></span><br><span class="line">Bison-3.5.3  <span class="comment"># 解析器生成器</span></span><br><span class="line">Flex-2.6.4  <span class="comment"># 生成识别文本模式的程序</span></span><br><span class="line">Grep-3.4  <span class="comment"># 搜索、过滤文件的程序</span></span><br><span class="line">Bash-5.0  <span class="comment"># Bourne-Again SHell</span></span><br><span class="line">Libtool-2.4.6  <span class="comment"># GNU通用库支持脚本</span></span><br><span class="line">GDBM-1.18.1  <span class="comment"># GNU数据库管理器</span></span><br><span class="line">Gperf-3.1  <span class="comment"># 从密钥集生成哈希函数</span></span><br><span class="line">Expat-2.2.9  <span class="comment"># 面向流的C库，用于解析XML</span></span><br><span class="line">Inetutils-1.9.4  <span class="comment"># 基本联网的程序</span></span><br><span class="line">Perl-5.30.2  <span class="comment"># 提取和报告语言</span></span><br><span class="line">XML::Parser-2.46  <span class="comment"># James Clark的XML解析器Expat的Perl接口</span></span><br><span class="line">Intltool-0.51.0  <span class="comment"># 一种国际化工具，用于从源文件中提取可翻译字符串</span></span><br><span class="line">Autoconf-2.69  <span class="comment"># 用于生成可自动配置源代码的Shell脚本的程序</span></span><br><span class="line">Automake-1.16.2  <span class="comment"># 用于生成与Autoconf一起使用的Makefile的程序</span></span><br><span class="line">Kmod-27  <span class="comment"># 用于加载内核模块的库和实用程序</span></span><br><span class="line">Gettext-0.20.1  <span class="comment"># 用于国际化和本地化的实用程序</span></span><br><span class="line">Libelf from Elfutils-0.179  <span class="comment"># 用于处理ELF（可执行和可链接格式）文件的库</span></span><br><span class="line">Libffi-3.3  <span class="comment"># 为各种调用约定提供了一个可移植的高级编程接口。这允许程序员在运行时调用由调用接口描述指定的任何函数</span></span><br><span class="line">OpenSSL-1.1.1f  <span class="comment"># 与加密有关的管理工具和库</span></span><br><span class="line">Python-3.8.2  <span class="comment"># Python开发环境</span></span><br><span class="line">Ninja-1.10.0  <span class="comment"># 注重速度的小型构建系统</span></span><br><span class="line">Meson-0.54.0  <span class="comment"># 高生产率的构建系统</span></span><br><span class="line">Coreutils-8.32  <span class="comment"># 显示和设置基本系统特征的实用程序</span></span><br><span class="line">Check-0.14.0  <span class="comment"># C的单元测试框架</span></span><br><span class="line">Diffutils-3.7  <span class="comment"># 显示文件或目录之间差异的程序</span></span><br><span class="line">Gawk-5.0.1  <span class="comment"># 处理文本文件的程序</span></span><br><span class="line">Findutils-4.7.0  <span class="comment"># 查找文件的程序</span></span><br><span class="line">Groff-1.22.4  <span class="comment"># 处理和格式化文本的程序</span></span><br><span class="line">GRUB-2.04  <span class="comment"># GRand Unified Bootloader</span></span><br><span class="line">Less-551  <span class="comment"># 文本文件查看器</span></span><br><span class="line">Gzip-1.10  <span class="comment"># 压缩和解压缩文件的程序</span></span><br><span class="line">Zstd-1.4.4  <span class="comment"># 实时压缩算法，可提供高压缩率。</span></span><br><span class="line">IPRoute2-5.5.0  <span class="comment"># 基本和高级基于IPV4的网络的程序</span></span><br><span class="line">Kbd-2.2.0  <span class="comment"># 键表文件，控制台字体和键盘实用程序</span></span><br><span class="line">Libpipeline-1.5.2  <span class="comment"># 用于以灵活方便的方式操纵子流程的管道</span></span><br><span class="line">Make-4.3  <span class="comment"># 编译软件包的程序</span></span><br><span class="line">Patch-2.7.6  <span class="comment"># 通常由diff程序创建的“补丁程序”文件 来修改或创建文件</span></span><br><span class="line">Man-DB-2.9.1  <span class="comment"># 手册数据库</span></span><br><span class="line">Tar-1.32  <span class="comment"># 归档程序</span></span><br><span class="line">Texinfo-6.7  <span class="comment"># 用于读取，写入和转换信息页面的程序</span></span><br><span class="line">Vim-8.2.0486  <span class="comment"># 文本编辑器</span></span><br><span class="line">Procps-ng-3.3.16  <span class="comment"># 用于监视过程的程序</span></span><br><span class="line">Util-linux-2.35.1  <span class="comment"># 其他实用程序。其中包括用于处理文件系统，控制台，分区和消息的实用程序</span></span><br><span class="line">Eudev-3.2.9  <span class="comment"># 动态创建设备节点的程序</span></span><br><span class="line">E2fsprogs-1.45.6  <span class="comment"># 处理ext2文件系统的实用程序 。它还支持ext3和ext4日志文件系统</span></span><br><span class="line">Sysklogd-1.5.1  <span class="comment"># 记录系统消息的程序</span></span><br><span class="line">Sysvinit-2.96  <span class="comment"># 控制系统的启动，运行和关闭的程序</span></span><br></pre></td></tr></table></figure></p>
+<p>系统配置文件：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/etc/sysconfig/ifconfig.eth0  <span class="comment"># 网络接口配置</span></span><br><span class="line">/etc/resolv.conf  <span class="comment"># 域名解析配置</span></span><br><span class="line">/etc/hostname  <span class="comment"># 主机名配置</span></span><br><span class="line">/etc/hosts  <span class="comment"># 主机名ip映射配置</span></span><br><span class="line">/etc/inittab  <span class="comment"># 内核初始化文件</span></span><br><span class="line">/etc/rc.d/  <span class="comment"># 启动级别配置</span></span><br><span class="line">/etc/sysconfig/clock  <span class="comment"># 系统时钟配置</span></span><br><span class="line">/etc/sysconfig/console  <span class="comment"># 控制台样式配置</span></span><br><span class="line">/etc/profile  <span class="comment"># profile配置</span></span><br><span class="line">~/.bash_profile  <span class="comment"># bash配置</span></span><br><span class="line">/etc/inputrc  <span class="comment"># 键盘输入映射配置</span></span><br><span class="line">/etc/shells  <span class="comment"># 登录Shell列表</span></span><br><span class="line">/etc/fstab  <span class="comment"># 启动挂载配置</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="随笔"><a href="#随笔" class="headerlink" title="随笔"></a>随笔</h2><p><strong>交叉编译</strong>是在一个平台上生成另一个平台上的可执行代码。同一个体系结构可以运行不同的操作系统；同样，同一个操作系统也可以在不同的体系结构上运行。</p>
+<p><strong>LSB</strong>（Linux Standard Base<br>）有五个独立的标准：内核、C++、桌面、运行时语言和输出。</p>
+<p>一般来说，交换分区的推荐大小为物理内存的两倍左右，实际上并无此必要。<br>对于 LFS 或者是 Gentoo 总是编译源代码的发行版来说，swap 分区是极其有必要的。在编译过程中，编译系统会将那些不总是变化的文件寄存在 swap 分区中，而为软件编译过程提供更多的内存空间。</p>
+<p><strong>ext2</strong><br>适用于那些分区容量不是太大，更新也不频繁的情况，例如 /boot 分区。</p>
+<p><strong>ext3</strong><br>是 ext2 的改进版本，其支持日志功能，能够帮助系统从非正常关机导致的异常中恢复。它通常被用作通用的文件系统。</p>
+<p><strong>ext4</strong><br>是 ext 文件系统的最新版。提供了很多新的特性，包括纳秒级时间戳、创建和使用巨型文件(16TB)、以及速度的提升。</p>
+<p><strong>strip</strong><br>简单的说就是给文件脱掉外衣，具体就是从特定文件中剥掉一些符号信息和调试信息，使文件变小。<br>其实， strip不仅仅可以针对可执行文件， 还能针对目标文件和动态库等. 在实际的开发中， 经常需要对动态库.so进行strip操作， 减少占地空间。 而在调试的时候（比如用addr2line）， 就需要符号了。 因此， 通常的做法是： strip前的库用来调试， strip后的库用来实际发布， 他们两者有对应关系。 一旦发布的strip后的库出了问题， 就可以找对应的未strip的库来定位。</p>
+<p><strong>使用多个CPU核心来加速编译速度</strong><br>对于具有多个处理器（或内核）的许多现代系统，可以通过设置环境变量或告知make 程序有多少个处理器来执行“并行make”来减少程序包的编译时间。例如，Core2Duo可以同时支持两个进程：</p>
+<p>export MAKEFLAGS=’-j 2’<br>或仅通过以下方式进行构建：</p>
+<p>make -j2</p>
+<p><strong>构建此最小系统需要两个步骤</strong>。第一步是构建一个新的且独立于主机的工具链（编译器，汇编器，链接器，库和一些有用的实用程序）。第二步使用此工具链构建其他基本工具。</p>
+<p><strong>动态链接库查找顺序和路径</strong><br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ld --verbose | grep SEARCH</span><br><span class="line">SEARCH_DIR(<span class="string">"=/usr/x86_64-redhat-linux/lib64"</span>); SEARCH_DIR(<span class="string">"=/usr/lib64"</span>); SEARCH_DIR(<span class="string">"=/usr/local/lib64"</span>); SEARCH_DIR(<span class="string">"=/lib64"</span>); SEARCH_DIR(<span class="string">"=/usr/x86_64-redhat-linux/lib"</span>); SEARCH_DIR(<span class="string">"=/usr/local/lib"</span>); SEARCH_DIR(<span class="string">"=/lib"</span>); SEARCH_DIR(<span class="string">"=/usr/lib"</span>);</span><br></pre></td></tr></table></figure></p>
+<p><strong>静态库和动态库</strong><br>静态库和动态库从字面意思来看，区别就是静态和动态。而这里的静态和动态指的是库的链接阶段。可以看如下的编译过程。</p>
+<p>静态库：在链接阶段库将会与目标汇编后的目标文件.o一起打包生成可执行文件。成为可执行文件的一部分，后续此库就可以消失了。也就是说在编译的最后一步（链接阶段），如果程序需要使用静态库，在这一步都会一起打包到可执行文件中。<br>动态库：而动态库在编译阶段都不会有什么动作，只有在程序运行时才被加载，也就是动态库的链接是发生在程序运行时期的，它和可执行文件是分开的，只是可执行文件在运行的某个时期调用了它。</p>
+<p><strong>sys和proc文件系统</strong><br>1、sys文件系统本质上和proc文件系统是一样的，都是虚拟文件系统。都在根目录下有个目录（一个是/proc目录，另一个是/sys目录），因此都不是硬盘中的文件，都是内核中的数据结构的可视化接口。</p>
+<p>2、不同的是/proc中的文件只能读，但是/sys中的文件可以读写。读/sys中的文件就是获取内核中数据结构的值，而写入/sys中的文件就是设置内核中的数据结构的元素的值。</p>
+<p>3、历史上刚开始先有/proc文件系统，后来人们希望通过这种技术来调试内核。实际做出来的时候确实是很有用，所以很多内核开发者都去内核添加代码向/proc目录中写文件，而且刚开始的时候内核管理者对proc目录的使用也没有什么经验也没有什么统一规划，后来导致的结果就是proc里边的内容又多又杂乱。</p>
+<p>4、后来觉得proc中的内容太多太乱缺乏统一规划，于是乎又添加了sys目录。sys文件系统一开始就做了很好的规划和约定，所以后来使用sys目录时有了规矩。</p>
+<p><strong>临时文件</strong>/var/log/wtmp文件记录所有登录和注销。该/var/log/lastlog文件记录每个用户上次登录的时间。该/var/log/faillog文件记录失败的登录尝试。该/var/log/btmp文件记录错误的登录尝试。</p>
+<p><strong>编译动态链接库</strong> ld指定动态库链接，除了修改/etc/ld.so.conf文件还要使用ldconfig刷新/etc/ld.so.cache缓存才能生效。<br>动态链接库查找顺序和路径：ld –verbose | grep SEARCH</p>
+<h2 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h2><p>LFS 从零开始学Linux，目标是以一个linux环境为基础，从零开始构建一个可用的Linux系统，这个Linux系统并不是最小的系统，而是包含了许多常用的软件，以及基本的开发、编译环境，可以从这个系统按需求繁衍出更为复杂的系统。</p>
+<p>通过搭建LFS可以让我对Linux的基本组件有更深刻的认识，包括它们的依赖关系<br>、伴生关系、配置目录位置等，超过100个常用软件和库的编译让我更加熟悉系统的软件编译安装，各种配置参数的作用。从零开始构建让我了解了Linux的每一个细微的构成，每一个配置文件的作用以及目录位置，GRUB引导Linux的启动过程，</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Linux">
+    <span class="tag-code">Linux</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/10/29/python/wsgi-uwsgi-he-uwsgi/">
+        <span class="nav-arrow">← </span>
+        
+          WSGI、uwsgi和uWSGI
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2020/04/14/linux/awk-zhi-shi-yu-ji-qiao/">
+        
+          AWK 知识与技巧
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">目录</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#LFS-搭建笔记"><span class="toc-nav-text">LFS 搭建笔记</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#简介"><span class="toc-nav-text">简介</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#核心"><span class="toc-nav-text">核心</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#随笔"><span class="toc-nav-text">随笔</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#理解"><span class="toc-nav-text">理解</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://durongjie.com/2020/04/14/linux/lfs-da-jian-bi-ji/';
+    var banner = 'null'
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'https://markdown-resource.oss-cn-shenzhen.aliyuncs.com/img20200414170549.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'https://markdown-resource.oss-cn-shenzhen.aliyuncs.com/img20200414170549.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+  <script>
+    var gitmentConfig = "FreezeJ";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "LFS 搭建笔记",
+        owner: "FreezeJ",
+        repo: "FreezeJ.github.io",
+        oauth: {
+          client_id: "e454d874578e161854c4",
+          client_secret: "d52121a2ee21be59da10cbb323649596989eb512"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  </script>
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.configure({ useBR: true })
+      var hasLine = 'false';
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = $(figure).attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+
+  </body>
+</html>
