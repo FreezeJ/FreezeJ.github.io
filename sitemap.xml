@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://durongjie.com/2020/07/15/secretcrt-mi-ma-jie-mi/</loc>
+    <loc>http://durongjie.com/2020/07/15/linux/secretcrt-mi-ma-jie-mi/</loc>
     
     <lastmod>2020-07-15T04:29:08.852Z</lastmod>
     
@@ -16,35 +16,35 @@
   </url>
   
   <url>
-    <loc>http://durongjie.com/2020/07/08/sshkey-xiao-yan/</loc>
+    <loc>http://durongjie.com/2020/07/08/linux/sshkey-xiao-yan/</loc>
     
     <lastmod>2020-07-08T08:43:39.721Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://durongjie.com/2020/06/29/bash-ming-ling-bu-quan/</loc>
+    <loc>http://durongjie.com/2020/06/29/linux/bash-ming-ling-bu-quan/</loc>
     
     <lastmod>2020-06-29T13:04:45.686Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://durongjie.com/2020/06/29/centos-xiu-gai-xi-tong-yu-yan/</loc>
+    <loc>http://durongjie.com/2020/06/29/linux/centos-xiu-gai-xi-tong-yu-yan/</loc>
     
     <lastmod>2020-06-29T13:03:01.682Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://durongjie.com/2020/06/22/linux-ci-pan-xing-neng-fen-xi-iostat/</loc>
+    <loc>http://durongjie.com/2020/06/22/linux/linux-ci-pan-xing-neng-fen-xi-iostat/</loc>
     
     <lastmod>2020-06-22T02:44:36.325Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://durongjie.com/2020/06/11/centos7-kuai-su-an-zhuang-docker/</loc>
+    <loc>http://durongjie.com/2020/06/11/linux/centos7-kuai-su-an-zhuang-docker/</loc>
     
     <lastmod>2020-06-11T10:47:12.225Z</lastmod>
     
@@ -128,14 +128,21 @@
   </url>
   
   <url>
-    <loc>http://durongjie.com/2019/04/29/life/ru-he-wei-xiu-qiang-shang-wang-luo-duan-kou/</loc>
+    <loc>http://durongjie.com/2019/04/28/django/django-shu-ju-ku-fang-zhu-ru/</loc>
     
     <lastmod>2019-10-29T07:15:14.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://durongjie.com/2019/04/28/django/django-shu-ju-ku-fang-zhu-ru/</loc>
+    <loc>http://durongjie.com/2019/04/28/javascript/css-xuan-ze-qi/</loc>
+    
+    <lastmod>2019-10-29T07:15:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://durongjie.com/2019/04/29/life/ru-he-wei-xiu-qiang-shang-wang-luo-duan-kou/</loc>
     
     <lastmod>2019-10-29T07:15:14.000Z</lastmod>
     
@@ -156,14 +163,14 @@
   </url>
   
   <url>
-    <loc>http://durongjie.com/2019/05/10/linux/linux-pai-cuo-ming-ling/</loc>
+    <loc>http://durongjie.com/2019/04/28/linux/mysql-bei-fen/</loc>
     
     <lastmod>2019-10-29T07:15:14.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://durongjie.com/2019/04/28/linux/mysql-bei-fen/</loc>
+    <loc>http://durongjie.com/2019/05/10/linux/linux-pai-cuo-ming-ling/</loc>
     
     <lastmod>2019-10-29T07:15:14.000Z</lastmod>
     
@@ -177,7 +184,7 @@
   </url>
   
   <url>
-    <loc>http://durongjie.com/2019/08/02/linux/shell-qi-dong-jiao-ben/</loc>
+    <loc>http://durongjie.com/2019/05/09/linux/vim-ji-chu-lian-xi/</loc>
     
     <lastmod>2019-10-29T07:15:14.000Z</lastmod>
     
@@ -191,14 +198,14 @@
   </url>
   
   <url>
-    <loc>http://durongjie.com/2019/05/09/linux/vim-ji-chu-lian-xi/</loc>
+    <loc>http://durongjie.com/2019/08/02/linux/shell-qi-dong-jiao-ben/</loc>
     
     <lastmod>2019-10-29T07:15:14.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://durongjie.com/2019/04/28/javascript/css-xuan-ze-qi/</loc>
+    <loc>http://durongjie.com/2019/04/28/linux/centos7-bu-shu-k8s-ji-qun-kubeadm/</loc>
     
     <lastmod>2019-10-29T07:15:14.000Z</lastmod>
     
@@ -219,7 +226,7 @@
   </url>
   
   <url>
-    <loc>http://durongjie.com/2019/04/28/linux/a-li-yun-ci-pan-fen-qu-yu-kuo-rong/</loc>
+    <loc>http://durongjie.com/2019/09/16/linux/da-jian-turn-fu-wu-qi/</loc>
     
     <lastmod>2019-10-29T07:15:14.000Z</lastmod>
     
@@ -240,7 +247,7 @@
   </url>
   
   <url>
-    <loc>http://durongjie.com/2019/05/09/other/yaml-yu-fa/</loc>
+    <loc>http://durongjie.com/2019/04/28/linux/a-li-yun-ci-pan-fen-qu-yu-kuo-rong/</loc>
     
     <lastmod>2019-10-29T07:15:14.000Z</lastmod>
     
@@ -254,7 +261,7 @@
   </url>
   
   <url>
-    <loc>http://durongjie.com/2019/06/14/python/socket-bian-cheng/</loc>
+    <loc>http://durongjie.com/2019/05/09/other/yaml-yu-fa/</loc>
     
     <lastmod>2019-10-29T07:15:14.000Z</lastmod>
     
@@ -268,7 +275,7 @@
   </url>
   
   <url>
-    <loc>http://durongjie.com/2019/09/16/linux/da-jian-turn-fu-wu-qi/</loc>
+    <loc>http://durongjie.com/2019/06/14/python/socket-bian-cheng/</loc>
     
     <lastmod>2019-10-29T07:15:14.000Z</lastmod>
     
@@ -290,6 +297,13 @@
   
   <url>
     <loc>http://durongjie.com/2019/04/28/python/python-xiao-zhi-shi-dian/</loc>
+    
+    <lastmod>2019-10-29T07:15:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://durongjie.com/2019/04/28/python/python-mo-kuai/</loc>
     
     <lastmod>2019-10-29T07:15:14.000Z</lastmod>
     
@@ -324,30 +338,9 @@
   </url>
   
   <url>
-    <loc>http://durongjie.com/2019/04/28/python/python-mo-kuai/</loc>
-    
-    <lastmod>2019-10-29T07:15:14.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://durongjie.com/2019/04/28/linux/centos7-bu-shu-k8s-ji-qun-kubeadm/</loc>
-    
-    <lastmod>2019-10-29T07:15:14.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://durongjie.com/2019/05/01/linux/linux-chang-yong-ming-ling/</loc>
     
     <lastmod>2019-10-29T07:15:14.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://durongjie.com/project/index.html</loc>
-    
-    <lastmod>2019-04-26T10:30:33.000Z</lastmod>
     
   </url>
   
@@ -360,6 +353,13 @@
   
   <url>
     <loc>http://durongjie.com/tags/index.html</loc>
+    
+    <lastmod>2019-04-26T10:30:33.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://durongjie.com/project/index.html</loc>
     
     <lastmod>2019-04-26T10:30:33.000Z</lastmod>
     

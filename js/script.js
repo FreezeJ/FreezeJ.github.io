@@ -4,6 +4,7 @@
   var header = $('.header')
   var banner = document.getElementById('article-banner') || false
   var about = document.getElementById('about-banner') || false
+  var games = document.getElementById('games-banner') || false
   var top = $('.scroll-top')
   var catalog = $('.catalog-container .toc-main')
   var isOpen = false
@@ -25,6 +26,10 @@
     }
     if (about) {
       $('.author').children().css(fade)
+    }
+    if (games) {
+      console.log('1234123')
+      $('#games-banner').children().css(fade)
     }
     app.css(fade)
   })

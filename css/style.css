@@ -76,7 +76,6 @@ pre {
   font-weight: 600;
 }
 .tag-code {
-  font-family: 'Roboto Mono', Monaco, courier, monospace;
   font-size: 0.8em;
   display: inline-block;
   background-color: #f8f8f8;
@@ -168,6 +167,68 @@ h2.article-head {
   transition-delay: 0.1s;
 }
 #article-banner .arrow-down a {
+  z-index: 4;
+  display: block;
+  width: 25px;
+  height: 25px;
+  -webkit-transform: rotate(315deg);
+  transform: rotate(315deg);
+  -webkit-animation-name: shine;
+  -webkit-animation-duration: 1.5s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  border-bottom: 1px solid #fff;
+  border-left: 1px solid #fff;
+}
+#games-banner {
+  width: 100%;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  padding: 100px 20px 25px 20px;
+  text-align: center;
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+@media screen and (max-width: 480px) {
+  #games-banner {
+    padding: 80px 10px 25px 10px;
+  }
+}
+#games-banner h2 {
+  margin: 0.4em 0;
+  font-size: 2.2em;
+  color: #fff;
+  text-shadow: 0 0 40px #34495e;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.4s;
+}
+@media screen and (max-width: 480px) {
+  #games-banner h2 {
+    font-size: 2em;
+  }
+}
+#games-banner .post-date {
+  margin: 10px 0 20px 0;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.4s;
+  transition-delay: 0.05s;
+}
+#games-banner .arrow-down {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.4s;
+  transition-delay: 0.1s;
+}
+#games-banner .arrow-down a {
   z-index: 4;
   display: block;
   width: 25px;
@@ -504,7 +565,6 @@ h2.article-head {
 .article-summary pre,
 .markdown-content code,
 .article-summary code {
-  font-family: 'Roboto Mono', Monaco, courier, monospace;
   font-size: 13px;
 }
 @media screen and (max-width: 480px) {
