@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="一个运维开发工程师的技术博客，分享关于自动化运维、Python编程、Linux操作系统、前端知识、网络技术、系统与网络安全技术的博客，以及记录一些较新技术的采坑日志，方便自己回顾，希望也能帮助到别人。">
+  <meta name="keyword" content="Linux,Python,Network,DevOps">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Mysql基础练习 | FreezeJ&#39; Blog
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/css/plugins/gitment.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    <script src="/js/qrious.js"></script>
+  
+  
+    <script src="/js/gitment.js"></script>
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>FreezeJ' Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Mysql基础练习</h2>
+  <p class="post-date">2019-05-09</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="https://raw.githubusercontent.com/FreezeJ/FreezeJ.github.io.static/master/v2-eb778ded7f5927497bd06fd9a6fe15e8_1200x500.jpg" alt="Mysql练习攻略"></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">#登录和退出数据库</span></span><br><span class="line">mysql -u root -p    <span class="comment">#输入密码 -P指定端口，-D指定数据库 ，--prompt 修改提示符</span></span><br><span class="line">exit      <span class="comment">#quit，\q</span></span><br><span class="line">mysql -u root -p</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">VERSION</span>();</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">NOW</span>();</span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">ENGINES</span>;</span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">VARIABLES</span> <span class="keyword">LIKE</span> <span class="string">'have%'</span>;  <span class="comment">#查看存储引擎信息</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">VARIABLES</span> <span class="keyword">LIKE</span> <span class="string">'storage_engine'</span>;  <span class="comment">#查看默认存储引擎</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">WARNINGS</span> \G;</span><br><span class="line"></span><br><span class="line"><span class="comment">#数据库创建，删除，进入数据库</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">DATABASES</span>;</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">DATABASE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> <span class="string">`testdatabase`</span>;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> <span class="string">`testdatabase`</span> <span class="keyword">DEFAULT</span> <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> = <span class="string">'utf8'</span>;</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">DATABASE</span> testdatabase <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> = <span class="string">'utf8'</span>;</span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> <span class="string">`testdatabase`</span>;</span><br><span class="line"><span class="keyword">USE</span> testdatabase;   <span class="comment">#这里不应该使用 `XX` 括住名称</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">USER</span>();</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DATABASE</span>();</span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">TABLES</span>;  <span class="comment">#注释符号</span></span><br><span class="line"><span class="keyword">help</span> <span class="string">'SELECT'</span>;</span><br><span class="line"><span class="keyword">help</span> <span class="string">'INT'</span>;</span><br><span class="line"><span class="keyword">help</span> <span class="string">'+'</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#表的创建和删除，创建表同时设置属性</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> testestable(</span><br><span class="line"><span class="keyword">id</span> <span class="built_in">INT</span> ZEROFILL PRIMARY <span class="keyword">KEY</span> AUTO_INCREMENT,</span><br><span class="line"><span class="keyword">name</span> <span class="built_in">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">UNIQUE</span>, <span class="comment">#检索效率 CHAR&gt;VARCHAR&gt;TEXT</span></span><br><span class="line">    age <span class="built_in">TINYINT</span> <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">brithday <span class="built_in">DATE</span>,  <span class="comment">#1000-01-01~9999-12-31 3个字节</span></span><br><span class="line">    sex <span class="built_in">TINYINT</span>(<span class="number">1</span>) <span class="keyword">DEFAULT</span> <span class="number">0</span> <span class="keyword">COMMENT</span> <span class="string">'0代表男,1代表女'</span>,</span><br><span class="line">address TINYTEXT,</span><br><span class="line">married ENUM(<span class="string">'是'</span>,<span class="string">'否'</span>,<span class="string">'保密'</span>),   <span class="comment">#最多65535个值</span></span><br><span class="line">    fav_food <span class="keyword">SET</span>(<span class="string">'apple'</span>,<span class="string">'orange'</span>,<span class="string">'fish'</span>,<span class="string">'meat'</span>,<span class="string">'cake'</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,   <span class="comment">#最多64个成员</span></span><br><span class="line">    score <span class="built_in">DECIMAL</span>(<span class="number">2</span>,<span class="number">2</span>),</span><br><span class="line"><span class="keyword">CHECK</span>(score &gt; <span class="number">0</span>)</span><br><span class="line">    ) <span class="keyword">ENGINE</span> = <span class="string">'InnoDB'</span> <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> = <span class="string">'utf8'</span>;</span><br><span class="line"><span class="comment"># InnoDB(支持事务、崩溃修复、并发控制，适合频繁更新删除)</span></span><br><span class="line"><span class="comment"># MyISAM(适合对数据的存储和读取，空间使用比较低)、</span></span><br><span class="line"><span class="comment"># MEMORY(速度快、安全性差)</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> testestable \G;</span><br><span class="line">DESC testestable;</span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">FULL</span> <span class="keyword">COLUMNS</span> <span class="keyword">FROM</span> testestable \G;</span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">TABLES</span>;</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> testestable;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#key键：</span></span><br><span class="line">  <span class="comment">#主键：唯一标识一条记录，不能有重复的，不允许为空,用来保证数据完整性</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> test1(</span><br><span class="line">username <span class="built_in">CHAR</span>(<span class="number">20</span>),</span><br><span class="line"><span class="keyword">password</span> <span class="built_in">CHAR</span>(<span class="number">20</span>),</span><br><span class="line">PRIMARY <span class="keyword">KEY</span>(username)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">#外键：外键是另一表的主键, 一个表可以有多个外键, 可以是空值,用来和其他表建立联系用的</span></span><br><span class="line">  <span class="comment">#外键连接必须连接的是主表的主键，如果连接主表主键的一部分，必须连接主键的第一个字段</span></span><br><span class="line">  <span class="comment">#外键关联的主从表字段数据类型必须完全一样</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> test2(</span><br><span class="line"><span class="keyword">id</span> <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span> AUTO_INCREMENT,</span><br><span class="line">username <span class="built_in">CHAR</span>(<span class="number">20</span>),</span><br><span class="line"><span class="keyword">level</span> <span class="built_in">TINYINT</span> <span class="keyword">UNSIGNED</span></span><br><span class="line">    <span class="comment">#CONSTRAINT uname FOREIGN KEY(username) REFERENCES test1(username)</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#修改表：</span></span><br><span class="line">    <span class="comment">#修改表名</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> test1 <span class="keyword">RENAME</span> temp;</span><br><span class="line"><span class="keyword">SHOW</span>  <span class="keyword">TABLES</span>;</span><br><span class="line">DESC temp;</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> temp <span class="keyword">RENAME</span> <span class="keyword">TO</span> test1;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#修改表属性数据类型</span></span><br><span class="line">DESC test1;</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> test1 <span class="keyword">MODIFY</span> <span class="keyword">password</span> <span class="built_in">VARCHAR</span>(<span class="number">50</span>);</span><br><span class="line">DESC test1;</span><br><span class="line"><span class="keyword">INSERT</span>  test1 <span class="keyword">VALUES</span>(<span class="string">'FreezeJ'</span>,<span class="string">'123456'</span>);</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> test1;</span><br><span class="line"><span class="comment">#ALTER TABLE test1 MODIFY username int;  #有值的情况下转换字段类型失败，因为字符串类型无法自动转型为整数类型</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">WARNINGS</span> <span class="keyword">LIMIT</span> <span class="number">1</span>;  <span class="comment">#查看第一条错误</span></span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> test1;  <span class="comment">#删除表中所有元素</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> test1;</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> test1 <span class="keyword">MODIFY</span> username <span class="built_in">int</span>;</span><br><span class="line">DESC test1;</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> test1 <span class="keyword">MODIFY</span> username <span class="built_in">CHAR</span>(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">#修改表属性</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> test1 <span class="keyword">CHANGE</span> <span class="keyword">password</span> passwd <span class="built_in">CHAR</span>(<span class="number">20</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">#增加字段</span></span><br><span class="line">DESC test1;</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> test1 <span class="keyword">ADD</span> sex <span class="built_in">TINYINT</span>(<span class="number">1</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">after</span> passwd;</span><br><span class="line"></span><br><span class="line"><span class="comment">#删除字段</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> test1 <span class="keyword">DROP</span> sex;  <span class="comment">#删除字段会直接删除，不管有没有内容，也不会要求确认</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">#修改属性排列顺序</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> test1 <span class="keyword">MODIFY</span> username <span class="built_in">CHAR</span>(<span class="number">10</span>) <span class="keyword">AFTER</span> passwd;  <span class="comment">#会修改username的类型</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> test1 <span class="keyword">MODIFY</span> username <span class="built_in">CHAR</span>(<span class="number">10</span>) <span class="keyword">FIRST</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#索引：</span></span><br><span class="line">  <span class="comment">#创建带索引的数据库表</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> test3(</span><br><span class="line"><span class="keyword">id</span> <span class="built_in">INTEGER</span> PRIMARY <span class="keyword">KEY</span> AUTO_INCREMENT,</span><br><span class="line"><span class="keyword">name</span> <span class="built_in">VARCHAR</span>(<span class="number">10</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">age <span class="built_in">TINYINT</span> <span class="keyword">UNSIGNED</span> <span class="keyword">DEFAULT</span> <span class="number">18</span>,</span><br><span class="line"><span class="keyword">UNIQUE</span> <span class="keyword">INDEX</span> index_id(<span class="keyword">id</span>)</span><br><span class="line">);    <span class="comment">#唯一索引，唯一索引指的是被索引的字段值唯一</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> test3 \G;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#在已存在表上添加索引</span></span><br><span class="line"><span class="comment">#create [unique|fulltext|spatial] index indexname on tablename (columnname [(length)] [ASC|DESC]);</span></span><br><span class="line">    <span class="comment">#Alter语句添加索引</span></span><br><span class="line">    <span class="comment">#Alter table tablename add [unique|fulltext|spatial] index indexname (columename [(length)] [ASC|DESC]);</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> index_username <span class="keyword">ON</span> test1(username);</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> test1 <span class="keyword">ADD</span> <span class="keyword">INDEX</span> index_passwd(passwd);</span><br><span class="line"><span class="comment">#查看索引</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">INDEX</span> <span class="keyword">FROM</span> test1 \G;</span><br><span class="line"></span><br><span class="line"><span class="comment">#删除索引</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">INDEX</span> index_username <span class="keyword">ON</span> test1;</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> test1 <span class="keyword">DROP</span> <span class="keyword">INDEX</span> index_passwd;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> student(</span><br><span class="line"><span class="keyword">id</span> <span class="built_in">INTEGER</span> <span class="keyword">UNSIGNED</span> PRIMARY <span class="keyword">KEY</span> AUTO_INCREMENT,</span><br><span class="line"><span class="keyword">name</span> <span class="built_in">CHAR</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line"><span class="keyword">num</span> <span class="built_in">INTEGER</span> <span class="keyword">UNSIGNED</span> <span class="keyword">UNIQUE</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">age <span class="built_in">TINYINT</span> <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">sex <span class="built_in">TINYINT</span>(<span class="number">1</span>) <span class="keyword">DEFAULT</span> <span class="number">0</span>,</span><br><span class="line">address <span class="built_in">CHAR</span>(<span class="number">50</span>),</span><br><span class="line">room <span class="built_in">CHAR</span>(<span class="number">5</span>),</span><br><span class="line"><span class="keyword">class</span> <span class="built_in">TINYINT</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> teacher(</span><br><span class="line"><span class="keyword">id</span> <span class="built_in">INTEGER</span> <span class="keyword">UNSIGNED</span> PRIMARY <span class="keyword">KEY</span> AUTO_INCREMENT,</span><br><span class="line"><span class="keyword">name</span> <span class="built_in">CHAR</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">sex <span class="built_in">TINYINT</span>(<span class="number">1</span>) <span class="keyword">DEFAULT</span> <span class="number">1</span> <span class="keyword">COMMENT</span> <span class="string">'1代表女'</span>,</span><br><span class="line">teach_class <span class="built_in">TINYINT</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#插入</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> student <span class="keyword">VALUES</span>(<span class="number">1</span>,<span class="string">'DRJ'</span>, <span class="number">11</span>, <span class="number">21</span>, <span class="number">0</span>, <span class="string">'AAAA'</span>, <span class="string">'6-208'</span>, <span class="number">1</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> student <span class="keyword">VALUES</span>(<span class="number">2</span>,<span class="string">'LYC'</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">0</span>, <span class="string">'AAAA'</span>, <span class="string">'6-210'</span>, <span class="number">2</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> student <span class="keyword">VALUES</span>(<span class="number">3</span>,<span class="string">'LZY'</span>, <span class="number">25</span>, <span class="number">23</span>, <span class="number">0</span>, <span class="string">'BBBB'</span>, <span class="string">'6-208'</span>, <span class="number">3</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> student <span class="keyword">VALUES</span>(<span class="number">4</span>,<span class="string">'WJX'</span>, <span class="number">5</span>, <span class="number">21</span>, <span class="number">0</span>, <span class="string">'CCCC'</span>, <span class="string">'6-207'</span>, <span class="number">1</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> student <span class="keyword">VALUES</span>(<span class="number">5</span>,<span class="string">'YJH'</span>, <span class="number">29</span>, <span class="number">21</span>, <span class="number">0</span>, <span class="string">'DDDD'</span>, <span class="string">'6-208'</span>, <span class="number">1</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> student <span class="keyword">VALUES</span>(<span class="number">6</span>,<span class="string">'WL'</span>, <span class="number">33</span>, <span class="number">21</span>, <span class="number">0</span>, <span class="string">'CCCC'</span>, <span class="string">'6-208'</span>, <span class="number">5</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> teacher <span class="keyword">VALUES</span>(<span class="number">1</span>,<span class="string">'YYY'</span>, <span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> teacher <span class="keyword">VALUES</span>(<span class="number">2</span>,<span class="string">'QQQ'</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> teacher <span class="keyword">VALUES</span>(<span class="number">3</span>,<span class="string">'WWW'</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> teacher <span class="keyword">VALUES</span>(<span class="number">4</span>,<span class="string">'EEE'</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> teacher <span class="keyword">VALUES</span>(<span class="number">5</span>,<span class="string">'RRR'</span>, <span class="number">1</span>, <span class="number">4</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">#更改属性</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> student <span class="keyword">MODIFY</span> sex <span class="built_in">TINYINT</span>(<span class="number">1</span>) <span class="keyword">COMMENT</span> <span class="string">'0代表男'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">#更新属性</span></span><br><span class="line"><span class="keyword">UPDATE</span> student <span class="keyword">SET</span> <span class="keyword">name</span> = <span class="string">'ZXB'</span>, <span class="keyword">num</span> = <span class="number">27</span> <span class="keyword">WHERE</span> <span class="keyword">id</span> = <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">#删除属性</span></span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> <span class="keyword">name</span> = <span class="string">'WL'</span>;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> student <span class="keyword">VALUES</span>(<span class="number">6</span>,<span class="string">'WL'</span>, <span class="number">33</span>, <span class="number">21</span>, <span class="number">0</span>, <span class="string">'CCCC'</span>, <span class="string">'6-208'</span>, <span class="number">5</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#常用查询语句</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, address <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> room <span class="keyword">LIKE</span> <span class="string">'__208'</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> age <span class="keyword">DESC</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, room <span class="keyword">FROM</span> student <span class="keyword">GROUP</span> <span class="keyword">BY</span> room;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span> <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> age = (<span class="keyword">SELECT</span> age <span class="keyword">FROM</span> student <span class="keyword">ORDER</span> <span class="keyword">BY</span> age <span class="keyword">DESC</span> <span class="keyword">LIMIT</span> <span class="number">1</span>);</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span> <span class="keyword">AS</span> <span class="string">'宿舍成员'</span> <span class="keyword">FROM</span> student <span class="keyword">GROUP</span> <span class="keyword">BY</span> room;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> age <span class="keyword">AS</span> <span class="string">'年龄分布'</span> <span class="keyword">FROM</span> student <span class="keyword">ORDER</span> <span class="keyword">BY</span> age;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> student.name <span class="keyword">AS</span> <span class="string">'学生名字'</span>,student.class <span class="keyword">AS</span> <span class="string">'班级'</span>, teacher.name <span class="keyword">AS</span> <span class="string">'老师姓名'</span></span><br><span class="line"><span class="keyword">FROM</span> student <span class="keyword">JOIN</span> teacher</span><br><span class="line"><span class="keyword">ON</span> student.class = teacher.teach_class;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span> <span class="keyword">FROM</span> student</span><br><span class="line"><span class="keyword">UNION</span>     <span class="comment">#UNION自动去重复，UNION ALL可以不去重复</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span> <span class="keyword">FROM</span> teacher;</span><br><span class="line"></span><br><span class="line"><span class="comment">#聚集函数</span></span><br><span class="line"><span class="comment">#AVG() - 返回平均值</span></span><br><span class="line"><span class="comment">#COUNT() - 返回行数</span></span><br><span class="line"><span class="comment">#FIRST() - 返回第一个记录的值</span></span><br><span class="line"><span class="comment">#LAST() - 返回最后一个记录的值</span></span><br><span class="line"><span class="comment">#MAX() - 返回最大值</span></span><br><span class="line"><span class="comment">#MIN() - 返回最小值</span></span><br><span class="line"><span class="comment">#SUM() - 返回总和</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">count</span>(*) <span class="keyword">AS</span> <span class="string">'总人数'</span> <span class="keyword">FROM</span> student;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> view_room <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, room</span><br><span class="line"><span class="keyword">FROM</span> student</span><br><span class="line"><span class="keyword">WHERE</span> room = <span class="string">'6-208'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SHOW</span>  <span class="keyword">TABLES</span>;</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> view_room;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> student <span class="keyword">VALUES</span> (<span class="number">7</span>,<span class="string">'WJZ'</span>, <span class="number">17</span>, <span class="number">21</span>, <span class="number">0</span>, <span class="string">'GGGG'</span>, <span class="string">'6-208'</span>, <span class="number">5</span>);</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> view_room;</span><br></pre></td></tr></table></figure>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Mysql">
+    <span class="tag-code">Mysql</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/05/09/other/pep8-zheng-li-yi-ji-zhu-yi-dian/">
+        <span class="nav-arrow">← </span>
+        
+          PEP8整理以及注意点
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/05/09/linux/vim-ji-chu-lian-xi/">
+        
+          VIM基础练习
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">目录</strong>
+    
+      <ol class="nav">none</ol>
+    
+  </div>
+</aside>
+
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://durongjie.com/2019/05/09/mysql/mysql-ji-chu-lian-xi/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'https://markdown-resource.oss-cn-shenzhen.aliyuncs.com/img20200414170549.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'https://markdown-resource.oss-cn-shenzhen.aliyuncs.com/img20200414170549.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+  <script>
+    var gitmentConfig = "FreezeJ";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "Mysql基础练习",
+        owner: "FreezeJ",
+        repo: "FreezeJ.github.io",
+        oauth: {
+          client_id: "e454d874578e161854c4",
+          client_secret: "d52121a2ee21be59da10cbb323649596989eb512"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  </script>
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.configure({ useBR: true })
+      var hasLine = 'false';
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = $(figure).attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+
+  </body>
+</html>

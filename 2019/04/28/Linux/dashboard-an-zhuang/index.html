@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="一个运维开发工程师的技术博客，分享关于自动化运维、Python编程、Linux操作系统、前端知识、网络技术、系统与网络安全技术的博客，以及记录一些较新技术的采坑日志，方便自己回顾，希望也能帮助到别人。">
+  <meta name="keyword" content="Linux,Python,Network,DevOps">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Dashboard安装 | FreezeJ&#39; Blog
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/css/plugins/gitment.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    <script src="/js/qrious.js"></script>
+  
+  
+    <script src="/js/gitment.js"></script>
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>FreezeJ' Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Dashboard安装</h2>
+  <p class="post-date">2019-04-28</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h1 id="Dashboard安装"><a href="#Dashboard安装" class="headerlink" title="Dashboard安装"></a>Dashboard安装</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改node为NodePort模式</span></span><br><span class="line">kubectl patch svc -n kube-system kubernetes-dashboard -p '&#123;"spec":&#123;"type":"NodePort"&#125;&#125;'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看服务(得知dashboard运行在30972端口)</span></span><br><span class="line">kubectl get svc -n kube-system</span><br><span class="line"><span class="meta">#</span><span class="bash"> --- 输出 ---</span></span><br><span class="line">NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                  AGE</span><br><span class="line">kube-dns               ClusterIP   10.96.0.10      &lt;none&gt;        53/UDP,53/TCP,9153/TCP   7h40m</span><br><span class="line">kubernetes-dashboard   NodePort    10.111.77.210   &lt;none&gt;        443:30972/TCP            3h42m</span><br><span class="line"><span class="meta">#</span><span class="bash"> --- 输出 ---</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看dashboard运行在哪个node(得知dashboard运行在192.168.20.4)</span></span><br><span class="line">kubectl get pods -A -o wide</span><br><span class="line"><span class="meta">#</span><span class="bash"> --- 输出 ---</span></span><br><span class="line">NAMESPACE     NAME                                    READY   STATUS    RESTARTS   AGE     IP             NODE     NOMINATED NODE   READINESS GATES</span><br><span class="line">kube-system   coredns-fb8b8dccf-rn8kd                 1/1     Running   0          7h43m   10.244.0.2     master   &lt;none&gt;           &lt;none&gt;</span><br><span class="line">kube-system   coredns-fb8b8dccf-slwr4                 1/1     Running   0          7h43m   10.244.0.3     master   &lt;none&gt;           &lt;none&gt;</span><br><span class="line">kube-system   etcd-master                             1/1     Running   0          7h42m   192.168.20.5   master   &lt;none&gt;           &lt;none&gt;</span><br><span class="line">kube-system   kube-apiserver-master                   1/1     Running   0          7h42m   192.168.20.5   master   &lt;none&gt;           &lt;none&gt;</span><br><span class="line">kube-system   kube-controller-manager-master          1/1     Running   0          7h42m   192.168.20.5   master   &lt;none&gt;           &lt;none&gt;</span><br><span class="line">kube-system   kube-flannel-ds-amd64-l8c7c             1/1     Running   0          7h3m    192.168.20.5   master   &lt;none&gt;           &lt;none&gt;</span><br><span class="line">kube-system   kube-flannel-ds-amd64-lcmxw             1/1     Running   1          6h50m   192.168.20.4   node1    &lt;none&gt;           &lt;none&gt;</span><br><span class="line">kube-system   kube-flannel-ds-amd64-pqnln             1/1     Running   1          6h5m    192.168.20.3   node2    &lt;none&gt;           &lt;none&gt;</span><br><span class="line">kube-system   kube-proxy-4kcqb                        1/1     Running   0          7h43m   192.168.20.5   master   &lt;none&gt;           &lt;none&gt;</span><br><span class="line">kube-system   kube-proxy-jcqjd                        1/1     Running   0          6h5m    192.168.20.3   node2    &lt;none&gt;           &lt;none&gt;</span><br><span class="line">kube-system   kube-proxy-vm9sj                        1/1     Running   0          6h50m   192.168.20.4   node1    &lt;none&gt;           &lt;none&gt;</span><br><span class="line">kube-system   kube-scheduler-master                   1/1     Running   0          7h42m   192.168.20.5   master   &lt;none&gt;           &lt;none&gt;</span><br><span class="line">kube-system   kubernetes-dashboard-5f7b999d65-2ltmv   1/1     Running   0          3h45m   10.244.1.2     node1    &lt;none&gt;           &lt;none&gt;</span><br><span class="line"><span class="meta">#</span><span class="bash"> --- 输出 ---</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果无法变成Running状态，可以使用以下命令排错</span></span><br><span class="line">journalctl -f -u kubelet  # 只看当前的kubelet进程日志,要到dashboard所在的node执行</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">## 若提示拉取镜像失败，无法翻墙的可以使用以下方法预先拉取镜像</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">## 请在kubernetes-dashboard的节点上操作：</span></span></span><br><span class="line">docker pull mirrorgooglecontainers/kubernetes-dashboard-amd64:v1.10.1</span><br><span class="line">docker tag mirrorgooglecontainers/kubernetes-dashboard-amd64:v1.10.1 k8s.gcr.io/kubernetes-dashboard-amd64:v1.10.1</span><br><span class="line">docker rmi  mirrorgooglecontainers/kubernetes-dashboard-amd64:v1.10.1</span><br></pre></td></tr></table></figure>
+<p>根据上面的信息可以得知dashboard的ip和端口，使用<strong>火狐浏览器</strong>访问<a href="https://192.168.20.4:30972（必须使用**https**，所以会提示不安全，火狐浏览器可以添加例外，谷歌浏览器不行。）" target="_blank" rel="noopener">https://192.168.20.4:30972（必须使用**https**，所以会提示不安全，火狐浏览器可以添加例外，谷歌浏览器不行。）</a></p>
+<p><img src="https://raw.githubusercontent.com/FreezeJ/FreezeJ.github.io.static/master/1555422013719.png" alt="登录dashboard"></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 创建dashboard管理用户</span></span><br><span class="line">kubectl create serviceaccount dashboard-admin -n kube-system</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 绑定用户为集群管理用户</span></span><br><span class="line">kubectl create clusterrolebinding dashboard-cluster-admin --clusterrole=cluster-admin --serviceaccount=kube-system:dashboard-admin</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 生成tocken</span></span><br><span class="line">kubectl describe secret -n kube-system dashboard-admin-token</span><br><span class="line"><span class="meta">#</span><span class="bash"> --- 输出如下 ---</span></span><br><span class="line">Name:         dashboard-admin-token-pb78x</span><br><span class="line">Namespace:    kube-system</span><br><span class="line">Labels:       &lt;none&gt;</span><br><span class="line">Annotations:  kubernetes.io/service-account.name: dashboard-admin</span><br><span class="line">              kubernetes.io/service-account.uid: 166aeb8d-604e-11e9-80d6-080027d8332b</span><br><span class="line"></span><br><span class="line">Type:  kubernetes.io/service-account-token</span><br><span class="line"></span><br><span class="line">Data</span><br><span class="line">====</span><br><span class="line">ca.crt:     1025 bytes</span><br><span class="line">namespace:  11 bytes</span><br><span class="line">token:      eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJkYXNoYm9hcmQtYWRtaW4tdG9rZW4tcGI3OHgiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGFzaGJvYXJkLWFkbWluIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiMTY2YWViOGQtNjA0ZS0xMWU5LTgwZDYtMDgwMDI3ZDgzMzJiIiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Omt1YmUtc3lzdGVtOmRhc2hib2FyZC1hZG1pbiJ9.WYV8iBXsGikehSknd4QKbbwVSHn5K0NF1DYi4JHL-wyHtLusuEFeP89s19iC_yXu_5nOsC0h4E3Q19C7XfkGtm37WwMdsJqFjzL2VjVs5NaOUGAeXAVcuHdx0Hrzo3MCu6e1t27KWxGEFwEQv0FNhHwJ9pBmEkJz5fLyGzNOmJqYh2bifL4hrtbnCduWXR4wdnNwtGvcnafGsEvl-QkYpH1h5GRc9A2qZoSKJC90LW-kIRB_0elhwqCg-UM2a0b9cOlbgbZAEseIb3gSHpxLomkziHEjYadBA5bhmSdlArRGQs3DhMcp9pFWarXZEKR5wtxrRdam5mJykXnxA-qwNg</span><br><span class="line"><span class="meta">#</span><span class="bash"> ------</span></span><br></pre></td></tr></table></figure>
+<p>使用生成的tocken就可以登录dashboard了。</p>
+<p><img src="https://raw.githubusercontent.com/FreezeJ/FreezeJ.github.io.static/master/1555423252759.png" alt="dashboard概况"></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Linux">
+    <span class="tag-code">Linux</span>
+  </a>
+
+  <a href="/tags#Kubernetes">
+    <span class="tag-code">Kubernetes</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/04/28/linux/centos7-bu-shu-k8s-ji-qun-kubeadm/">
+        <span class="nav-arrow">← </span>
+        
+           centos7部署k8s集群-kubeadm
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/04/28/javascript/jquery-ji-chu/">
+        
+          JQuery基础知识
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">目录</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Dashboard安装"><span class="toc-nav-text">Dashboard安装</span></a></li></ol>
+    
+  </div>
+</aside>
+
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://durongjie.com/2019/04/28/linux/dashboard-an-zhuang/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'https://markdown-resource.oss-cn-shenzhen.aliyuncs.com/img20200414170549.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'https://markdown-resource.oss-cn-shenzhen.aliyuncs.com/img20200414170549.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+  <script>
+    var gitmentConfig = "FreezeJ";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "Dashboard安装",
+        owner: "FreezeJ",
+        repo: "FreezeJ.github.io",
+        oauth: {
+          client_id: "e454d874578e161854c4",
+          client_secret: "d52121a2ee21be59da10cbb323649596989eb512"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  </script>
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.configure({ useBR: true })
+      var hasLine = 'false';
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = $(figure).attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+
+  </body>
+</html>
