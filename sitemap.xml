@@ -142,14 +142,14 @@
   </url>
   
   <url>
-    <loc>http://durongjie.com/2019/04/29/life/ru-he-wei-xiu-qiang-shang-wang-luo-duan-kou/</loc>
+    <loc>http://durongjie.com/2019/04/28/javascript/jquery-ji-chu/</loc>
     
     <lastmod>2019-10-29T07:15:14.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://durongjie.com/2019/04/28/javascript/jquery-ji-chu/</loc>
+    <loc>http://durongjie.com/2019/04/29/life/ru-he-wei-xiu-qiang-shang-wang-luo-duan-kou/</loc>
     
     <lastmod>2019-10-29T07:15:14.000Z</lastmod>
     
@@ -163,6 +163,13 @@
   </url>
   
   <url>
+    <loc>http://durongjie.com/2019/05/10/linux/linux-pai-cuo-ming-ling/</loc>
+    
+    <lastmod>2019-10-29T07:15:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://durongjie.com/2019/04/28/linux/mysql-bei-fen/</loc>
     
     <lastmod>2019-10-29T07:15:14.000Z</lastmod>
@@ -170,7 +177,7 @@
   </url>
   
   <url>
-    <loc>http://durongjie.com/2019/05/10/linux/linux-pai-cuo-ming-ling/</loc>
+    <loc>http://durongjie.com/2019/08/02/linux/shell-qi-dong-jiao-ben/</loc>
     
     <lastmod>2019-10-29T07:15:14.000Z</lastmod>
     
@@ -198,7 +205,7 @@
   </url>
   
   <url>
-    <loc>http://durongjie.com/2019/08/02/linux/shell-qi-dong-jiao-ben/</loc>
+    <loc>http://durongjie.com/2019/04/28/linux/centos7-da-jian-harbor-qi-ye-ji-docker-cang-ku/</loc>
     
     <lastmod>2019-10-29T07:15:14.000Z</lastmod>
     
@@ -206,13 +213,6 @@
   
   <url>
     <loc>http://durongjie.com/2019/04/28/linux/centos7-bu-shu-k8s-ji-qun-kubeadm/</loc>
-    
-    <lastmod>2019-10-29T07:15:14.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://durongjie.com/2019/04/28/linux/centos7-da-jian-harbor-qi-ye-ji-docker-cang-ku/</loc>
     
     <lastmod>2019-10-29T07:15:14.000Z</lastmod>
     
@@ -254,14 +254,14 @@
   </url>
   
   <url>
-    <loc>http://durongjie.com/2019/04/28/python/mro-fang-fa-jie-xi-shun-xu/</loc>
+    <loc>http://durongjie.com/2019/05/09/other/yaml-yu-fa/</loc>
     
     <lastmod>2019-10-29T07:15:14.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://durongjie.com/2019/05/09/other/yaml-yu-fa/</loc>
+    <loc>http://durongjie.com/2019/04/28/python/mro-fang-fa-jie-xi-shun-xu/</loc>
     
     <lastmod>2019-10-29T07:15:14.000Z</lastmod>
     
@@ -345,13 +345,6 @@
   </url>
   
   <url>
-    <loc>http://durongjie.com/about/index.html</loc>
-    
-    <lastmod>2019-04-26T10:30:33.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://durongjie.com/tags/index.html</loc>
     
     <lastmod>2019-04-26T10:30:33.000Z</lastmod>
@@ -360,6 +353,13 @@
   
   <url>
     <loc>http://durongjie.com/project/index.html</loc>
+    
+    <lastmod>2019-04-26T10:30:33.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://durongjie.com/about/index.html</loc>
     
     <lastmod>2019-04-26T10:30:33.000Z</lastmod>
     
